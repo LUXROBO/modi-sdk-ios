@@ -10,7 +10,46 @@ import Foundation
 class ModiFrame  {
     
     private var mFrame : Array<UInt8> = []
+    private var frame : Array<UInt8> = []
 
+    func cmd() -> Int {
+
+        var cmd = Array<UInt8>()
+        cmd[0] = mFrame[0]
+        
+        return getInt(data : cmd)
+    
+    }
+    
+    func sid() -> Int {
+        
+        var sid = Array<UInt8>()
+        sid[0] = mFrame[1]
+        
+        return getInt(data:  sid)
+    }
+    
+    func did() -> Int {
+        
+        var did = Array<UInt8>()
+        did[0] = mFrame[4]
+        
+        return getInt(data:  did)
+        
+    }
+    
+    func len() -> Int {
+        
+        var len = Array<UInt8>()
+        len[0] = mFrame[6]
+        
+        return getInt(data:  len)
+        
+    }
+    
+    func setFrame(frame : Array<UInt8>) {
+        self.frame = frame
+    }
     
     func makeFrame(cmd : Int, sid : Int, did : Int, binary : Array<UInt8>) -> Array<UInt8> {
         
@@ -42,6 +81,17 @@ class ModiFrame  {
             
             mFrame[i+8] = data[i]
         }
+    }
+    
+    private func getInt(data : Array<UInt8>) -> Int {
+        
+        let littleEndianValue = data.withUnsafeBufferPointer {
+                 ($0.baseAddress!.withMemoryRebound(to: UInt32.self, capacity: 2) { $0 })
+        }.pointee
+        let value = UInt32(littleEndianValue)
+        
+        return Int(value)
+        
     }
     
 }
