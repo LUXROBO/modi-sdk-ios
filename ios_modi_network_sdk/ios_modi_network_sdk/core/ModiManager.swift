@@ -12,7 +12,7 @@ import RxCocoa
 import RxSwift
 import CoreBluetooth
 
-open class ModiManager: NSObject {
+open class ModiManager  {
    
     private var bluetoothService: RxBluetoothKitService
     private var modiConnected:Bool = false;
@@ -65,10 +65,11 @@ open class ModiManager: NSObject {
         self.peripheralList.removeAll()
         
         self.bluetoothService.startScanning()
-        self.bluetoothService.scanningOutput.subscribe(onNext: { [unowned self] result in
+        self.bluetoothService.scanningOutput.subscribe(onNext: { result in
             switch result {
             case .success(let value):
                 
+ 
                 if(value.peripheral.name == nil) {
                     return
                 }
@@ -107,7 +108,7 @@ open class ModiManager: NSObject {
                 }
                 
                 
-            case .error(let error):
+                case .error(let error):
                  ModiLog.i("scan", messages: "error : \(error)")
 //                 self.bluetoothService.stopScanning()
                 
@@ -137,7 +138,7 @@ open class ModiManager: NSObject {
        bluetoothService.discoverServices(for: periperal)
        bluetoothService.discoveredServicesOutput
         .observeOn(MainScheduler.instance)
-        .subscribe(onNext: { [unowned self] (result) in
+        .subscribe(onNext: { result in
             switch result {
             case .success(let services):
                 
