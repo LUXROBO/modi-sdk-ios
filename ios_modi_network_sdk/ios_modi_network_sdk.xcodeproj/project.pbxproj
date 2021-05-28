@@ -173,13 +173,6 @@
 		DE342E132637C04E00BABE0B = {
 			isa = PBXGroup;
 			children = (
-				DE545B8A2660910F003EB0D6 /* crcCalc */,
-				DE342EFB2637FAE800BABE0B /* extention */,
-				DE342E3F2637C0C300BABE0B /* core */,
-				DE342E392637C0C300BABE0B /* delegate */,
-				DE342E632637C0C300BABE0B /* enums */,
-				DE342E4E2637C0C300BABE0B /* Network */,
-				DE342E5D2637C0C300BABE0B /* utils */,
 				DE342E1F2637C04E00BABE0B /* ios_modi_network_sdk */,
 				DE342E2A2637C04E00BABE0B /* ios_modi_network_sdkTests */,
 				DE342E1E2637C04E00BABE0B /* Products */,
@@ -200,6 +193,13 @@
 		DE342E1F2637C04E00BABE0B /* ios_modi_network_sdk */ = {
 			isa = PBXGroup;
 			children = (
+				DE545B8A2660910F003EB0D6 /* crcCalc */,
+				DE342EFB2637FAE800BABE0B /* extention */,
+				DE342E3F2637C0C300BABE0B /* core */,
+				DE342E392637C0C300BABE0B /* delegate */,
+				DE342E632637C0C300BABE0B /* enums */,
+				DE342E4E2637C0C300BABE0B /* Network */,
+				DE342E5D2637C0C300BABE0B /* utils */,
 				DE342E202637C04E00BABE0B /* ios_modi_network_sdk.h */,
 				DE342E212637C04E00BABE0B /* Info.plist */,
 			);
@@ -225,8 +225,7 @@
 				DE342E3D2637C0C300BABE0B /* ModiManagerDelegate.swift */,
 				DE342EF52637EB1000BABE0B /* ModiModuleManagerProtocol.swift */,
 			);
-			name = delegate;
-			path = ios_modi_network_sdk/delegate;
+			path = delegate;
 			sourceTree = "<group>";
 		};
 		DE342E3F2637C0C300BABE0B /* core */ = {
@@ -246,8 +245,7 @@
 				DE342E4D2637C0C300BABE0B /* ModiStream.swift */,
 				DE342F0026390A5A00BABE0B /* ModiProtocol.swift */,
 			);
-			name = core;
-			path = ios_modi_network_sdk/core;
+			path = core;
 			sourceTree = "<group>";
 		};
 		DE342E4E2637C0C300BABE0B /* Network */ = {
@@ -255,8 +253,7 @@
 			children = (
 				DE342E4F2637C0C300BABE0B /* restAPI */,
 			);
-			name = Network;
-			path = ios_modi_network_sdk/Network;
+			path = Network;
 			sourceTree = "<group>";
 		};
 		DE342E4F2637C0C300BABE0B /* restAPI */ = {
@@ -324,8 +321,7 @@
 				DE342E622637C0C300BABE0B /* ModiLog.swift */,
 				DE545B6E265631C6003EB0D6 /* ModiSingleton.swift */,
 			);
-			name = utils;
-			path = ios_modi_network_sdk/utils;
+			path = utils;
 			sourceTree = "<group>";
 		};
 		DE342E632637C0C300BABE0B /* enums */ = {
@@ -334,8 +330,7 @@
 				DE342E472637C0C300BABE0B /* Result.swift */,
 				DE342E642637C0C300BABE0B /* CodeUpdateError.swift */,
 			);
-			name = enums;
-			path = ios_modi_network_sdk/enums;
+			path = enums;
 			sourceTree = "<group>";
 		};
 		DE342EFB2637FAE800BABE0B /* extention */ = {
