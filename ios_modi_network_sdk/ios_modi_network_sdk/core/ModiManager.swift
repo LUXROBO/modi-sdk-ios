@@ -17,6 +17,8 @@ open class ModiManager  {
     private var bluetoothService: RxBluetoothKitService
     private var modiConnected:Bool = false;
     private var managerDelegate:ModiManagerDelegate?
+    private var modiModuleManager : ModiModuleManager?
+    private var modiCodeUpdater : ModiCodeUpdater?
     private var connectedDeviceAddress:String?
 //    private var scanningOutput: Observable<Result<ScannedPeripheral, Error>>
     
@@ -51,6 +53,8 @@ open class ModiManager  {
         self.managerDelegate = managerDelegate
         self.modiConnected = false
         self.macString = ""
+        self.modiModuleManager = ModiModuleManager(modiManager: self)
+        self.modiCodeUpdater = ModiCodeUpdater(modiManager: self)
 //        self.scanningOutput = bluetoothService.scanningOutput
     
         
@@ -232,7 +236,9 @@ open class ModiManager  {
                 var buff: [UInt8]=[0x00,0x00,0x00,0x00,0x00,0x00,0x08,0x00,0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x00]
                 let MODI:Data = Data(bytes: &buff, count: buff.count)
                 self.sendData(MODI)
-                   
+                    
+                modiModuleManager!.setRootModule(uuid: self.getConnectedModiUuid())
+                modiModuleManager!.discoverModules()
                 
                 case .error(let error):
                     ModiLog.i("discoveredServices", messages: "error : \(error)")
@@ -517,6 +523,27 @@ open class ModiManager  {
         let MODI:Data = Data(bytes: &buff, count: buff.count)
         self.sendData(MODI)
     }
+    
+    func getConnectedModiUuid() -> Int {
+        
+        let littleEndianValue = getMODI_ID().withUnsafeBufferPointer {
+                 ($0.baseAddress!.withMemoryRebound(to: UInt32.self, capacity: 1) { $0 })
+        }.pointee
+        let value = UInt32(littleEndianValue)
+        
+        return Int(value)
+    }
+    
+    func getModuleManager() -> ModiModuleManager {
+        
+        return self.modiModuleManager!
+    }
+    
+    func getCodeUpdater() -> ModiCodeUpdater {
+        
+        return self.modiCodeUpdater!
+    }
+    
    
 }
 

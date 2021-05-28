@@ -22,12 +22,12 @@ class ModiModule {
     private let TYPE_LED = "Led";
     private let TYPE_SPEAKER = "Speaker";
     
-    private var version = 0
-    private var typeCode = 0
-    private var uuid = 0
-    private var state = 0
-    private var type = "null"
-    private var lastUpdate : Int64 = 0
+    var version = 0
+    var typeCode = 0
+    var uuid = 0
+    var state = 0
+    var type = "null"
+    var lastUpdate : Double = 0
     
     func makeModule(type : Int , uuid : Int , version : Int , state : Int , time : Date ) -> Self {
         
@@ -36,7 +36,7 @@ class ModiModule {
         self.uuid = uuid
         self.version = version
         self.state = state
-        self.lastUpdate = Int64(time.timeIntervalSince1970 * 1000)
+        self.lastUpdate = time.timeIntervalSince1970 * 1000
         
         return self
         

@@ -47,6 +47,18 @@ class ModiFrame  {
         
     }
     
+    func data() -> Array<UInt8> {
+        
+        var data = [UInt8](repeating: 0, count: 8)
+        
+        for i in 8 ... frame.count {
+            
+            data[i - 8] = frame[i]
+        }
+        
+        return data
+    }
+    
     func setFrame(frame : Array<UInt8>) {
         self.frame = frame
     }
@@ -83,7 +95,7 @@ class ModiFrame  {
         }
     }
     
-    private func getInt(data : Array<UInt8>) -> Int {
+    func getInt(data : Array<UInt8>) -> Int {
         
         let littleEndianValue = data.withUnsafeBufferPointer {
                  ($0.baseAddress!.withMemoryRebound(to: UInt32.self, capacity: 2) { $0 })

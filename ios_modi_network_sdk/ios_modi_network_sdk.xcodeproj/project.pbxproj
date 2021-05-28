@@ -45,6 +45,18 @@
 		DE342E842637C0C300BABE0B /* ModiLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E622637C0C300BABE0B /* ModiLog.swift */; };
 		DE342E852637C0C300BABE0B /* CodeUpdateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E642637C0C300BABE0B /* CodeUpdateError.swift */; };
 		DE342EF62637EB1000BABE0B /* ModiModuleManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342EF52637EB1000BABE0B /* ModiModuleManagerProtocol.swift */; };
+		DE342F0126390A5A00BABE0B /* ModiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342F0026390A5A00BABE0B /* ModiProtocol.swift */; };
+		DE545B6F265631C6003EB0D6 /* ModiSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE545B6E265631C6003EB0D6 /* ModiSingleton.swift */; };
+		DE545B74265CE60D003EB0D6 /* ModiFrameFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE545B73265CE60D003EB0D6 /* ModiFrameFilter.swift */; };
+		DE545B79265CE9A9003EB0D6 /* StreamFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE545B78265CE9A9003EB0D6 /* StreamFilter.swift */; };
+		DE545B7F265DEE33003EB0D6 /* FirmwareFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE545B7E265DEE33003EB0D6 /* FirmwareFilter.swift */; };
+		DE545B83265DF0E6003EB0D6 /* ModuleStateFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE545B82265DF0E6003EB0D6 /* ModuleStateFilter.swift */; };
+		DE545B87265DF48C003EB0D6 /* ChangeUpdateFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE545B86265DF48C003EB0D6 /* ChangeUpdateFilter.swift */; };
+		DE545B8C26609130003EB0D6 /* AlgoParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE545B8B26609130003EB0D6 /* AlgoParams.swift */; };
+		DE545B902660B381003EB0D6 /* Crc32.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE545B8F2660B381003EB0D6 /* Crc32.swift */; };
+		DE545B942660B4F6003EB0D6 /* CrcCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE545B932660B4F6003EB0D6 /* CrcCalculator.swift */; };
+		DE65398E26451CFA00662728 /* ModiProtocol_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE65398D26451CFA00662728 /* ModiProtocol_Test.swift */; };
+		DEBCC881264B852400D5036C /* ModiCodeUpdate_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBCC880264B852400D5036C /* ModiCodeUpdate_Test.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +115,18 @@
 		DE342E622637C0C300BABE0B /* ModiLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModiLog.swift; sourceTree = "<group>"; };
 		DE342E642637C0C300BABE0B /* CodeUpdateError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeUpdateError.swift; sourceTree = "<group>"; };
 		DE342EF52637EB1000BABE0B /* ModiModuleManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModiModuleManagerProtocol.swift; sourceTree = "<group>"; };
+		DE342F0026390A5A00BABE0B /* ModiProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModiProtocol.swift; sourceTree = "<group>"; };
+		DE545B6E265631C6003EB0D6 /* ModiSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModiSingleton.swift; sourceTree = "<group>"; };
+		DE545B73265CE60D003EB0D6 /* ModiFrameFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModiFrameFilter.swift; sourceTree = "<group>"; };
+		DE545B78265CE9A9003EB0D6 /* StreamFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamFilter.swift; sourceTree = "<group>"; };
+		DE545B7E265DEE33003EB0D6 /* FirmwareFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirmwareFilter.swift; sourceTree = "<group>"; };
+		DE545B82265DF0E6003EB0D6 /* ModuleStateFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleStateFilter.swift; sourceTree = "<group>"; };
+		DE545B86265DF48C003EB0D6 /* ChangeUpdateFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUpdateFilter.swift; sourceTree = "<group>"; };
+		DE545B8B26609130003EB0D6 /* AlgoParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgoParams.swift; sourceTree = "<group>"; };
+		DE545B8F2660B381003EB0D6 /* Crc32.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crc32.swift; sourceTree = "<group>"; };
+		DE545B932660B4F6003EB0D6 /* CrcCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrcCalculator.swift; sourceTree = "<group>"; };
+		DE65398D26451CFA00662728 /* ModiProtocol_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModiProtocol_Test.swift; sourceTree = "<group>"; };
+		DEBCC880264B852400D5036C /* ModiCodeUpdate_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModiCodeUpdate_Test.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +173,8 @@
 		DE342E132637C04E00BABE0B = {
 			isa = PBXGroup;
 			children = (
+				DE545B8A2660910F003EB0D6 /* crcCalc */,
+				DE342EFB2637FAE800BABE0B /* extention */,
 				DE342E3F2637C0C300BABE0B /* core */,
 				DE342E392637C0C300BABE0B /* delegate */,
 				DE342E632637C0C300BABE0B /* enums */,
@@ -185,6 +211,8 @@
 			children = (
 				DE342E2B2637C04E00BABE0B /* ios_modi_network_sdkTests.swift */,
 				DE342E2D2637C04E00BABE0B /* Info.plist */,
+				DE65398D26451CFA00662728 /* ModiProtocol_Test.swift */,
+				DEBCC880264B852400D5036C /* ModiCodeUpdate_Test.swift */,
 			);
 			path = ios_modi_network_sdkTests;
 			sourceTree = "<group>";
@@ -204,21 +232,19 @@
 		DE342E3F2637C0C300BABE0B /* core */ = {
 			isa = PBXGroup;
 			children = (
+				DE545B77265CE982003EB0D6 /* frameFilter */,
 				DE342E3E2637C0C300BABE0B /* FirmwareUpdater.swift */,
 				DE342E402637C0C300BABE0B /* Constant.swift */,
 				DE342E412637C0C300BABE0B /* ModiManager.swift */,
 				DE342E422637C0C300BABE0B /* ModiCodeUpdater.swift */,
 				DE342E432637C0C300BABE0B /* ModiModule.swift */,
 				DE342E442637C0C300BABE0B /* ModiFrame.swift */,
-				DE342E452637C0C300BABE0B /* Peripheral+Hashable.swift */,
 				DE342E462637C0C300BABE0B /* ModiConstants.swift */,
-				DE342E472637C0C300BABE0B /* Result.swift */,
-				DE342E482637C0C300BABE0B /* Characterist+CBCharacteristicWriteType.swift */,
-				DE342E492637C0C300BABE0B /* Characteristic+Hashable.swift */,
 				DE342E4A2637C0C300BABE0B /* RxBluetoothKitService.swift */,
 				DE342E4B2637C0C300BABE0B /* ModiGattAttributes.swift */,
 				DE342E4C2637C0C300BABE0B /* ModiModuleManager.swift */,
 				DE342E4D2637C0C300BABE0B /* ModiStream.swift */,
+				DE342F0026390A5A00BABE0B /* ModiProtocol.swift */,
 			);
 			name = core;
 			path = ios_modi_network_sdk/core;
@@ -296,6 +322,7 @@
 				DE342E602637C0C300BABE0B /* ModiData.swift */,
 				DE342E612637C0C300BABE0B /* ModiNumber.swift */,
 				DE342E622637C0C300BABE0B /* ModiLog.swift */,
+				DE545B6E265631C6003EB0D6 /* ModiSingleton.swift */,
 			);
 			name = utils;
 			path = ios_modi_network_sdk/utils;
@@ -304,10 +331,43 @@
 		DE342E632637C0C300BABE0B /* enums */ = {
 			isa = PBXGroup;
 			children = (
+				DE342E472637C0C300BABE0B /* Result.swift */,
 				DE342E642637C0C300BABE0B /* CodeUpdateError.swift */,
 			);
 			name = enums;
 			path = ios_modi_network_sdk/enums;
+			sourceTree = "<group>";
+		};
+		DE342EFB2637FAE800BABE0B /* extention */ = {
+			isa = PBXGroup;
+			children = (
+				DE342E452637C0C300BABE0B /* Peripheral+Hashable.swift */,
+				DE342E482637C0C300BABE0B /* Characterist+CBCharacteristicWriteType.swift */,
+				DE342E492637C0C300BABE0B /* Characteristic+Hashable.swift */,
+			);
+			path = extention;
+			sourceTree = "<group>";
+		};
+		DE545B77265CE982003EB0D6 /* frameFilter */ = {
+			isa = PBXGroup;
+			children = (
+				DE545B73265CE60D003EB0D6 /* ModiFrameFilter.swift */,
+				DE545B78265CE9A9003EB0D6 /* StreamFilter.swift */,
+				DE545B7E265DEE33003EB0D6 /* FirmwareFilter.swift */,
+				DE545B82265DF0E6003EB0D6 /* ModuleStateFilter.swift */,
+				DE545B86265DF48C003EB0D6 /* ChangeUpdateFilter.swift */,
+			);
+			path = frameFilter;
+			sourceTree = "<group>";
+		};
+		DE545B8A2660910F003EB0D6 /* crcCalc */ = {
+			isa = PBXGroup;
+			children = (
+				DE545B8B26609130003EB0D6 /* AlgoParams.swift */,
+				DE545B8F2660B381003EB0D6 /* Crc32.swift */,
+				DE545B932660B4F6003EB0D6 /* CrcCalculator.swift */,
+			);
+			path = crcCalc;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -487,11 +547,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE342E772637C0C300BABE0B /* ModiStream.swift in Sources */,
+				DE545B79265CE9A9003EB0D6 /* StreamFilter.swift in Sources */,
 				DE342E762637C0C300BABE0B /* ModiModuleManager.swift in Sources */,
 				DE342E782637C0C300BABE0B /* RestApiRepository.swift in Sources */,
 				DE342E7B2637C0C300BABE0B /* HttpApiTarget.swift in Sources */,
 				DE342E662637C0C300BABE0B /* ModiFrameObserver.swift in Sources */,
+				DE545B6F265631C6003EB0D6 /* ModiSingleton.swift in Sources */,
+				DE545B74265CE60D003EB0D6 /* ModiFrameFilter.swift in Sources */,
 				DE342E712637C0C300BABE0B /* Result.swift in Sources */,
+				DE545B8C26609130003EB0D6 /* AlgoParams.swift in Sources */,
 				DE342E752637C0C300BABE0B /* ModiGattAttributes.swift in Sources */,
 				DE342E7E2637C0C300BABE0B /* RestApiRemoteDataSourceImpl.swift in Sources */,
 				DE342E7D2637C0C300BABE0B /* HttpModel.swift in Sources */,
@@ -501,6 +565,8 @@
 				DE342E722637C0C300BABE0B /* Characterist+CBCharacteristicWriteType.swift in Sources */,
 				DE342E6C2637C0C300BABE0B /* ModiCodeUpdater.swift in Sources */,
 				DE342E692637C0C300BABE0B /* FirmwareUpdater.swift in Sources */,
+				DE545B87265DF48C003EB0D6 /* ChangeUpdateFilter.swift in Sources */,
+				DE545B7F265DEE33003EB0D6 /* FirmwareFilter.swift in Sources */,
 				DE342E822637C0C300BABE0B /* ModiData.swift in Sources */,
 				DE342E852637C0C300BABE0B /* CodeUpdateError.swift in Sources */,
 				DE342E702637C0C300BABE0B /* ModiConstants.swift in Sources */,
@@ -509,7 +575,11 @@
 				DE342E842637C0C300BABE0B /* ModiLog.swift in Sources */,
 				DE342E6A2637C0C300BABE0B /* Constant.swift in Sources */,
 				DE342E7C2637C0C300BABE0B /* HttpNetworkManager.swift in Sources */,
+				DE545B942660B4F6003EB0D6 /* CrcCalculator.swift in Sources */,
+				DE545B902660B381003EB0D6 /* Crc32.swift in Sources */,
 				DE342E832637C0C300BABE0B /* ModiNumber.swift in Sources */,
+				DE545B83265DF0E6003EB0D6 /* ModuleStateFilter.swift in Sources */,
+				DE342F0126390A5A00BABE0B /* ModiProtocol.swift in Sources */,
 				DE342E6B2637C0C300BABE0B /* ModiManager.swift in Sources */,
 				DE342E7A2637C0C300BABE0B /* RestApiUseCaseImpl.swift in Sources */,
 				DE342E6F2637C0C300BABE0B /* Peripheral+Hashable.swift in Sources */,
@@ -526,7 +596,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE65398E26451CFA00662728 /* ModiProtocol_Test.swift in Sources */,
 				DE342E2C2637C04E00BABE0B /* ios_modi_network_sdkTests.swift in Sources */,
+				DEBCC881264B852400D5036C /* ModiCodeUpdate_Test.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
