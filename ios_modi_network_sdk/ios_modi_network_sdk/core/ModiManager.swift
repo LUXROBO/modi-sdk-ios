@@ -539,7 +539,7 @@ open class ModiManager  {
         return self.modiModuleManager!
     }
     
-    func getCodeUpdater() -> ModiCodeUpdater {
+    open func getCodeUpdater() -> ModiCodeUpdater {
         
         return self.modiCodeUpdater!
     }

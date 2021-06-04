@@ -90,7 +90,7 @@ class ModiProtocol  {
         var data = [UInt8](repeating: 0, count: 8)
         var uuid = module_uuid
         
-        for i in 0...5 {
+        for i in 0...6 {
            data[i] = (UInt8)(uuid & 0xFF)
            uuid = uuid >> 8
         }

@@ -2,7 +2,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class ModiCodeUpdater : ModiFrameObserver{
+open class ModiCodeUpdater : ModiFrameObserver{
     
     private let MODULE_PROGRESS_COUNT_UNIT = 5;
     private let PROGRESS_NOTIFY_PERIOD = 150;
@@ -33,7 +33,7 @@ class ModiCodeUpdater : ModiFrameObserver{
         
     }
     
-    func startReset(callback : ModiCodeUpdaterCallback) {
+    open func startReset(callback : ModiCodeUpdaterCallback) {
     
         if mRunningFlag == true {
            
@@ -65,7 +65,7 @@ class ModiCodeUpdater : ModiFrameObserver{
     
 
     
-    func startUpdate(stream : ModiStream, callback : ModiCodeUpdaterCallback) {
+    open func startUpdate(stream : ModiStream, callback : ModiCodeUpdaterCallback) {
         
         if mRunningFlag == true {
             

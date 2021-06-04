@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ModiCodeUpdaterCallback : NSObjectProtocol {
+public protocol ModiCodeUpdaterCallback : NSObjectProtocol {
     
     func onUpdateSuccess()
     func onUpdateFailed(error : CodeUpdateError, reason : String);

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CodeUpdateError : Error {
+public enum CodeUpdateError : Error {
     
     public typealias RawValue = String
     

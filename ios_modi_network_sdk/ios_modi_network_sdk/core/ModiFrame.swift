@@ -9,8 +9,8 @@ import Foundation
 
 class ModiFrame  {
     
-    private var mFrame : Array<UInt8> = []
-    private var frame : Array<UInt8> = []
+    private var mFrame = [UInt8](repeating: 0, count: 16)
+    private var frame = [UInt8](repeating: 0, count: 16)
 
     func cmd() -> Int {
 

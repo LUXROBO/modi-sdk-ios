@@ -8,13 +8,13 @@
 import Foundation
 
 
-class ModiStream {
+public class ModiStream {
     
-    enum STREAM_TYPE : Int {
+    public enum STREAM_TYPE : Int {
         case INTERPRETER = 3
     }
     
-    enum STREAM_RESPONSE : Int {
+    public enum STREAM_RESPONSE : Int {
         case SUCCESS = 0
         case DUPLICATE = 3
         case UNDEFINED = 4
@@ -27,7 +27,7 @@ class ModiStream {
     var streamBody : Array<UInt8> = []
         
     
-    func makeStream(moduleId : Int, streamId : Int, streamType : STREAM_TYPE, streamBody : Array<UInt8>) -> Self {
+    public func makeStream(moduleId : Int, streamId : Int, streamType : STREAM_TYPE, streamBody : Array<UInt8>) -> Self {
         
         self.moduleId = moduleId
         self.streamId = UInt8(streamId)
