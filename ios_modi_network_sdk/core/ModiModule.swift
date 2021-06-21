@@ -32,7 +32,7 @@ class ModiModule {
     func makeModule(type : Int , uuid : Int , version : Int , state : Int , time : Date ) -> Self {
         
         self.typeCode = type
-        self.type = typeCodeToString(typeCode: type)
+        self.type = typeCodeToString(typeCode: type & 0xFFFF)
         self.uuid = uuid
         self.version = version
         self.state = state

@@ -8,7 +8,7 @@
 import Foundation
 
 
-class ModiProtocol  {
+open class ModiProtocol  {
     
     enum FLASH_CMD : Int {
         case CHECK_CRC = 0x101
@@ -33,7 +33,6 @@ class ModiProtocol  {
         case SRAM = 6
         case FAULT = 7
     }
-        
     
     func streamCommand(stream : ModiStream) -> [UInt8] {
         
@@ -52,8 +51,6 @@ class ModiProtocol  {
 
         }
         
-        print(streamCommandData)
-        
         return ModiFrame().makeFrame(cmd: 0x12, sid: 0, did : stream.moduleId, binary : streamCommandData)
     }
     
@@ -61,7 +58,7 @@ class ModiProtocol  {
         
         var dataList = Array<[UInt8]>()
         
-        for i in stride(from : 0, to : stream.streamBody.count - 1, by: 7)  {
+        for i in stride(from : 0, to : stream.streamBody.count , by: 7)  {
 
            let begin = i
            var end = i + 7
@@ -70,12 +67,12 @@ class ModiProtocol  {
                 end = stream.streamBody.count
             }
            
-            let slice : [UInt8] =  Array(stream.streamBody[begin...end])
-            var streamSlice = [UInt8]()
-            streamSlice.reserveCapacity(slice.count + 1)
+            let slice : [UInt8] =  Array(stream.streamBody[begin...end - 1])
+            
+            var streamSlice = [UInt8](repeating: 0, count: slice.count + 1)
             streamSlice[0] = stream.streamId
             
-            for j in 0...slice.count - 1 {
+            for j in 0 ..< slice.count {
                 streamSlice[j+1] = slice[j]
             }
             
@@ -104,12 +101,14 @@ class ModiProtocol  {
         
         var data = [UInt8](repeating: 0, count: 8)
         
-        let address_buffer = withUnsafeBytes(of: address, Array.init)
-        let crc_buffer = withUnsafeBytes(of: crc, Array.init)
+        let addressBuffer = withUnsafeBytes(of: address, Array.init)
+        let crcBuffer = withUnsafeBytes(of: crc, Array.init)
+  
         
         for i in 0...3 {
-           data[i] = crc_buffer[i]
-           data[i + 4] = address_buffer[i]
+    
+           data[i] = crcBuffer[i]
+           data[i + 4] = addressBuffer[i]
         }
         
         return ModiFrame().makeFrame(cmd: 0x0D, sid: flashCmd.rawValue, did : moduleKey , binary : data)
@@ -150,11 +149,11 @@ class ModiProtocol  {
         return ModiFrame().makeFrame(cmd: 0xAE, sid: 0, did : moduleKey , binary : data)
     }
     
-    func setVersion(moduleKey : Int , data : [UInt8] ) -> [UInt8] {
+    public func setVersion(moduleKey : Int , data : [UInt8] ) -> [UInt8] {
         ModiFrame().makeFrame(cmd: 0xA0, sid : 24, did : moduleKey , binary : data)
     }
     
-    func getVersion(moduleKey : Int) -> [UInt8] {
+    public func getVersion(moduleKey : Int) -> [UInt8] {
         
         var data = [UInt8](repeating: 0, count: 8)
         

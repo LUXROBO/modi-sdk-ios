@@ -11,14 +11,14 @@ class AlgoParams {
     
     let name : String
     let hashSize : Int
-    let poly : Int
-    let initial : Int
+    let poly : UInt64
+    let initial : UInt64
     let refIn : Bool
     let refOut : Bool
     let xorOut : Int
     let check : Int
     
-    init(name : String, hashSize : Int, poly : Int, initial : Int, refIn : Bool, refOut : Bool, xorOut : Int, check : Int) {
+    init(name : String, hashSize : Int, poly : UInt64, initial : UInt64, refIn : Bool, refOut : Bool, xorOut : Int, check : Int) {
         self.name = name
         self.hashSize = hashSize
         self.poly = poly

@@ -13,7 +13,7 @@ class ModuleStateFilter: ModiFrameFilter {
     
     init(moduleKey : Int) {
         
-        self.moduleKey = moduleKey
+        self.moduleKey = moduleKey & 0xFF
         
     }
     

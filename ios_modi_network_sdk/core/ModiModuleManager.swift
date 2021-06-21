@@ -45,6 +45,8 @@ class ModiModuleManager: ModiFrameObserver {
         
         var modules = Array<ModiModule>()
         
+        print("getModules \(mModuleMap.count)")
+        
         self.mModuleMap.keys.forEach { (module) in
             modules.append(self.mModuleMap[module]!)
         }
@@ -59,7 +61,7 @@ class ModiModuleManager: ModiFrameObserver {
             self.resetAllModules()
         }
     
-        self.mRootmodule = ModiModule().makeModule(type: 0x0000, uuid: uuid, version: 0, state: 0, time: Date())
+        self.mRootmodule = ModiModule().makeModule(type: 0x0000, uuid: uuid & 0xFFF, version: 0, state: 0, time: Date())
         
         updateRootModule(uuid : uuid & 0xFFF)
         
@@ -77,7 +79,7 @@ class ModiModuleManager: ModiFrameObserver {
     
     func updateRootModule(uuid : Int) {
         
-        if self.mModuleMap.keys.contains(uuid) != false {
+        if self.mModuleMap.keys.contains(uuid) != true {
             self.mModuleMap[uuid] = self.mRootmodule
         }
         
@@ -108,15 +110,17 @@ class ModiModuleManager: ModiFrameObserver {
         
         if(self.mModuleMap.keys.contains(id) != true) {
             
-            let uuid = ModiFrame().getInt(data : Array(moduleData[0...4]))
-            let typeCode = ModiFrame().getInt(data : Array(moduleData[4...6]))
-            let version = ModiFrame().getInt(data : Array(moduleData[6...8]))
+            let uuid = ModiFrame().getInt(data : Array(moduleData[0...3]))
+            let typeCode = ModiFrame().getInt(data : Array(moduleData[4...5]))
+            let version = ModiFrame().getInt(data : Array(moduleData[6...7]))
             let state = Int(moduleData[6])
             let time = Date()
             
             let module = ModiModule().makeModule(type : typeCode, uuid : uuid, version : version, state : state, time : time)
             
             self.mModuleMap[id] = module
+            
+            print("updateModuleState self.mModuleMap[id] \(self.mModuleMap[id]!) module \(module)")
             
             self.removeDisableMapModule(id : id)
             
@@ -237,12 +241,14 @@ class ModiModuleManager: ModiFrameObserver {
     
     func updateModuleData(moduleKey : Int , moduleData : Array<UInt8>) {
         
-        if mModuleMap.keys.contains(moduleKey) {
+        print("updateModuleData moduleKey : \(moduleKey & 0xFFF)")
+        
+        if mModuleMap.keys.contains(moduleKey) != true {
             
-            let uuid = ModiFrame().getInt(data : Array(moduleData[0...4]))
-            let typeCode = ModiFrame().getInt(data : Array(moduleData[4...6]))
-            var version = ModiFrame().getInt(data : Array(moduleData[6...8]))
-            let state = Int(moduleData[6])
+            let uuid = ModiFrame().getInt(data : Array(moduleData[0...3])) & 0xFFF
+            let typeCode = ModiFrame().getInt(data : Array(moduleData[4...5])) & 0xFFF
+            var version = ModiFrame().getInt(data : Array(moduleData[6...7])) & 0xFFF
+            let state = Int(moduleData[6]) & 0xFFF
             let time = Date()
             
             if version == 10 || version == 0 {
@@ -254,6 +260,8 @@ class ModiModuleManager: ModiFrameObserver {
             let module = ModiModule().makeModule(type : typeCode, uuid : uuid, version : version, state : state, time : time)
             
             self.mModuleMap[moduleKey] = module
+            
+            print("updateModuleData  typeCode  : \(typeCode)")
             
             self.removeDisableMapModule(id : moduleKey)
             
@@ -270,6 +278,7 @@ class ModiModuleManager: ModiFrameObserver {
     func observeFrame() {
         ModiSingleton.shared.getModiFrameObserver().subscribe { modiFrame in
             
+        
             self.onModiFrame(frame: modiFrame)
         }
     }
@@ -278,7 +287,7 @@ class ModiModuleManager: ModiFrameObserver {
     func onModiFrame(frame :ModiFrame) {
         
         let cmd = frame.cmd()
-        
+       
         
         switch cmd {
         
