@@ -172,6 +172,9 @@ open class ModiManager  {
                     self.discoverCharacteristics(service: service)
                     
                 }
+                
+               
+                
             case .error(let error):
                ModiLog.i("connect", messages: "error : \(error)")
             
@@ -229,6 +232,8 @@ open class ModiManager  {
                         ModiLog.i("discoveredServices", messages: "characteristics.count : \(String(describing:characteristics.count))")
                         ModiLog.i("discoveredServices", messages: "value2 : \(String(describing:item.uuid))")
                         ModiLog.i("discoveredServices", messages: "============================================")
+                        
+                        
 
                     }
                     
@@ -237,9 +242,6 @@ open class ModiManager  {
                 let MODI:Data = Data(bytes: &buff, count: buff.count)
                 self.sendData(MODI)
                     
-                modiModuleManager!.setRootModule(uuid: self.getConnectedModiUuid())
-                modiModuleManager!.discoverModules()
-                
                 case .error(let error):
                     ModiLog.i("discoveredServices", messages: "error : \(error)")
                     self.disconnect()
@@ -277,6 +279,15 @@ open class ModiManager  {
                      self.modiConnected = true
                      self.managerDelegate?.onConnected()
                      self.reConnectCount = 0
+                    
+                    
+                    ModiLog.d("setupRead", messages: "\(MODI_ID)")
+                    ModiLog.d("setupRead", messages: "\(getConnectedModiUuid())")
+                    
+                    
+                    modiModuleManager!.setRootModule(uuid: self.getConnectedModiUuid())
+                    modiModuleManager!.discoverModules()
+                    self.managerDelegate?.onDiscoveredAllCharacteristics()
                 
                   
                 case .error(let error) :
@@ -320,16 +331,22 @@ open class ModiManager  {
 
                             if (characteristic.value![0] != 0) {
                                 ModiLog.d("setupNotification DEVICE_CHAR_TX_RX", messages: "\(ModiString.convertHexString(characteristics.value)))")
+                                
                                 self.managerDelegate?.onReceived(str, bytes: characteristics.value!)
+                                let modiFrame = ModiFrame()
+                                modiFrame.setFrame(data: characteristics.value!)
+                                ModiSingleton.shared.notifyModiFrame(frame: modiFrame.getFrame())
+                                
                                 if(characteristics.value![0] == 0x28) {
+                                    
                                     self.setModi_ID(value: characteristics.value!)
+                                  
                                 }
                             }
-                            
-                          }
+                      }
 
                        case ModiGattArributes.DEVICE_TX_DESC:
-                           print("ModiGattArributes.DEVICE_TX_DESC");
+                           print("ModiGattArributes.DEVICE_TX_DESC")
                            break
 
                        default:
@@ -527,7 +544,7 @@ open class ModiManager  {
     func getConnectedModiUuid() -> Int {
         
         let littleEndianValue = getMODI_ID().withUnsafeBufferPointer {
-                 ($0.baseAddress!.withMemoryRebound(to: UInt32.self, capacity: 1) { $0 })
+                 ($0.baseAddress!.withMemoryRebound(to: UInt32.self, capacity: 2) { $0 })
         }.pointee
         let value = UInt32(littleEndianValue)
         

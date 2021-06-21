@@ -7,63 +7,65 @@
 
 import Foundation
 
-class ModiFrame  {
+open class ModiFrame  {
     
     private var mFrame = [UInt8](repeating: 0, count: 16)
     private var frame = [UInt8](repeating: 0, count: 16)
 
+    public init() {}
+    
     func cmd() -> Int {
 
-        var cmd = Array<UInt8>()
-        cmd[0] = mFrame[0]
-        
-        return getInt(data : cmd)
+        return Int(mFrame[0])
     
     }
     
     func sid() -> Int {
         
-        var sid = Array<UInt8>()
-        sid[0] = mFrame[1]
-        
-        return getInt(data:  sid)
+        return Int(mFrame[2])
     }
     
     func did() -> Int {
         
-        var did = Array<UInt8>()
-        did[0] = mFrame[4]
-        
-        return getInt(data:  did)
+        return Int(mFrame[4])
         
     }
     
     func len() -> Int {
         
-        var len = Array<UInt8>()
-        len[0] = mFrame[6]
-        
-        return getInt(data:  len)
+        return Int(mFrame[6])
         
     }
     
-    func data() -> Array<UInt8> {
+    func data() -> [UInt8] {
         
         var data = [UInt8](repeating: 0, count: 8)
         
-        for i in 8 ... frame.count {
+        for i in 8 ... mFrame.count - 1 {
             
-            data[i - 8] = frame[i]
+            data[i - 8] = mFrame[i]
         }
         
         return data
     }
     
-    func setFrame(frame : Array<UInt8>) {
-        self.frame = frame
+    func setFrame(data : Data) {
+        
+        for i in 0...data.count - 1 {
+            
+            frame[i] = data[i]
+        }
+        
+        mFrame = frame
+        
     }
     
-    func makeFrame(cmd : Int, sid : Int, did : Int, binary : Array<UInt8>) -> Array<UInt8> {
+    func getFrame() -> ModiFrame {
+        
+        return self
+    }
+    
+    func makeFrame(cmd : Int, sid : Int, did : Int, binary : [UInt8]) -> [UInt8] {
         
     
         stuffFrameHeader(cmd:cmd, sid : sid, did : did)
@@ -79,12 +81,12 @@ class ModiFrame  {
         mFrame[1] = UInt8(cmd >> 8 & 0xFF)
         mFrame[2] = UInt8(sid & 0xFF)
         mFrame[3] = UInt8(sid >> 8 & 0xFF)
-        mFrame[4] = UInt8(cmd & 0xFF)
+        mFrame[4] = UInt8(did & 0xFF)
         mFrame[5] = UInt8(did >> 8 & 0xFF)
         
     }
     
-    private func stuffFrameData(data : Array<UInt8>) {
+    private func stuffFrameData(data : [UInt8] ) {
     
         mFrame[6] = UInt8( data.count & 0xFF)
         mFrame[7] = UInt8( data.count >> 8 & 0xFF)
@@ -92,10 +94,12 @@ class ModiFrame  {
         for i in 0 ..< data.count {
             
             mFrame[i+8] = data[i]
+        
         }
+        
     }
     
-    func getInt(data : Array<UInt8>) -> Int {
+    open func getInt(data : Array<UInt8>) -> Int {
         
         let littleEndianValue = data.withUnsafeBufferPointer {
                  ($0.baseAddress!.withMemoryRebound(to: UInt32.self, capacity: 2) { $0 })
