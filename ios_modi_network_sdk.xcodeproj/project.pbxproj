@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE3027C12681E02E00C82583 /* ModiPlayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3027C02681E02E00C82583 /* ModiPlayManager.swift */; };
+		DE3027C32681F08200C82583 /* ModiPlayManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3027C22681F08200C82583 /* ModiPlayManagerProtocol.swift */; };
+		DE3027C52682DD2D00C82583 /* PlayCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3027C42682DD2D00C82583 /* PlayCommand.swift */; };
+		DE3027C72682E1DC00C82583 /* PlayCommandData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3027C62682E1DC00C82583 /* PlayCommandData.swift */; };
+		DE3027C926830D3D00C82583 /* PlayEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3027C826830D3D00C82583 /* PlayEvent.swift */; };
 		DE342E272637C04E00BABE0B /* ios_modi_network_sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE342E1D2637C04E00BABE0B /* ios_modi_network_sdk.framework */; };
 		DE342E2C2637C04E00BABE0B /* ios_modi_network_sdkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E2B2637C04E00BABE0B /* ios_modi_network_sdkTests.swift */; };
 		DE342E2E2637C04E00BABE0B /* ios_modi_network_sdk.h in Headers */ = {isa = PBXBuildFile; fileRef = DE342E202637C04E00BABE0B /* ios_modi_network_sdk.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -72,6 +77,11 @@
 		7386B6D367E7440A2DF8840C /* Pods-ios_modi_network_sdk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios_modi_network_sdk.release.xcconfig"; path = "Target Support Files/Pods-ios_modi_network_sdk/Pods-ios_modi_network_sdk.release.xcconfig"; sourceTree = "<group>"; };
 		BA99EC06EBEDF37462706905 /* Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.release.xcconfig"; path = "Target Support Files/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.release.xcconfig"; sourceTree = "<group>"; };
 		DDB2116D363C7F25DF252D3F /* Pods-ios_modi_network_sdk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios_modi_network_sdk.debug.xcconfig"; path = "Target Support Files/Pods-ios_modi_network_sdk/Pods-ios_modi_network_sdk.debug.xcconfig"; sourceTree = "<group>"; };
+		DE3027C02681E02E00C82583 /* ModiPlayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModiPlayManager.swift; sourceTree = "<group>"; };
+		DE3027C22681F08200C82583 /* ModiPlayManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModiPlayManagerProtocol.swift; sourceTree = "<group>"; };
+		DE3027C42682DD2D00C82583 /* PlayCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayCommand.swift; sourceTree = "<group>"; };
+		DE3027C62682E1DC00C82583 /* PlayCommandData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayCommandData.swift; sourceTree = "<group>"; };
+		DE3027C826830D3D00C82583 /* PlayEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayEvent.swift; sourceTree = "<group>"; };
 		DE342E1D2637C04E00BABE0B /* ios_modi_network_sdk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ios_modi_network_sdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE342E202637C04E00BABE0B /* ios_modi_network_sdk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ios_modi_network_sdk.h; sourceTree = "<group>"; };
 		DE342E212637C04E00BABE0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -216,6 +226,7 @@
 				DE342E3B2637C0C300BABE0B /* ModiFrameObserver.swift */,
 				DE342E3D2637C0C300BABE0B /* ModiManagerDelegate.swift */,
 				DE342EF52637EB1000BABE0B /* ModiModuleManagerProtocol.swift */,
+				DE3027C22681F08200C82583 /* ModiPlayManagerProtocol.swift */,
 			);
 			path = delegate;
 			sourceTree = "<group>";
@@ -236,6 +247,7 @@
 				DE342E4C2637C0C300BABE0B /* ModiModuleManager.swift */,
 				DE342E4D2637C0C300BABE0B /* ModiStream.swift */,
 				DE342F0026390A5A00BABE0B /* ModiProtocol.swift */,
+				DE3027C02681E02E00C82583 /* ModiPlayManager.swift */,
 			);
 			path = core;
 			sourceTree = "<group>";
@@ -321,6 +333,9 @@
 			children = (
 				DE342E472637C0C300BABE0B /* Result.swift */,
 				DE342E642637C0C300BABE0B /* CodeUpdateError.swift */,
+				DE3027C42682DD2D00C82583 /* PlayCommand.swift */,
+				DE3027C62682E1DC00C82583 /* PlayCommandData.swift */,
+				DE3027C826830D3D00C82583 /* PlayEvent.swift */,
 			);
 			path = enums;
 			sourceTree = "<group>";
@@ -554,16 +569,21 @@
 				DE342E692637C0C300BABE0B /* FirmwareUpdater.swift in Sources */,
 				DE545B87265DF48C003EB0D6 /* ChangeUpdateFilter.swift in Sources */,
 				DE545B7F265DEE33003EB0D6 /* FirmwareFilter.swift in Sources */,
+				DE3027C72682E1DC00C82583 /* PlayCommandData.swift in Sources */,
 				DE342E822637C0C300BABE0B /* ModiData.swift in Sources */,
 				DE342E852637C0C300BABE0B /* CodeUpdateError.swift in Sources */,
 				DE342E702637C0C300BABE0B /* ModiConstants.swift in Sources */,
 				DE342E652637C0C300BABE0B /* ModiCodeUpdaterCallback.swift in Sources */,
 				DE342E682637C0C300BABE0B /* ModiManagerDelegate.swift in Sources */,
+				DE3027C12681E02E00C82583 /* ModiPlayManager.swift in Sources */,
+				DE3027C52682DD2D00C82583 /* PlayCommand.swift in Sources */,
 				DE342E842637C0C300BABE0B /* ModiLog.swift in Sources */,
 				DE342E6A2637C0C300BABE0B /* Constant.swift in Sources */,
 				DE342E7C2637C0C300BABE0B /* HttpNetworkManager.swift in Sources */,
 				DE545B942660B4F6003EB0D6 /* CrcCalculator.swift in Sources */,
 				DE545B902660B381003EB0D6 /* Crc32.swift in Sources */,
+				DE3027C926830D3D00C82583 /* PlayEvent.swift in Sources */,
+				DE3027C32681F08200C82583 /* ModiPlayManagerProtocol.swift in Sources */,
 				DE342E832637C0C300BABE0B /* ModiNumber.swift in Sources */,
 				DE545B83265DF0E6003EB0D6 /* ModuleStateFilter.swift in Sources */,
 				DE342F0126390A5A00BABE0B /* ModiProtocol.swift in Sources */,
