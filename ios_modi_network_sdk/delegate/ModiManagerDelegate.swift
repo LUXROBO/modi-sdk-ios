@@ -10,7 +10,7 @@
 import Foundation
 
 
-@objc public protocol ModiManagerDelegate : NSObjectProtocol {
+@objc public protocol ModiManagerDelegate {
     
     // SCAN
     func onFoundDevice(deviceName name:String, deviceAddress address:String, macAddress:String)
