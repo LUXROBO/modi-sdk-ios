@@ -1,0 +1,873 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DE3027C12681E02E00C82583 /* ModiPlayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3027C02681E02E00C82583 /* ModiPlayManager.swift */; };
+		DE3027C32681F08200C82583 /* ModiPlayManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3027C22681F08200C82583 /* ModiPlayManagerProtocol.swift */; };
+		DE3027C52682DD2D00C82583 /* PlayCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3027C42682DD2D00C82583 /* PlayCommand.swift */; };
+		DE3027C72682E1DC00C82583 /* PlayCommandData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3027C62682E1DC00C82583 /* PlayCommandData.swift */; };
+		DE3027C926830D3D00C82583 /* PlayEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3027C826830D3D00C82583 /* PlayEvent.swift */; };
+		DE342E272637C04E00BABE0B /* ios_modi_network_sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE342E1D2637C04E00BABE0B /* ios_modi_network_sdk.framework */; };
+		DE342E2C2637C04E00BABE0B /* ios_modi_network_sdkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E2B2637C04E00BABE0B /* ios_modi_network_sdkTests.swift */; };
+		DE342E2E2637C04E00BABE0B /* ios_modi_network_sdk.h in Headers */ = {isa = PBXBuildFile; fileRef = DE342E202637C04E00BABE0B /* ios_modi_network_sdk.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DE342E652637C0C300BABE0B /* ModiCodeUpdaterCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E3A2637C0C300BABE0B /* ModiCodeUpdaterCallback.swift */; };
+		DE342E662637C0C300BABE0B /* ModiFrameObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E3B2637C0C300BABE0B /* ModiFrameObserver.swift */; };
+		DE342E682637C0C300BABE0B /* ModiManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E3D2637C0C300BABE0B /* ModiManagerDelegate.swift */; };
+		DE342E692637C0C300BABE0B /* FirmwareUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E3E2637C0C300BABE0B /* FirmwareUpdater.swift */; };
+		DE342E6A2637C0C300BABE0B /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E402637C0C300BABE0B /* Constant.swift */; };
+		DE342E6B2637C0C300BABE0B /* ModiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E412637C0C300BABE0B /* ModiManager.swift */; };
+		DE342E6C2637C0C300BABE0B /* ModiCodeUpdater.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E422637C0C300BABE0B /* ModiCodeUpdater.swift */; };
+		DE342E6D2637C0C300BABE0B /* ModiModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E432637C0C300BABE0B /* ModiModule.swift */; };
+		DE342E6E2637C0C300BABE0B /* ModiFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E442637C0C300BABE0B /* ModiFrame.swift */; };
+		DE342E6F2637C0C300BABE0B /* Peripheral+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E452637C0C300BABE0B /* Peripheral+Hashable.swift */; };
+		DE342E702637C0C300BABE0B /* ModiConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E462637C0C300BABE0B /* ModiConstants.swift */; };
+		DE342E712637C0C300BABE0B /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E472637C0C300BABE0B /* Result.swift */; };
+		DE342E722637C0C300BABE0B /* Characterist+CBCharacteristicWriteType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E482637C0C300BABE0B /* Characterist+CBCharacteristicWriteType.swift */; };
+		DE342E732637C0C300BABE0B /* Characteristic+Hashable.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E492637C0C300BABE0B /* Characteristic+Hashable.swift */; };
+		DE342E742637C0C300BABE0B /* RxBluetoothKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E4A2637C0C300BABE0B /* RxBluetoothKitService.swift */; };
+		DE342E752637C0C300BABE0B /* ModiGattAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E4B2637C0C300BABE0B /* ModiGattAttributes.swift */; };
+		DE342E762637C0C300BABE0B /* ModiModuleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E4C2637C0C300BABE0B /* ModiModuleManager.swift */; };
+		DE342E772637C0C300BABE0B /* ModiStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E4D2637C0C300BABE0B /* ModiStream.swift */; };
+		DE342E782637C0C300BABE0B /* RestApiRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E512637C0C300BABE0B /* RestApiRepository.swift */; };
+		DE342E792637C0C300BABE0B /* RestApiRepositoryImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E522637C0C300BABE0B /* RestApiRepositoryImpl.swift */; };
+		DE342E7A2637C0C300BABE0B /* RestApiUseCaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E532637C0C300BABE0B /* RestApiUseCaseImpl.swift */; };
+		DE342E7B2637C0C300BABE0B /* HttpApiTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E552637C0C300BABE0B /* HttpApiTarget.swift */; };
+		DE342E7C2637C0C300BABE0B /* HttpNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E562637C0C300BABE0B /* HttpNetworkManager.swift */; };
+		DE342E7D2637C0C300BABE0B /* HttpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E592637C0C300BABE0B /* HttpModel.swift */; };
+		DE342E7E2637C0C300BABE0B /* RestApiRemoteDataSourceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E5B2637C0C300BABE0B /* RestApiRemoteDataSourceImpl.swift */; };
+		DE342E7F2637C0C300BABE0B /* RestApiRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E5C2637C0C300BABE0B /* RestApiRemoteDataSource.swift */; };
+		DE342E802637C0C300BABE0B /* ModiDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E5E2637C0C300BABE0B /* ModiDate.swift */; };
+		DE342E812637C0C300BABE0B /* ModiString.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E5F2637C0C300BABE0B /* ModiString.swift */; };
+		DE342E822637C0C300BABE0B /* ModiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E602637C0C300BABE0B /* ModiData.swift */; };
+		DE342E832637C0C300BABE0B /* ModiNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E612637C0C300BABE0B /* ModiNumber.swift */; };
+		DE342E842637C0C300BABE0B /* ModiLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E622637C0C300BABE0B /* ModiLog.swift */; };
+		DE342E852637C0C300BABE0B /* CodeUpdateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E642637C0C300BABE0B /* CodeUpdateError.swift */; };
+		DE342EF62637EB1000BABE0B /* ModiModuleManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342EF52637EB1000BABE0B /* ModiModuleManagerProtocol.swift */; };
+		DE342F0126390A5A00BABE0B /* ModiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342F0026390A5A00BABE0B /* ModiProtocol.swift */; };
+		DE545B6F265631C6003EB0D6 /* ModiSingleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE545B6E265631C6003EB0D6 /* ModiSingleton.swift */; };
+		DE545B74265CE60D003EB0D6 /* ModiFrameFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE545B73265CE60D003EB0D6 /* ModiFrameFilter.swift */; };
+		DE545B79265CE9A9003EB0D6 /* StreamFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE545B78265CE9A9003EB0D6 /* StreamFilter.swift */; };
+		DE545B7F265DEE33003EB0D6 /* FirmwareFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE545B7E265DEE33003EB0D6 /* FirmwareFilter.swift */; };
+		DE545B83265DF0E6003EB0D6 /* ModuleStateFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE545B82265DF0E6003EB0D6 /* ModuleStateFilter.swift */; };
+		DE545B87265DF48C003EB0D6 /* ChangeUpdateFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE545B86265DF48C003EB0D6 /* ChangeUpdateFilter.swift */; };
+		DE545B8C26609130003EB0D6 /* AlgoParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE545B8B26609130003EB0D6 /* AlgoParams.swift */; };
+		DE545B902660B381003EB0D6 /* Crc32.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE545B8F2660B381003EB0D6 /* Crc32.swift */; };
+		DE545B942660B4F6003EB0D6 /* CrcCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE545B932660B4F6003EB0D6 /* CrcCalculator.swift */; };
+		DE65398E26451CFA00662728 /* ModiProtocol_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE65398D26451CFA00662728 /* ModiProtocol_Test.swift */; };
+		DEBCC881264B852400D5036C /* ModiCodeUpdate_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBCC880264B852400D5036C /* ModiCodeUpdate_Test.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DE342E282637C04E00BABE0B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DE342E142637C04E00BABE0B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DE342E1C2637C04E00BABE0B;
+			remoteInfo = ios_modi_network_sdk;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		67B546600723AF13485C8612 /* Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.debug.xcconfig"; path = "Target Support Files/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7386B6D367E7440A2DF8840C /* Pods-ios_modi_network_sdk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios_modi_network_sdk.release.xcconfig"; path = "Target Support Files/Pods-ios_modi_network_sdk/Pods-ios_modi_network_sdk.release.xcconfig"; sourceTree = "<group>"; };
+		BA99EC06EBEDF37462706905 /* Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.release.xcconfig"; path = "Target Support Files/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.release.xcconfig"; sourceTree = "<group>"; };
+		DDB2116D363C7F25DF252D3F /* Pods-ios_modi_network_sdk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios_modi_network_sdk.debug.xcconfig"; path = "Target Support Files/Pods-ios_modi_network_sdk/Pods-ios_modi_network_sdk.debug.xcconfig"; sourceTree = "<group>"; };
+		DE3027C02681E02E00C82583 /* ModiPlayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModiPlayManager.swift; sourceTree = "<group>"; };
+		DE3027C22681F08200C82583 /* ModiPlayManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModiPlayManagerProtocol.swift; sourceTree = "<group>"; };
+		DE3027C42682DD2D00C82583 /* PlayCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayCommand.swift; sourceTree = "<group>"; };
+		DE3027C62682E1DC00C82583 /* PlayCommandData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayCommandData.swift; sourceTree = "<group>"; };
+		DE3027C826830D3D00C82583 /* PlayEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayEvent.swift; sourceTree = "<group>"; };
+		DE342E1D2637C04E00BABE0B /* ios_modi_network_sdk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ios_modi_network_sdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE342E202637C04E00BABE0B /* ios_modi_network_sdk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ios_modi_network_sdk.h; sourceTree = "<group>"; };
+		DE342E212637C04E00BABE0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DE342E262637C04E00BABE0B /* ios_modi_network_sdkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ios_modi_network_sdkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE342E2B2637C04E00BABE0B /* ios_modi_network_sdkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_modi_network_sdkTests.swift; sourceTree = "<group>"; };
+		DE342E2D2637C04E00BABE0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DE342E3A2637C0C300BABE0B /* ModiCodeUpdaterCallback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModiCodeUpdaterCallback.swift; sourceTree = "<group>"; };
+		DE342E3B2637C0C300BABE0B /* ModiFrameObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModiFrameObserver.swift; sourceTree = "<group>"; };
+		DE342E3D2637C0C300BABE0B /* ModiManagerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModiManagerDelegate.swift; sourceTree = "<group>"; };
+		DE342E3E2637C0C300BABE0B /* FirmwareUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirmwareUpdater.swift; sourceTree = "<group>"; };
+		DE342E402637C0C300BABE0B /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		DE342E412637C0C300BABE0B /* ModiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModiManager.swift; sourceTree = "<group>"; };
+		DE342E422637C0C300BABE0B /* ModiCodeUpdater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModiCodeUpdater.swift; sourceTree = "<group>"; };
+		DE342E432637C0C300BABE0B /* ModiModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModiModule.swift; sourceTree = "<group>"; };
+		DE342E442637C0C300BABE0B /* ModiFrame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModiFrame.swift; sourceTree = "<group>"; };
+		DE342E452637C0C300BABE0B /* Peripheral+Hashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Peripheral+Hashable.swift"; sourceTree = "<group>"; };
+		DE342E462637C0C300BABE0B /* ModiConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModiConstants.swift; sourceTree = "<group>"; };
+		DE342E472637C0C300BABE0B /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		DE342E482637C0C300BABE0B /* Characterist+CBCharacteristicWriteType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Characterist+CBCharacteristicWriteType.swift"; sourceTree = "<group>"; };
+		DE342E492637C0C300BABE0B /* Characteristic+Hashable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Characteristic+Hashable.swift"; sourceTree = "<group>"; };
+		DE342E4A2637C0C300BABE0B /* RxBluetoothKitService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxBluetoothKitService.swift; sourceTree = "<group>"; };
+		DE342E4B2637C0C300BABE0B /* ModiGattAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModiGattAttributes.swift; sourceTree = "<group>"; };
+		DE342E4C2637C0C300BABE0B /* ModiModuleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModiModuleManager.swift; sourceTree = "<group>"; };
+		DE342E4D2637C0C300BABE0B /* ModiStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModiStream.swift; sourceTree = "<group>"; };
+		DE342E512637C0C300BABE0B /* RestApiRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiRepository.swift; sourceTree = "<group>"; };
+		DE342E522637C0C300BABE0B /* RestApiRepositoryImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiRepositoryImpl.swift; sourceTree = "<group>"; };
+		DE342E532637C0C300BABE0B /* RestApiUseCaseImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiUseCaseImpl.swift; sourceTree = "<group>"; };
+		DE342E552637C0C300BABE0B /* HttpApiTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpApiTarget.swift; sourceTree = "<group>"; };
+		DE342E562637C0C300BABE0B /* HttpNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpNetworkManager.swift; sourceTree = "<group>"; };
+		DE342E592637C0C300BABE0B /* HttpModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpModel.swift; sourceTree = "<group>"; };
+		DE342E5B2637C0C300BABE0B /* RestApiRemoteDataSourceImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiRemoteDataSourceImpl.swift; sourceTree = "<group>"; };
+		DE342E5C2637C0C300BABE0B /* RestApiRemoteDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiRemoteDataSource.swift; sourceTree = "<group>"; };
+		DE342E5E2637C0C300BABE0B /* ModiDate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModiDate.swift; sourceTree = "<group>"; };
+		DE342E5F2637C0C300BABE0B /* ModiString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModiString.swift; sourceTree = "<group>"; };
+		DE342E602637C0C300BABE0B /* ModiData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModiData.swift; sourceTree = "<group>"; };
+		DE342E612637C0C300BABE0B /* ModiNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModiNumber.swift; sourceTree = "<group>"; };
+		DE342E622637C0C300BABE0B /* ModiLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModiLog.swift; sourceTree = "<group>"; };
+		DE342E642637C0C300BABE0B /* CodeUpdateError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeUpdateError.swift; sourceTree = "<group>"; };
+		DE342EF52637EB1000BABE0B /* ModiModuleManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModiModuleManagerProtocol.swift; sourceTree = "<group>"; };
+		DE342F0026390A5A00BABE0B /* ModiProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModiProtocol.swift; sourceTree = "<group>"; };
+		DE545B6E265631C6003EB0D6 /* ModiSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModiSingleton.swift; sourceTree = "<group>"; };
+		DE545B73265CE60D003EB0D6 /* ModiFrameFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModiFrameFilter.swift; sourceTree = "<group>"; };
+		DE545B78265CE9A9003EB0D6 /* StreamFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamFilter.swift; sourceTree = "<group>"; };
+		DE545B7E265DEE33003EB0D6 /* FirmwareFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirmwareFilter.swift; sourceTree = "<group>"; };
+		DE545B82265DF0E6003EB0D6 /* ModuleStateFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleStateFilter.swift; sourceTree = "<group>"; };
+		DE545B86265DF48C003EB0D6 /* ChangeUpdateFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeUpdateFilter.swift; sourceTree = "<group>"; };
+		DE545B8B26609130003EB0D6 /* AlgoParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgoParams.swift; sourceTree = "<group>"; };
+		DE545B8F2660B381003EB0D6 /* Crc32.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crc32.swift; sourceTree = "<group>"; };
+		DE545B932660B4F6003EB0D6 /* CrcCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrcCalculator.swift; sourceTree = "<group>"; };
+		DE65398D26451CFA00662728 /* ModiProtocol_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModiProtocol_Test.swift; sourceTree = "<group>"; };
+		DEBCC880264B852400D5036C /* ModiCodeUpdate_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModiCodeUpdate_Test.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DE342E1A2637C04E00BABE0B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE342E232637C04E00BABE0B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE342E272637C04E00BABE0B /* ios_modi_network_sdk.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FA18470EB4D9805091BDA9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DDB2116D363C7F25DF252D3F /* Pods-ios_modi_network_sdk.debug.xcconfig */,
+				7386B6D367E7440A2DF8840C /* Pods-ios_modi_network_sdk.release.xcconfig */,
+				67B546600723AF13485C8612 /* Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.debug.xcconfig */,
+				BA99EC06EBEDF37462706905 /* Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		5237E7CE778189CC00B2680D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DE342E132637C04E00BABE0B = {
+			isa = PBXGroup;
+			children = (
+				DE342E1F2637C04E00BABE0B /* ios_modi_network_sdk */,
+				DE342E2A2637C04E00BABE0B /* ios_modi_network_sdkTests */,
+				DE342E1E2637C04E00BABE0B /* Products */,
+				08FA18470EB4D9805091BDA9 /* Pods */,
+				5237E7CE778189CC00B2680D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		DE342E1E2637C04E00BABE0B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DE342E1D2637C04E00BABE0B /* ios_modi_network_sdk.framework */,
+				DE342E262637C04E00BABE0B /* ios_modi_network_sdkTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DE342E1F2637C04E00BABE0B /* ios_modi_network_sdk */ = {
+			isa = PBXGroup;
+			children = (
+				DE545B8A2660910F003EB0D6 /* crcCalc */,
+				DE342EFB2637FAE800BABE0B /* extention */,
+				DE342E3F2637C0C300BABE0B /* core */,
+				DE342E392637C0C300BABE0B /* delegate */,
+				DE342E632637C0C300BABE0B /* enums */,
+				DE342E4E2637C0C300BABE0B /* Network */,
+				DE342E5D2637C0C300BABE0B /* utils */,
+				DE342E202637C04E00BABE0B /* ios_modi_network_sdk.h */,
+				DE342E212637C04E00BABE0B /* Info.plist */,
+			);
+			path = ios_modi_network_sdk;
+			sourceTree = "<group>";
+		};
+		DE342E2A2637C04E00BABE0B /* ios_modi_network_sdkTests */ = {
+			isa = PBXGroup;
+			children = (
+				DE342E2B2637C04E00BABE0B /* ios_modi_network_sdkTests.swift */,
+				DE342E2D2637C04E00BABE0B /* Info.plist */,
+				DE65398D26451CFA00662728 /* ModiProtocol_Test.swift */,
+				DEBCC880264B852400D5036C /* ModiCodeUpdate_Test.swift */,
+			);
+			path = ios_modi_network_sdkTests;
+			sourceTree = "<group>";
+		};
+		DE342E392637C0C300BABE0B /* delegate */ = {
+			isa = PBXGroup;
+			children = (
+				DE342E3A2637C0C300BABE0B /* ModiCodeUpdaterCallback.swift */,
+				DE342E3B2637C0C300BABE0B /* ModiFrameObserver.swift */,
+				DE342E3D2637C0C300BABE0B /* ModiManagerDelegate.swift */,
+				DE342EF52637EB1000BABE0B /* ModiModuleManagerProtocol.swift */,
+				DE3027C22681F08200C82583 /* ModiPlayManagerProtocol.swift */,
+			);
+			path = delegate;
+			sourceTree = "<group>";
+		};
+		DE342E3F2637C0C300BABE0B /* core */ = {
+			isa = PBXGroup;
+			children = (
+				DE545B77265CE982003EB0D6 /* frameFilter */,
+				DE342E3E2637C0C300BABE0B /* FirmwareUpdater.swift */,
+				DE342E402637C0C300BABE0B /* Constant.swift */,
+				DE342E412637C0C300BABE0B /* ModiManager.swift */,
+				DE342E422637C0C300BABE0B /* ModiCodeUpdater.swift */,
+				DE342E432637C0C300BABE0B /* ModiModule.swift */,
+				DE342E442637C0C300BABE0B /* ModiFrame.swift */,
+				DE342E462637C0C300BABE0B /* ModiConstants.swift */,
+				DE342E4A2637C0C300BABE0B /* RxBluetoothKitService.swift */,
+				DE342E4B2637C0C300BABE0B /* ModiGattAttributes.swift */,
+				DE342E4C2637C0C300BABE0B /* ModiModuleManager.swift */,
+				DE342E4D2637C0C300BABE0B /* ModiStream.swift */,
+				DE342F0026390A5A00BABE0B /* ModiProtocol.swift */,
+				DE3027C02681E02E00C82583 /* ModiPlayManager.swift */,
+			);
+			path = core;
+			sourceTree = "<group>";
+		};
+		DE342E4E2637C0C300BABE0B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				DE342E4F2637C0C300BABE0B /* restAPI */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		DE342E4F2637C0C300BABE0B /* restAPI */ = {
+			isa = PBXGroup;
+			children = (
+				DE342E502637C0C300BABE0B /* Repository */,
+				DE342E532637C0C300BABE0B /* RestApiUseCaseImpl.swift */,
+				DE342E542637C0C300BABE0B /* HTTP */,
+				DE342E572637C0C300BABE0B /* Data */,
+				DE342E5A2637C0C300BABE0B /* Remote */,
+			);
+			path = restAPI;
+			sourceTree = "<group>";
+		};
+		DE342E502637C0C300BABE0B /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				DE342E512637C0C300BABE0B /* RestApiRepository.swift */,
+				DE342E522637C0C300BABE0B /* RestApiRepositoryImpl.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		DE342E542637C0C300BABE0B /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				DE342E552637C0C300BABE0B /* HttpApiTarget.swift */,
+				DE342E562637C0C300BABE0B /* HttpNetworkManager.swift */,
+			);
+			path = HTTP;
+			sourceTree = "<group>";
+		};
+		DE342E572637C0C300BABE0B /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				DE342E582637C0C300BABE0B /* Model */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		DE342E582637C0C300BABE0B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DE342E592637C0C300BABE0B /* HttpModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DE342E5A2637C0C300BABE0B /* Remote */ = {
+			isa = PBXGroup;
+			children = (
+				DE342E5B2637C0C300BABE0B /* RestApiRemoteDataSourceImpl.swift */,
+				DE342E5C2637C0C300BABE0B /* RestApiRemoteDataSource.swift */,
+			);
+			path = Remote;
+			sourceTree = "<group>";
+		};
+		DE342E5D2637C0C300BABE0B /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				DE342E5E2637C0C300BABE0B /* ModiDate.swift */,
+				DE342E5F2637C0C300BABE0B /* ModiString.swift */,
+				DE342E602637C0C300BABE0B /* ModiData.swift */,
+				DE342E612637C0C300BABE0B /* ModiNumber.swift */,
+				DE342E622637C0C300BABE0B /* ModiLog.swift */,
+				DE545B6E265631C6003EB0D6 /* ModiSingleton.swift */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
+		DE342E632637C0C300BABE0B /* enums */ = {
+			isa = PBXGroup;
+			children = (
+				DE342E472637C0C300BABE0B /* Result.swift */,
+				DE342E642637C0C300BABE0B /* CodeUpdateError.swift */,
+				DE3027C42682DD2D00C82583 /* PlayCommand.swift */,
+				DE3027C62682E1DC00C82583 /* PlayCommandData.swift */,
+				DE3027C826830D3D00C82583 /* PlayEvent.swift */,
+			);
+			path = enums;
+			sourceTree = "<group>";
+		};
+		DE342EFB2637FAE800BABE0B /* extention */ = {
+			isa = PBXGroup;
+			children = (
+				DE342E452637C0C300BABE0B /* Peripheral+Hashable.swift */,
+				DE342E482637C0C300BABE0B /* Characterist+CBCharacteristicWriteType.swift */,
+				DE342E492637C0C300BABE0B /* Characteristic+Hashable.swift */,
+			);
+			path = extention;
+			sourceTree = "<group>";
+		};
+		DE545B77265CE982003EB0D6 /* frameFilter */ = {
+			isa = PBXGroup;
+			children = (
+				DE545B73265CE60D003EB0D6 /* ModiFrameFilter.swift */,
+				DE545B78265CE9A9003EB0D6 /* StreamFilter.swift */,
+				DE545B7E265DEE33003EB0D6 /* FirmwareFilter.swift */,
+				DE545B82265DF0E6003EB0D6 /* ModuleStateFilter.swift */,
+				DE545B86265DF48C003EB0D6 /* ChangeUpdateFilter.swift */,
+			);
+			path = frameFilter;
+			sourceTree = "<group>";
+		};
+		DE545B8A2660910F003EB0D6 /* crcCalc */ = {
+			isa = PBXGroup;
+			children = (
+				DE545B8B26609130003EB0D6 /* AlgoParams.swift */,
+				DE545B8F2660B381003EB0D6 /* Crc32.swift */,
+				DE545B932660B4F6003EB0D6 /* CrcCalculator.swift */,
+			);
+			path = crcCalc;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		DE342E182637C04E00BABE0B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE342E2E2637C04E00BABE0B /* ios_modi_network_sdk.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		DE342E1C2637C04E00BABE0B /* ios_modi_network_sdk */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DE342E312637C04E00BABE0B /* Build configuration list for PBXNativeTarget "ios_modi_network_sdk" */;
+			buildPhases = (
+				8D364A22344E95C28B0DDB0C /* [CP] Check Pods Manifest.lock */,
+				DE342E182637C04E00BABE0B /* Headers */,
+				DE342E192637C04E00BABE0B /* Sources */,
+				DE342E1A2637C04E00BABE0B /* Frameworks */,
+				DE342E1B2637C04E00BABE0B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ios_modi_network_sdk;
+			productName = ios_modi_network_sdk;
+			productReference = DE342E1D2637C04E00BABE0B /* ios_modi_network_sdk.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		DE342E252637C04E00BABE0B /* ios_modi_network_sdkTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DE342E342637C04E00BABE0B /* Build configuration list for PBXNativeTarget "ios_modi_network_sdkTests" */;
+			buildPhases = (
+				8A4D3E657FB368F6D0C42CAE /* [CP] Check Pods Manifest.lock */,
+				DE342E222637C04E00BABE0B /* Sources */,
+				DE342E232637C04E00BABE0B /* Frameworks */,
+				DE342E242637C04E00BABE0B /* Resources */,
+				EF71D216E5EFABB18D77633B /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DE342E292637C04E00BABE0B /* PBXTargetDependency */,
+			);
+			name = ios_modi_network_sdkTests;
+			productName = ios_modi_network_sdkTests;
+			productReference = DE342E262637C04E00BABE0B /* ios_modi_network_sdkTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DE342E142637C04E00BABE0B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
+				TargetAttributes = {
+					DE342E1C2637C04E00BABE0B = {
+						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1240;
+					};
+					DE342E252637C04E00BABE0B = {
+						CreatedOnToolsVersion = 12.4;
+					};
+				};
+			};
+			buildConfigurationList = DE342E172637C04E00BABE0B /* Build configuration list for PBXProject "ios_modi_network_sdk" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DE342E132637C04E00BABE0B;
+			productRefGroup = DE342E1E2637C04E00BABE0B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DE342E1C2637C04E00BABE0B /* ios_modi_network_sdk */,
+				DE342E252637C04E00BABE0B /* ios_modi_network_sdkTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DE342E1B2637C04E00BABE0B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE342E242637C04E00BABE0B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8A4D3E657FB368F6D0C42CAE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8D364A22344E95C28B0DDB0C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ios_modi_network_sdk-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF71D216E5EFABB18D77633B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DE342E192637C04E00BABE0B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE342E772637C0C300BABE0B /* ModiStream.swift in Sources */,
+				DE545B79265CE9A9003EB0D6 /* StreamFilter.swift in Sources */,
+				DE342E762637C0C300BABE0B /* ModiModuleManager.swift in Sources */,
+				DE342E782637C0C300BABE0B /* RestApiRepository.swift in Sources */,
+				DE342E7B2637C0C300BABE0B /* HttpApiTarget.swift in Sources */,
+				DE342E662637C0C300BABE0B /* ModiFrameObserver.swift in Sources */,
+				DE545B6F265631C6003EB0D6 /* ModiSingleton.swift in Sources */,
+				DE545B74265CE60D003EB0D6 /* ModiFrameFilter.swift in Sources */,
+				DE342E712637C0C300BABE0B /* Result.swift in Sources */,
+				DE545B8C26609130003EB0D6 /* AlgoParams.swift in Sources */,
+				DE342E752637C0C300BABE0B /* ModiGattAttributes.swift in Sources */,
+				DE342E7E2637C0C300BABE0B /* RestApiRemoteDataSourceImpl.swift in Sources */,
+				DE342E7D2637C0C300BABE0B /* HttpModel.swift in Sources */,
+				DE342EF62637EB1000BABE0B /* ModiModuleManagerProtocol.swift in Sources */,
+				DE342E812637C0C300BABE0B /* ModiString.swift in Sources */,
+				DE342E792637C0C300BABE0B /* RestApiRepositoryImpl.swift in Sources */,
+				DE342E722637C0C300BABE0B /* Characterist+CBCharacteristicWriteType.swift in Sources */,
+				DE342E6C2637C0C300BABE0B /* ModiCodeUpdater.swift in Sources */,
+				DE342E692637C0C300BABE0B /* FirmwareUpdater.swift in Sources */,
+				DE545B87265DF48C003EB0D6 /* ChangeUpdateFilter.swift in Sources */,
+				DE545B7F265DEE33003EB0D6 /* FirmwareFilter.swift in Sources */,
+				DE3027C72682E1DC00C82583 /* PlayCommandData.swift in Sources */,
+				DE342E822637C0C300BABE0B /* ModiData.swift in Sources */,
+				DE342E852637C0C300BABE0B /* CodeUpdateError.swift in Sources */,
+				DE342E702637C0C300BABE0B /* ModiConstants.swift in Sources */,
+				DE342E652637C0C300BABE0B /* ModiCodeUpdaterCallback.swift in Sources */,
+				DE342E682637C0C300BABE0B /* ModiManagerDelegate.swift in Sources */,
+				DE3027C12681E02E00C82583 /* ModiPlayManager.swift in Sources */,
+				DE3027C52682DD2D00C82583 /* PlayCommand.swift in Sources */,
+				DE342E842637C0C300BABE0B /* ModiLog.swift in Sources */,
+				DE342E6A2637C0C300BABE0B /* Constant.swift in Sources */,
+				DE342E7C2637C0C300BABE0B /* HttpNetworkManager.swift in Sources */,
+				DE545B942660B4F6003EB0D6 /* CrcCalculator.swift in Sources */,
+				DE545B902660B381003EB0D6 /* Crc32.swift in Sources */,
+				DE3027C926830D3D00C82583 /* PlayEvent.swift in Sources */,
+				DE3027C32681F08200C82583 /* ModiPlayManagerProtocol.swift in Sources */,
+				DE342E832637C0C300BABE0B /* ModiNumber.swift in Sources */,
+				DE545B83265DF0E6003EB0D6 /* ModuleStateFilter.swift in Sources */,
+				DE342F0126390A5A00BABE0B /* ModiProtocol.swift in Sources */,
+				DE342E6B2637C0C300BABE0B /* ModiManager.swift in Sources */,
+				DE342E7A2637C0C300BABE0B /* RestApiUseCaseImpl.swift in Sources */,
+				DE342E6F2637C0C300BABE0B /* Peripheral+Hashable.swift in Sources */,
+				DE342E7F2637C0C300BABE0B /* RestApiRemoteDataSource.swift in Sources */,
+				DE342E6E2637C0C300BABE0B /* ModiFrame.swift in Sources */,
+				DE342E802637C0C300BABE0B /* ModiDate.swift in Sources */,
+				DE342E732637C0C300BABE0B /* Characteristic+Hashable.swift in Sources */,
+				DE342E6D2637C0C300BABE0B /* ModiModule.swift in Sources */,
+				DE342E742637C0C300BABE0B /* RxBluetoothKitService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE342E222637C04E00BABE0B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE65398E26451CFA00662728 /* ModiProtocol_Test.swift in Sources */,
+				DE342E2C2637C04E00BABE0B /* ios_modi_network_sdkTests.swift in Sources */,
+				DEBCC881264B852400D5036C /* ModiCodeUpdate_Test.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DE342E292637C04E00BABE0B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DE342E1C2637C04E00BABE0B /* ios_modi_network_sdk */;
+			targetProxy = DE342E282637C04E00BABE0B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		DE342E2F2637C04E00BABE0B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		DE342E302637C04E00BABE0B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		DE342E322637C04E00BABE0B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DDB2116D363C7F25DF252D3F /* Pods-ios_modi_network_sdk.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 4B7YLKL5S2;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = ios_modi_network_sdk/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.luxrobo.modi-network-sdk-ios.ios-modi-network-sdk";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DE342E332637C04E00BABE0B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7386B6D367E7440A2DF8840C /* Pods-ios_modi_network_sdk.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 4B7YLKL5S2;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = ios_modi_network_sdk/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.luxrobo.modi-network-sdk-ios.ios-modi-network-sdk";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		DE342E352637C04E00BABE0B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 67B546600723AF13485C8612 /* Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4B7YLKL5S2;
+				INFOPLIST_FILE = ios_modi_network_sdkTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.luxrobo.modi-network-sdk-ios.ios-modi-network-sdkTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DE342E362637C04E00BABE0B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA99EC06EBEDF37462706905 /* Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4B7YLKL5S2;
+				INFOPLIST_FILE = ios_modi_network_sdkTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.luxrobo.modi-network-sdk-ios.ios-modi-network-sdkTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DE342E172637C04E00BABE0B /* Build configuration list for PBXProject "ios_modi_network_sdk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE342E2F2637C04E00BABE0B /* Debug */,
+				DE342E302637C04E00BABE0B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DE342E312637C04E00BABE0B /* Build configuration list for PBXNativeTarget "ios_modi_network_sdk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE342E322637C04E00BABE0B /* Debug */,
+				DE342E332637C04E00BABE0B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DE342E342637C04E00BABE0B /* Build configuration list for PBXNativeTarget "ios_modi_network_sdkTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DE342E352637C04E00BABE0B /* Debug */,
+				DE342E362637C04E00BABE0B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DE342E142637C04E00BABE0B /* Project object */;
+}

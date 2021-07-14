@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ModiModuleManagerProtocol : NSObjectProtocol {
+protocol ModiModuleManagerProtocol {
     
     func onConnectModule(manager : ModiModuleManager, module:ModiModule)
     func onExpiredModule(manager : ModiModuleManager, module:ModiModule)

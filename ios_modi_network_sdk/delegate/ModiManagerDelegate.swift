@@ -10,14 +10,16 @@
 import Foundation
 
 
-@objc public protocol ModiManagerDelegate : NSObjectProtocol {
+@objc public protocol ModiManagerDelegate {
     
     // SCAN
     func onFoundDevice(deviceName name:String, deviceAddress address:String, macAddress:String)
     func onConnected()
+    func onConnectFail(error : Error)
     func onDisconnected()
     func onDiscoveredAllCharacteristics()
     func onScan(_ scanable:Bool)
+    func onScanFail(error : Error)
     
     // BLUETOOTH
     func onBluetoothEnabled(_ enabled:Bool)
