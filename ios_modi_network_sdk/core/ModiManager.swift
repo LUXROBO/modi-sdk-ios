@@ -39,7 +39,7 @@ open class ModiManager  {
     
 //    private let discoveredServicesSubject = PublishSubject<Result<Service, Error>>()
 
-    private var disposeBag : DisposeBag?
+    private var disposeBag = DisposeBag()
 
     private var isReconnect = false
     private var reConnectCount = 0
@@ -63,7 +63,7 @@ open class ModiManager  {
     open func scan() {
         
         ModiLog.i("scan", messages: "scan start")
-        self.disposeBag = DisposeBag()
+//        self.disposeBag = DisposeBag()
         
         self.bluetoothService.stopScanning()
         self.peripheralList.removeAll()
@@ -117,7 +117,7 @@ open class ModiManager  {
 //                 self.bluetoothService.stopScanning()
                 
             }
-            }).disposed(by: disposeBag!)
+            }).disposed(by: disposeBag)
     
     }
     
@@ -181,7 +181,7 @@ open class ModiManager  {
                self.disconnect()
                 
             }
-        }).disposed(by: disposeBag!)
+        }).disposed(by: disposeBag)
     }
     
     private func discoverCharacteristics(service : Service) {
@@ -247,7 +247,7 @@ open class ModiManager  {
                     self.disconnect()
                     
             }
-        }).disposed(by: self.disposeBag!)
+        }).disposed(by: self.disposeBag)
         
         
     }
@@ -298,7 +298,7 @@ open class ModiManager  {
                     
             }
             
-        }).disposed(by: disposeBag!)
+        }).disposed(by: disposeBag)
     }
     
     func setupNotification(characteristic : Characteristic) {
@@ -359,7 +359,7 @@ open class ModiManager  {
                    self.disconnect()
             }
 
-        }).disposed(by: disposeBag!)
+        }).disposed(by: disposeBag)
         
     }
 
@@ -370,7 +370,6 @@ open class ModiManager  {
         self.bluetoothService.disconnect(self.periperal!)
         self.periperal = nil
         self.stopNotification()
-        self.disposeBag = nil
         self.managerDelegate?.onDisconnected()
         
         self.reConnectCount = 0
