@@ -115,6 +115,7 @@ open class ModiManager  {
                 case .error(let error):
                  ModiLog.i("scan", messages: "error : \(error)")
 //                 self.bluetoothService.stopScanning()
+                    self.scanFail(error: error)
                 
             }
             }).disposed(by: disposeBag)
@@ -178,7 +179,7 @@ open class ModiManager  {
             case .error(let error):
                ModiLog.i("connect", messages: "error : \(error)")
             
-               self.disconnect()
+                self.connectFail(error : error)
                 
             }
         }).disposed(by: disposeBag)
@@ -364,6 +365,19 @@ open class ModiManager  {
     }
 
 
+    private func scanFail(error : Error) {
+        stopScan()
+        4
+        managerDelegate?.onScanFail(error: error)
+    }
+    
+    private func connectFail(error : Error) {
+        
+        self.disconnect()
+    
+        managerDelegate?.onConnectFail(error: error)
+    }
+    
     open func disconnect() {
         
         self.modiConnected = false
