@@ -163,4 +163,16 @@ open class ModiProtocol  {
         
         return ModiFrame().makeFrame(cmd: 0xA0, sid : 25, did : moduleKey , binary : data)
     }
+    
+    public func setStartInterpreter() -> [UInt8] {
+        
+        var data = [UInt8](repeating: 0, count: 8)
+        
+        for i in 0...7 {
+            data[i] = 0x00
+        }
+        
+        return ModiFrame().makeFrame(cmd: 0xA0, sid : 0x51, did : 0xFFF , binary : data)
+        
+    }
 }
