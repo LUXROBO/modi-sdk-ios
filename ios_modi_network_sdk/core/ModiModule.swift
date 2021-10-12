@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ModiModule {
+open class ModiModule {
     
     private let TYPE_NETWORK = "Network";
     private let TYPE_ENVIRONMENT = "Environment";
@@ -23,7 +23,7 @@ class ModiModule {
     private let TYPE_SPEAKER = "Speaker";
     
     var version = 0
-    var typeCode = 0
+    public var typeCode = 0
     var uuid = 0
     var state = 0
     var type = "null"
@@ -42,7 +42,7 @@ class ModiModule {
         
     }
     
-    func typeCodeToString(typeCode : Int) -> String {
+    public func typeCodeToString(typeCode : Int) -> String {
         
         switch typeCode {
             case 0x0000: return TYPE_NETWORK

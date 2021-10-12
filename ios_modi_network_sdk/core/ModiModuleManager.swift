@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 
-class ModiModuleManager: ModiFrameObserver {
+open class ModiModuleManager: ModiFrameObserver {
     
     private let MODULE_STATE_UNKNOWN = 0xFF
     private let MODULE_TIMEOUT_PERIOD = 2000
@@ -27,7 +27,7 @@ class ModiModuleManager: ModiFrameObserver {
         self.mModiMananger = modiManager
     }
     
-    func setListener(listener : ModiModuleManagerProtocol) {
+    public func setListener(listener : ModiModuleManagerProtocol) {
         self.mListener = listener
     }
     
@@ -41,7 +41,7 @@ class ModiModuleManager: ModiFrameObserver {
     }
     
     
-    func getModules() -> Array<ModiModule> {
+    public func getModules() -> Array<ModiModule> {
         
         var modules = Array<ModiModule>()
         
