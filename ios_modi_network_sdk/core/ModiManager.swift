@@ -332,18 +332,19 @@ open class ModiManager  {
 
                             if (characteristic.value![0] != 0) {
                                 ModiLog.d("setupNotification DEVICE_CHAR_TX_RX", messages: "\(ModiString.convertHexString(characteristics.value)))")
-                                
-                                self.managerDelegate?.onReceived(str, bytes: characteristics.value!)
-                                let modiFrame = ModiFrame()
-                                modiFrame.setFrame(data: characteristics.value!)
-                                ModiSingleton.shared.notifyModiFrame(frame: modiFrame.getFrame())
-                                
-                                if(characteristics.value![0] == 0x28) {
-                                    
-                                    self.setModi_ID(value: characteristics.value!)
-                                  
-                                }
                             }
+                            
+                            self.managerDelegate?.onReceived(str, bytes: characteristics.value!)
+                            let modiFrame = ModiFrame()
+                            modiFrame.setFrame(data: characteristics.value!)
+                            ModiSingleton.shared.notifyModiFrame(frame: modiFrame.getFrame())
+                            
+                            if(characteristics.value![0] == 0x28) {
+                                
+                                self.setModi_ID(value: characteristics.value!)
+                              
+                            }
+                            
                       }
 
                        case ModiGattArributes.DEVICE_TX_DESC:

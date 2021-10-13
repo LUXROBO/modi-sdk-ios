@@ -67,6 +67,13 @@ open class ModiModuleManager: ModiFrameObserver {
         
         observeFrame()
         
+       Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true, block: { timer in
+           
+            self.run()
+        })
+        
+       
+        
     }
     
     func resetAllModules() {
@@ -79,8 +86,13 @@ open class ModiModuleManager: ModiFrameObserver {
     
     func updateRootModule(uuid : Int) {
         
+        print("updateRootModule1 uuid \(uuid)")
+        
         if self.mModuleMap.keys.contains(uuid) != true {
             self.mModuleMap[uuid] = self.mRootmodule
+            
+            print("updateRootModule2 uuid \(uuid) mModuleMap : \(mModuleMap.count)")
+            
         }
         
         if self.mListener != nil {
@@ -110,17 +122,20 @@ open class ModiModuleManager: ModiFrameObserver {
         
         if(self.mModuleMap.keys.contains(id) != true) {
             
-            let uuid = ModiFrame().getInt(data : Array(moduleData[0...3]))
-            let typeCode = ModiFrame().getInt(data : Array(moduleData[4...5]))
-            let version = ModiFrame().getInt(data : Array(moduleData[6...7]))
-            let state = Int(moduleData[6])
+            let uuid = ModiFrame().getInt(data : Array(moduleData[0...1])) & 0xFFFF
+            let typeCode = ModiFrame().getInt(data : Array(moduleData[4...5])) & 0xFFFF
+            var version = ModiFrame().getInt(data : Array(moduleData[6...7])) & 0xFFFF
+            let state = Int(moduleData[6]) & 0xFFFF
             let time = Date()
+            
+            if version == 10 || version == 0 {
+                version = 16690
+            }
             
             let module = ModiModule().makeModule(type : typeCode, uuid : uuid, version : version, state : state, time : time)
             
             self.mModuleMap[id] = module
-            
-            print("updateModuleState self.mModuleMap[id] \(self.mModuleMap[id]!) module \(module)")
+        
             
             self.removeDisableMapModule(id : id)
             
@@ -172,6 +187,8 @@ open class ModiModuleManager: ModiFrameObserver {
                 
                 let module = mModuleMap[key]
                 let duration = Int(currentTime - module!.lastUpdate)
+                
+                print("run module duration \(duration))")
                 
                 if duration > MODULE_TIMEOUT_PERIOD {
                     expireList.append(key)
@@ -228,10 +245,15 @@ open class ModiModuleManager: ModiFrameObserver {
     
     func expireModule(key : Int) {
         
+        print("updateModuleData expireModule : \(key & 0xFFF)")
+        
         if self.mModuleMap.keys.contains(key) {
             let module = self.mModuleMap[key]
             self.mModuleMap.removeValue(forKey: key)
             self.mDisabledModuleMap[key] = module
+            
+            print("updateModuleData onExpiredModule : \(module!.getString())")
+            
             
             if self.mListener != nil {
                 self.mListener?.onExpiredModule(manager: self, module: module!)
@@ -241,14 +263,14 @@ open class ModiModuleManager: ModiFrameObserver {
     
     func updateModuleData(moduleKey : Int , moduleData : Array<UInt8>) {
         
-        print("updateModuleData moduleKey : \(moduleKey & 0xFFF)")
-        
+        let data = Data(bytes : moduleData, count: moduleData.count)
+    
         if mModuleMap.keys.contains(moduleKey) != true {
             
-            let uuid = ModiFrame().getInt(data : Array(moduleData[0...3])) & 0xFFF
-            let typeCode = ModiFrame().getInt(data : Array(moduleData[4...5])) & 0xFFF
-            var version = ModiFrame().getInt(data : Array(moduleData[6...7])) & 0xFFF
-            let state = Int(moduleData[6]) & 0xFFF
+            let uuid = ModiFrame().getInt(data : Array(moduleData[0...1])) & 0xFFFF
+            let typeCode = ModiFrame().getInt(data : Array(moduleData[4...5])) & 0xFFFF
+            var version = ModiFrame().getInt(data : Array(moduleData[6...7])) & 0xFFFF
+            let state = Int(moduleData[6]) & 0xFFFF
             let time = Date()
             
             if version == 10 || version == 0 {
@@ -256,12 +278,11 @@ open class ModiModuleManager: ModiFrameObserver {
             }
             
             
-            
             let module = ModiModule().makeModule(type : typeCode, uuid : uuid, version : version, state : state, time : time)
             
             self.mModuleMap[moduleKey] = module
             
-            print("updateModuleData  typeCode  : \(typeCode)")
+          
             
             self.removeDisableMapModule(id : moduleKey)
             
