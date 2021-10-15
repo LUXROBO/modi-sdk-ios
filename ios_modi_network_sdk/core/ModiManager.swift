@@ -368,6 +368,7 @@ open class ModiManager  {
 
     private func scanFail(error : Error) {
         stopScan()
+        
         managerDelegate?.onScanFail(error: error)
     }
     
@@ -564,7 +565,7 @@ open class ModiManager  {
         return Int(value)
     }
     
-    func getModuleManager() -> ModiModuleManager {
+    open func getModuleManager() -> ModiModuleManager {
         
         return self.modiModuleManager!
     }
