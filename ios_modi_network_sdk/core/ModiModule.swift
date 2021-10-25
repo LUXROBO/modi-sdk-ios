@@ -63,7 +63,7 @@ open class ModiModule {
         
     }
     
-    func getString() -> String {
+    public func getString() -> String {
         
         let name = self.type.lowercased()+"0"
 //        return String(format: "%s %s(0x%04X%08X);\n", type,name,typeCode, uuid)
