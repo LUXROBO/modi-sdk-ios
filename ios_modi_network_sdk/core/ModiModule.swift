@@ -9,18 +9,22 @@ import Foundation
 
 open class ModiModule {
     
-    private let TYPE_NETWORK = "Network";
-    private let TYPE_ENVIRONMENT = "Environment";
+    private let TYPE_NETWORK = "Network"
+    private let TYPE_ENVIRONMENT = "Environment"
     private let TYPE_GYRO = "Gyro"
-    private let TYPE_MIC = "Mic";
-    private let TYPE_BUTTON = "Button";
-    private let TYPE_DIAL = "Dial";
-    private let TYPE_ULTRASONIC = "Ultrasonic";
-    private let TYPE_IR = "Ir";
-    private let TYPE_DISPLAY = "Display";
-    private let TYPE_MOTOR = "Motor";
-    private let TYPE_LED = "Led";
-    private let TYPE_SPEAKER = "Speaker";
+    private let TYPE_MIC = "Mic"
+    private let TYPE_BUTTON = "Button"
+    private let TYPE_DIAL = "Dial"
+    private let TYPE_ULTRASONIC = "Ultrasonic"
+    private let TYPE_IR = "Ir"
+    private let TYPE_DISPLAY = "Display"
+    private let TYPE_MOTOR = "Motor"
+    private let TYPE_MOTOR_B = "MotorB"
+    private let TYPE_LED = "Led"
+    private let TYPE_SPEAKER = "Speaker"
+    private let TYPE_BATTERY = "Battery"
+    private let TYPE_JOYSTICK = "Joystick"
+    private let TYPE_TOF = "Tof"
     
     var version = 0
     public var typeCode = 0
@@ -53,10 +57,14 @@ open class ModiModule {
             case 0x2040: return TYPE_DIAL
             case 0x2050: return TYPE_ULTRASONIC
             case 0x2060: return TYPE_IR
+            case 0x2070: return TYPE_JOYSTICK
+            case 0x2080: return TYPE_TOF
             case 0x4000: return TYPE_DISPLAY
             case 0x4010: return TYPE_MOTOR
+            case 0x4011: return TYPE_MOTOR_B
             case 0x4020: return TYPE_LED
             case 0x4030: return TYPE_SPEAKER
+        
             default: return "unKnown"
                 
         }

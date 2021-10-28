@@ -421,7 +421,7 @@ open class ModiCodeUpdater : ModiFrameObserver{
 
                         } else {
 
-                            bootingAddress[5] = 0x4C
+                            bootingAddress[5] = 0x50
 
                         }
                         
