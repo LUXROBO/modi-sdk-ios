@@ -174,20 +174,22 @@ open class ModiCodeUpdater : ModiFrameObserver{
     func updateModule() {
         
 
-        if(mModuleUpdateCount > mUpdateTargets!.count - 1) {
-            mModuleUpdateCount = mUpdateTargets!.count - 1
-        }
-        
-        var module = mUpdateTargets![mModuleUpdateCount]
+        let module = mUpdateTargets![mModuleUpdateCount]
         
         print("steave updateModule \(module.type) mModuleUpdateCount \(mModuleUpdateCount)")
         
         if module.type == ModiModule().typeCodeToString(typeCode : 0) {
 
-            mModuleUpdateCount += 1
-            progressNotifierAddCount(count: MODULE_PROGRESS_COUNT_UNIT)
-            updateModule()
+            if (mModuleUpdateCount < mUpdateTargets!.count - 1) {
+                mModuleUpdateCount += 1
+                progressNotifierAddCount(count: MODULE_PROGRESS_COUNT_UNIT)
+                updateModule()
+                return
+            }
+            
+            updateEnd()
             return
+           
         }
 
         do {
@@ -210,20 +212,24 @@ open class ModiCodeUpdater : ModiFrameObserver{
         
         if mModuleUpdateCount == mUpdateTargets!.count {
             
-            self.requestStream()
-            
-            let bytes = ModiProtocol().setModuleState(moduleKey : 0xFFF, state : ModiProtocol.MODULE_STATE.RESET)
-            self.sendData(bytes: bytes)
-            
-            self.sendData(bytes: ModiProtocol().setStartInterpreter())
-            
-            self.progressNotifierComplete()
-            if self.modiCodeUpdaterCallback != nil {
-                self.modiCodeUpdaterCallback?.onUpdateSuccess()
-            }
+            updateEnd()
             
         }
         
+    }
+    
+    func updateEnd() {
+        self.requestStream()
+        
+        let bytes = ModiProtocol().setModuleState(moduleKey : 0xFFF, state : ModiProtocol.MODULE_STATE.RESET)
+        self.sendData(bytes: bytes)
+        
+        self.sendData(bytes: ModiProtocol().setStartInterpreter())
+        
+        self.progressNotifierComplete()
+        if self.modiCodeUpdaterCallback != nil {
+            self.modiCodeUpdaterCallback?.onUpdateSuccess()
+        }
     }
     
     func requestStream() {
