@@ -19,6 +19,7 @@ import Foundation
     func onDisconnected()
     func onDiscoveredAllCharacteristics()
     func onScan(_ scanable:Bool)
+    func onScanStop()
     func onScanFail(error : Error)
     
     // BLUETOOTH

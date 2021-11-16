@@ -65,7 +65,7 @@ open class ModiFrame  {
         return self
     }
     
-    func makeFrame(cmd : Int, sid : Int, did : Int, binary : [UInt8]) -> [UInt8] {
+    open func makeFrame(cmd : Int, sid : Int, did : Int, binary : [UInt8]) -> [UInt8] {
         
     
         stuffFrameHeader(cmd:cmd, sid : sid, did : did)

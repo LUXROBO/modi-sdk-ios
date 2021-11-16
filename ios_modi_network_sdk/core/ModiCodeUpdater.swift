@@ -152,7 +152,7 @@ open class ModiCodeUpdater : ModiFrameObserver{
             let bytes = ModiProtocol().setModuleState(moduleKey : 0xFFF, state : ModiProtocol.MODULE_STATE.STOP)
             self.sendData(bytes: bytes)
             
-            usleep(200000)
+            usleep(200)
             requestResetStream()
            
         }
@@ -173,6 +173,10 @@ open class ModiCodeUpdater : ModiFrameObserver{
     
     func updateModule() {
         
+
+        if(mModuleUpdateCount > mUpdateTargets!.count - 1) {
+            mModuleUpdateCount = mUpdateTargets!.count - 1
+        }
         
         var module = mUpdateTargets![mModuleUpdateCount]
         

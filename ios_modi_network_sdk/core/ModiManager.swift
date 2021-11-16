@@ -555,7 +555,7 @@ open class ModiManager  {
         self.sendData(MODI)
     }
     
-    func getConnectedModiUuid() -> Int {
+    open func getConnectedModiUuid() -> Int {
         
         let littleEndianValue = getMODI_ID().withUnsafeBufferPointer {
                  ($0.baseAddress!.withMemoryRebound(to: UInt32.self, capacity: 2) { $0 })

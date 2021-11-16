@@ -11,7 +11,7 @@ open class ModiModule {
     
     private let TYPE_NETWORK = "Network"
     private let TYPE_ENVIRONMENT = "Environment"
-    private let TYPE_GYRO = "Gyro"
+    private let TYPE_IMU = "IMU"
     private let TYPE_MIC = "Mic"
     private let TYPE_BUTTON = "Button"
     private let TYPE_DIAL = "Dial"
@@ -51,7 +51,7 @@ open class ModiModule {
         switch typeCode {
             case 0x0000: return TYPE_NETWORK
             case 0x2000: return TYPE_ENVIRONMENT
-            case 0x2010: return TYPE_GYRO
+            case 0x2010: return TYPE_IMU
             case 0x2020: return TYPE_MIC
             case 0x2030: return TYPE_BUTTON
             case 0x2040: return TYPE_DIAL
@@ -71,7 +71,7 @@ open class ModiModule {
         
     }
     
-    func getString() -> String {
+    open func getString() -> String {
         
         let name = self.type.lowercased()+"0"
 //        return String(format: "%s %s(0x%04X%08X);\n", type,name,typeCode, uuid)
