@@ -344,7 +344,7 @@ open class ModiCodeUpdater : ModiFrameObserver{
         
         if modiKind == .MODI_PLUS {
             
-            if (module.type == "Network" || module.type == "Dial" || module.type == "Environment" || module.type == "Speaker") {
+            if (module.type == "Network" || module.type == "Display" || module.type == "Environment" || module.type == "Speaker") {
                address = 0x0801F800;
                moduleCase = 0;
            }
