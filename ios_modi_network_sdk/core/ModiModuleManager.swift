@@ -12,6 +12,7 @@ open class ModiModuleManager: ModiFrameObserver {
     
     private let MODULE_STATE_UNKNOWN = 0xFF
     private let MODULE_TIMEOUT_PERIOD = 2000
+    private let MODULE_UPDATE_TIMEOUT_PERIOD = 10000 * 11
     private let MODULE_CHECK_PERIOD = 500
 
     private var mModuleMap : Dictionary<Int, ModiModule> = Dictionary()
@@ -21,6 +22,7 @@ open class ModiModuleManager: ModiFrameObserver {
     private var mModiMananger : ModiManager? = nil
     private var mRootmodule : ModiModule? = nil
 //    private var runningKey : Stream
+    private var isUpdateMode = false
     
     
     public init (modiManager : ModiManager) {
@@ -31,6 +33,14 @@ open class ModiModuleManager: ModiFrameObserver {
         self.mListener = listener
     }
     
+    
+    func enableUpdateMode() {
+        isUpdateMode = true
+    }
+    
+    func disableUpdateMode() {
+        isUpdateMode = false
+    }
     func discoverModules() {
         
         var buff = ModiProtocol().discoverModule(module_uuid : 0xFFF, flag : 0x0)
@@ -58,12 +68,15 @@ open class ModiModuleManager: ModiFrameObserver {
         
         if self.mRootmodule != nil {
             
+            if (uuid == self.mRootmodule?.uuid) {
+                return
+            }
             self.resetAllModules()
         }
     
-        self.mRootmodule = ModiModule().makeModule(type: 0x0000, uuid: uuid & 0xFFF, version: 0, state: 0, time: Date())
+        self.mRootmodule = ModiModule().makeModule(type: 0x0000, uuid: uuid, version: 0, state: 0, time: Date())
         
-        updateRootModule(uuid : uuid & 0xFFF)
+        updateRootModule(uuid : uuid & 0xFF)
         
         observeFrame()
         
@@ -104,17 +117,18 @@ open class ModiModuleManager: ModiFrameObserver {
         
         let module = self.mModuleMap[id]
         
+//        print("updateModuleTime sid \(id) module : \(String(describing: module?.getString()))")
+        
         if(module != nil) {
             
             module?.lastUpdate = Date().timeIntervalSince1970 * 1000
+//            let data = ModiProtocol().discoverModule(module_uuid: Int64(id), flag: 0x0)
+//            mModiMananger?.sendData(Data(bytes: data, count: data.count))
+            
+            
         }
         
-        else {
-            let data = ModiProtocol().discoverModule(module_uuid: Int64(id), flag: 0x0)
-
-            mModiMananger?.sendData(Data(bytes: data, count: data.count))
-        }
-        
+       
         
     }
     
@@ -147,7 +161,7 @@ open class ModiModuleManager: ModiFrameObserver {
         else {
             
             let module = self.mModuleMap[id]
-            module!.state = Int(moduleData[6])
+            module!.state = Int(moduleData[6]) & 0xFFFF 
             module?.lastUpdate = Date().timeIntervalSince1970 * 1000
             
             if(mListener != nil) {
@@ -163,7 +177,7 @@ open class ModiModuleManager: ModiFrameObserver {
             return false
         }
         
-        let rootModuleKey = mRootmodule!.uuid & 0xFFF
+        let rootModuleKey = mRootmodule!.uuid & 0xFF
         if rootModuleKey == key {
             return true
         }
@@ -188,9 +202,14 @@ open class ModiModuleManager: ModiFrameObserver {
                 let module = mModuleMap[key]
                 let duration = Int(currentTime - module!.lastUpdate)
                 
-                print("run module duration \(duration))")
+                var period = MODULE_TIMEOUT_PERIOD
                 
-                if duration > MODULE_TIMEOUT_PERIOD {
+                if(isUpdateMode) {
+                   
+                    period = MODULE_UPDATE_TIMEOUT_PERIOD
+                }
+                
+                if (duration > period) {
                     expireList.append(key)
                 }
             }
@@ -203,7 +222,7 @@ open class ModiModuleManager: ModiFrameObserver {
     
     func getModuleVersion(uuid : Int) -> Int {
         
-        let key = uuid & 0xFFF
+        let key = uuid & 0xFF
         
         if mModuleMap.keys.contains(key) {
             

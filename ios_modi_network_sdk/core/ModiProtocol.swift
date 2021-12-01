@@ -100,11 +100,10 @@ open class ModiProtocol  {
     func firmwareCommand(moduleKey : Int , flashCmd : FLASH_CMD, address : Int , crc : Int ) -> [UInt8] {
         
         var data = [UInt8](repeating: 0, count: 8)
-        
+       
         let addressBuffer = withUnsafeBytes(of: address, Array.init)
         let crcBuffer = withUnsafeBytes(of: crc, Array.init)
-  
-        
+       
         for i in 0...3 {
     
            data[i] = crcBuffer[i]

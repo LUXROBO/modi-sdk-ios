@@ -75,7 +75,7 @@ open class ModiModule {
         
         let name = self.type.lowercased()+"0"
 //        return String(format: "%s %s(0x%04X%08X);\n", type,name,typeCode, uuid)
-        var modiString = String(format: "(0x%04X%08X);\n", typeCode, uuid)
+        var modiString = String(format: "(0x%04X%07X);", typeCode, uuid)
         
         modiString = "\(type) \(name) \(modiString)"
         return modiString
