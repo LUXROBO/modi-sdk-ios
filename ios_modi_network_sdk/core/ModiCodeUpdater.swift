@@ -36,8 +36,14 @@ open class ModiCodeUpdater : ModiFrameObserver{
     private let background = ConcurrentDispatchQueueScheduler(queue: DispatchQueue.global())
     
     private var frameFilter = FRAME_FILTER.RESET_STREAM
+    private var modiKind = ModiKind.MODI_PLUS
+    
+//    private var modiFrameTimerCheck = Date().timeIntervalSince1970 * 1000
     
     enum FRAME_FILTER {
+        
+        typealias RawValue = Int
+        
         case RESET_STREAM
         case MODULE_STATE_UPDATE
         case MODULE_STATE_UPDATE_READY
@@ -45,6 +51,18 @@ open class ModiCodeUpdater : ModiFrameObserver{
         case FLASH_CMD_CHECK_CRC
         case UPLOAD_STREAM
         case UPLOAD_STREAM_DATA
+        
+        var rawValue: RawValue {
+          switch self {
+            case .RESET_STREAM:                 return 0
+            case .MODULE_STATE_UPDATE:          return 1
+            case .MODULE_STATE_UPDATE_READY:    return 2
+            case .FLASH_CMD_ERASE:              return 3
+            case .FLASH_CMD_CHECK_CRC:          return 4
+            case .UPLOAD_STREAM:                return 5
+            case .UPLOAD_STREAM_DATA:           return 6
+          }
+        }
     }
     
     
@@ -129,16 +147,17 @@ open class ModiCodeUpdater : ModiFrameObserver{
         
         do  {
             
+           
 //            let backgroundScheduler = ConcurrentDispatchQueueScheduler(queue: DispatchQueue.global())
             self.disposeBag = DisposeBag()
             mModuleUpdateCount  = 0
-            
+            self.frameFilter = FRAME_FILTER.RESET_STREAM
             self.sendData(bytes: ModiProtocol().discoverModule(module_uuid : 0xFFF, flag : 0x0))
             
             ModiSingleton.shared.getModiFrameObserver()
 //                .observeOn(MainScheduler.instance)
 //                .observeOn(background)
-//                .subscribeOn(background)
+//                .subscribeOn(MainScheduler.instance)
                 .subscribe { frame in
                     
                 self.onModiFrame(frame: frame)
@@ -151,19 +170,19 @@ open class ModiCodeUpdater : ModiFrameObserver{
             let bytes = ModiProtocol().setModuleState(moduleKey : 0xFFF, state : ModiProtocol.MODULE_STATE.STOP)
             self.sendData(bytes: bytes)
             
-            usleep(200000)
-            requestResetStream()
+            self.requestResetStream()
+            
            
         }
 
         catch CodeUpdateError.CONNECTION_ERROR  {
             print("\(CodeUpdateError.CONNECTION_ERROR.rawValue)")
-            notifyUpdateFail(reson: CodeUpdateError.CONNECTION_ERROR.rawValue)
+            notifyUpdateFail(error : CodeUpdateError.CONNECTION_ERROR, reson: CodeUpdateError.CONNECTION_ERROR.rawValue)
         }
         
         catch  {
             print("\(CodeUpdateError.MODULE_TIMEOUT.rawValue)")
-            notifyUpdateFail(reson: CodeUpdateError.MODULE_TIMEOUT.rawValue)
+            notifyUpdateFail(error : CodeUpdateError.CONNECTION_ERROR, reson: CodeUpdateError.MODULE_TIMEOUT.rawValue)
         }
         
         print("runUpdateTask end")
@@ -172,52 +191,55 @@ open class ModiCodeUpdater : ModiFrameObserver{
     
     func updateModule() {
         
-        
-        
-        for module in mUpdateTargets! {
 
-            print("steave updateModule \(mUpdateTargets!.count) mModuleUpdateCount \(mModuleUpdateCount)")
-            
-            if module.type == ModiModule().typeCodeToString(typeCode : 0) {
+        let module = mUpdateTargets![mModuleUpdateCount]
+        
+        print("steave updateModule \(module.type) mModuleUpdateCount \(mModuleUpdateCount)")
+        
+        if module.type == ModiModule().typeCodeToString(typeCode : 0) {
 
-                progressNotifierAddCount(count: MODULE_PROGRESS_COUNT_UNIT)
+            if (mModuleUpdateCount < mUpdateTargets!.count - 1) {
                 mModuleUpdateCount += 1
-                continue
+                progressNotifierAddCount(count: MODULE_PROGRESS_COUNT_UNIT)
+                updateModule()
+                return
             }
-
-            do {
-               
-                try requestChangeUpdateMode(module : module)
-               
-                
-            }
-
-            catch CodeUpdateError.CODE_NOT_UPDATE_MODE {
-
-                updateFail(error : CodeUpdateError.CODE_NOT_UPDATE_MODE)
-            }
-
-            catch {
-
-                updateFail(error : CodeUpdateError.CODE_NOT_UPDATE_READY)
-            }
-        
+            progressNotifierAddCount(count: MODULE_PROGRESS_COUNT_UNIT)
+            updateEnd()
+            return
+           
         }
+
+        do {
+           
+            try requestChangeUpdateMode(module : module)
+           
+            
+        }
+
+        catch CodeUpdateError.CODE_NOT_UPDATE_MODE {
+
+            updateFail(error : CodeUpdateError.CODE_NOT_UPDATE_MODE)
+        }
+
+        catch {
+
+            updateFail(error : CodeUpdateError.CODE_NOT_UPDATE_READY)
+        }
+        
         
         if mModuleUpdateCount == mUpdateTargets!.count {
             
-            self.requestStream()
-            
-            let bytes = ModiProtocol().setModuleState(moduleKey : 0xFFF, state : ModiProtocol.MODULE_STATE.RESET)
-            self.sendData(bytes: bytes)
-            
-            self.progressNotifierComplete()
-            if self.modiCodeUpdaterCallback != nil {
-                self.modiCodeUpdaterCallback?.onUpdateSuccess()
-            }
+            updateEnd()
             
         }
         
+    }
+    
+    func updateEnd() {
+        
+        self.requestStream()
+    
     }
     
     func requestStream() {
@@ -228,22 +250,25 @@ open class ModiCodeUpdater : ModiFrameObserver{
             
             mRecieveQueue.removeAll()
             self.frameFilter = FRAME_FILTER.UPLOAD_STREAM
-            let bytes = ModiProtocol().streamCommand(stream: modiStream!)
-            self.sendData(bytes: bytes)
-            
-            usleep(200000)
-            
+           
+            var checkTime = Date().timeIntervalSince1970 * 1000
             do {
                 
+                let bytes = ModiProtocol().streamCommand(stream: self.modiStream!)
+                self.sendData(bytes: bytes)
+                
                 mRecieveQueueSubject
-                .subscribeOn(background).subscribe { event in
+                    .subscribeOn(MainScheduler.instance)
+                    .subscribe { event in
                     
-                    if self.getStreamFilter(moduleKey: self.modiStream!.moduleId, streamId: Int(self.modiStream!.streamId)).filter(frame: event.element!) == true &&
-                        self.frameFilter == FRAME_FILTER.UPLOAD_STREAM {
                         
-                        var  responseCode = Int(event.element!.data()[1])
+                        self.timerCheck(checkTime: checkTime, timeout: 1000 * 10)
                         
-                        print("steave requestStream UPLOAD_STREAM \(responseCode)")
+                    if self.getStreamFilter(moduleKey: self.modiStream!.moduleId, streamId: Int(self.modiStream!.streamId)).filter(frame: event.element!) == true {
+                        
+                        let  responseCode = Int(event.element!.data()[1])
+                        
+//                        print("steave requestStream UPLOAD_STREAM \(responseCode)")
                         
                         if responseCode != ModiStream.STREAM_RESPONSE.SUCCESS.rawValue {
                             self.updateFail(error: CodeUpdateError.MODULE_TIMEOUT)
@@ -260,17 +285,18 @@ open class ModiCodeUpdater : ModiFrameObserver{
                             self.progressNotifierAddCount(count: Int(frame[6]) - 1)
                             
                         }
-                        
+                        checkTime = Date().timeIntervalSince1970 * 1000
                     }
                 
                     
                     else if self.getStreamFilter(moduleKey: self.modiStream!.moduleId, streamId: Int(self.modiStream!.streamId)).filter(frame: event.element!) == true &&
                                 self.frameFilter == FRAME_FILTER.UPLOAD_STREAM_DATA {
                         
+                        
                     
                         let responseCode = Int(event.element!.data()[1])
                         
-                        print("steave requestStream UPLOAD_STREAM_DATA \(responseCode)")
+//                        print("steave requestStream UPLOAD_STREAM_DATA \(responseCode)")
                         
                         if responseCode != ModiStream.STREAM_RESPONSE.SUCCESS.rawValue {
                             self.updateFail(error: CodeUpdateError.MODULE_TIMEOUT)
@@ -279,6 +305,8 @@ open class ModiCodeUpdater : ModiFrameObserver{
                         
                         let bytes = ModiProtocol().setModuleState(moduleKey : 0xFFF, state : ModiProtocol.MODULE_STATE.RESET)
                         self.sendData(bytes: bytes)
+                        self.sendData(bytes: ModiProtocol().setStartInterpreter())
+                        
                         
                         self.progressNotifierComplete()
                         if self.modiCodeUpdaterCallback != nil {
@@ -293,7 +321,7 @@ open class ModiCodeUpdater : ModiFrameObserver{
             
             catch CodeUpdateError.STREAM_COMMAND_RESPONSE_FAILED {
                 print("\(CodeUpdateError.STREAM_COMMAND_RESPONSE_FAILED.rawValue)")
-                notifyUpdateFail(reson: CodeUpdateError.STREAM_COMMAND_RESPONSE_FAILED.rawValue)
+                notifyUpdateFail(error: CodeUpdateError.STREAM_COMMAND_RESPONSE_FAILED, reson: CodeUpdateError.STREAM_COMMAND_RESPONSE_FAILED.rawValue)
             }
            
             
@@ -303,6 +331,8 @@ open class ModiCodeUpdater : ModiFrameObserver{
             
             let bytes = ModiProtocol().setModuleState(moduleKey : 0xFFF, state : ModiProtocol.MODULE_STATE.RESET)
             self.sendData(bytes: bytes)
+            self.sendData(bytes: ModiProtocol().setStartInterpreter())
+            
             
             self.progressNotifierComplete()
             if self.modiCodeUpdaterCallback != nil {
@@ -311,29 +341,51 @@ open class ModiCodeUpdater : ModiFrameObserver{
             
         }
         
+       
+        
     }
     
     
     func setPlugAndPlayModule(module : ModiModule, pnpEnable : Bool, userEnable : Bool) {
         
+        print("steave setPlugAndPlayModule type \(module.type) \(module.uuid)")
+        
         let targetModuleKey = module.uuid & 0xFFF
         mRecieveQueue.removeAll()
         
+        
+        var address = 0x0800F800
+        var moduleCase = 1
+        
+
         self.frameFilter = FRAME_FILTER.FLASH_CMD_ERASE
         
-        var bytes = ModiProtocol().firmwareCommand(moduleKey: targetModuleKey, flashCmd: ModiProtocol.FLASH_CMD.ERASE, address: 0x0801F800, crc: 0)
+        if modiKind == .MODI_PLUS {
+            
+            if (module.type == "Network" || module.type == "Display" || module.type == "Environment" || module.type == "Speaker") {
+               address = 0x0801F800;
+               moduleCase = 0;
+           }
+        }
         
-    
-        
+         
+        var bytes = ModiProtocol().firmwareCommand(moduleKey: targetModuleKey, flashCmd: ModiProtocol.FLASH_CMD.ERASE, address: address, crc: 1)
         sendData(bytes: bytes)
         
-        usleep(200000)
-        
-        mRecieveQueueSubject.subscribe { event in
-
+        var checkTime = Date().timeIntervalSince1970 * 1000
+       
+        mRecieveQueueSubject
+            .subscribe(onNext: { event in
            
-            if self.getFirmwareFilter(moduleKey: targetModuleKey).filter(frame: event.element!) == true &&
-                self.frameFilter == FRAME_FILTER.FLASH_CMD_ERASE {
+                        
+            if(self.frameFilter.rawValue < FRAME_FILTER.FLASH_CMD_ERASE.rawValue ||
+                self.frameFilter.rawValue > FRAME_FILTER.FLASH_CMD_CHECK_CRC.rawValue) {
+                return
+            }
+                        
+            self.timerCheck(checkTime: checkTime, timeout:1000 * 10 * self.mUpdateTargets!.count)
+                        
+            if self.getFirmwareFilter(moduleKey: targetModuleKey).filter(frame: event) == true && self.frameFilter == FRAME_FILTER.FLASH_CMD_ERASE {
                 
                 let frame = self.mRecieveQueue.last
                 self.mRecieveQueue.removeLast()
@@ -362,30 +414,74 @@ open class ModiCodeUpdater : ModiFrameObserver{
                     pnpData[6] = versionBuffer[0]
                     pnpData[7] = versionBuffer[1]
                     
+                    
                     bytes = ModiProtocol().firmwareData(moduleKey: targetModuleKey, segment: 0, data: pnpData)
                     self.sendData(bytes: bytes)
-                    usleep(200000)
                     
-                    let reverseData = self.reverseBlock(source : pnpData)
-                    let crcValue = self.calculateCrc32(data : reverseData)
+                    var reverseData = self.reverseBlock(source : pnpData)
+                    var crcValue = self.calculateCrc32(data : reverseData)
                     
-                    print("steave setPlugAndPlayModule crcValue \(crcValue)")
+//                    print("steave setPlugAndPlayModule crcValue \(crcValue)")
                     //0x3BF0B6D
                     //0xf084a0dc
                     self.mRecieveQueue.removeAll()
                     
                     self.frameFilter = FRAME_FILTER.FLASH_CMD_CHECK_CRC
                     
-                    bytes = ModiProtocol().firmwareCommand(moduleKey: targetModuleKey, flashCmd: ModiProtocol.FLASH_CMD.CHECK_CRC, address: 0x0801F800, crc: crcValue)
-                    self.sendData(bytes: bytes)
+                    if self.modiKind == .MODI {
+                        
+                        bytes = ModiProtocol().firmwareCommand(moduleKey: targetModuleKey, flashCmd: ModiProtocol.FLASH_CMD.CHECK_CRC, address: 0x0801F800, crc: crcValue)
+                        self.sendData(bytes: bytes)
+                    
+                    }
+                    
+                    else if self.modiKind == .MODI_PLUS {
+                        
+                        var bootingAddress = [UInt8](repeating: 0, count: 8)
+                        
+                        for i in 0 ..< 6 {
+                            
+                            bootingAddress[i] = 0x00
+                        }
+                        
+                        bootingAddress[7] = 0x08
+                        
+                        if(moduleCase == 0) {
+
+                            bootingAddress[5] = 0x90
+
+                        } else {
+
+                            bootingAddress[5] = 0x50
+
+                        }
+                        
+                    
+                        bytes = ModiProtocol().firmwareData(moduleKey: targetModuleKey, segment: 1, data: bootingAddress)
+                        self.sendData(bytes: bytes)
+                        
+                        reverseData = self.reverseBlock(source : bootingAddress)
+                        
+                        crcValue = self.calculateCrc32(data : reverseData, crc: crcValue)
+                        
+                        
+                        bytes = ModiProtocol().firmwareCommand(moduleKey: targetModuleKey, flashCmd: ModiProtocol.FLASH_CMD.CHECK_CRC, address: address, crc: crcValue)
+                        self.sendData(bytes: bytes)
+                        
+                        checkTime = Date().timeIntervalSince1970 * 1000
+        
+                    }
                    
                     
                 }
             }
             
-            else if self.getFirmwareFilter(moduleKey: targetModuleKey).filter(frame:event.element!) == true &&
-                        self.frameFilter == FRAME_FILTER.FLASH_CMD_CHECK_CRC {
+            else if self.getFirmwareFilter(moduleKey: targetModuleKey).filter(frame:event) == true  && self.frameFilter == FRAME_FILTER.FLASH_CMD_CHECK_CRC{
                 
+               
+                if (self.mRecieveQueue.isEmpty) {
+                    return
+                }
                 let frame = self.mRecieveQueue.last
                 self.mRecieveQueue.removeLast()
                 
@@ -399,23 +495,31 @@ open class ModiCodeUpdater : ModiFrameObserver{
                     return
                 }
                 
-
                 self.progressNotifierAddCount(count: self.MODULE_PROGRESS_COUNT_UNIT)
-                self.mModuleUpdateCount += 1
                 
                 if (self.mModuleUpdateCount < self.mUpdateTargets!.count - 1) {
-                  
-                    print("steave setPlugAndPlayModule Fself.mModuleUpdateCount < self.mUpdateTargets!.count - 1")
+                    
+                    self.mModuleUpdateCount += 1
+//                    print("steave setPlugAndPlayModule Fself.mModuleUpdateCount < self.mUpdateTargets!.count - 1")
+                    self.updateModule()
                     return
                 }
              
                 self.requestStream()
                 
-            }
+            }},onError: { _ in
+                
+                if(self.frameFilter.rawValue >= FRAME_FILTER.UPLOAD_STREAM.rawValue) {
+                    return
+                }
+                
+                self.updateFail(error: CodeUpdateError.FLASH_ERASE_ERROR)
             
             
-         
-        }.disposed(by: self.disposeBag!)
+            }).disposed(by: self.disposeBag!)
+        
+        
+      
         
     }
     
@@ -424,6 +528,13 @@ open class ModiCodeUpdater : ModiFrameObserver{
 
         return crcCalc.calc(data: data, offset: 0, length: data.count)
     }
+    
+    func calculateCrc32(data : [UInt8], crc : Int )-> Int {
+        let crcCalc = CrcCalculator(params: Crc32().Crc32Mpeg2)
+
+        return crcCalc.calc(data: data, offset: 0, length: data.count, crc : crc)
+    }
+    
     
     func reverseBlock(source : [UInt8]) -> [UInt8] {
         
@@ -454,7 +565,7 @@ open class ModiCodeUpdater : ModiFrameObserver{
     
     func updateFail(error : CodeUpdateError) {
         
-        notifyUpdateFail(reson: error.rawValue)
+        notifyUpdateFail(error : error ,reson: error.rawValue)
         
     }
     
@@ -465,15 +576,26 @@ open class ModiCodeUpdater : ModiFrameObserver{
         mRecieveQueue.removeAll()
         
         self.frameFilter = FRAME_FILTER.MODULE_STATE_UPDATE
-        
         var bytes = ModiProtocol().setModuleState(moduleKey: targetModuleKey, state: ModiProtocol.MODULE_STATE.UPDATE)
         sendData(bytes: bytes)
+       
+        var checkTime = Date().timeIntervalSince1970 * 1000
         
-        usleep(200000)
-        
-        mRecieveQueueSubject.subscribe { event in
-
-            if self.getModuleStateFilter(moduleKey: targetModuleKey).filter(frame: event.element!) == true &&
+        mRecieveQueueSubject
+            .subscribeOn(MainScheduler.instance)
+            .subscribe (onNext : { event in
+               
+                if(self.frameFilter.rawValue < FRAME_FILTER.MODULE_STATE_UPDATE.rawValue ||
+                    self.frameFilter.rawValue > FRAME_FILTER.MODULE_STATE_UPDATE_READY.rawValue) {
+                    return
+                }
+                
+                print("steave requestChangeUpdateMode subscribe \(event.cmd())")
+                
+                self.timerCheck(checkTime: checkTime, timeout: 1000 * 10 * self.mUpdateTargets!.count)
+            
+                
+            if self.getModuleStateFilter(moduleKey: targetModuleKey).filter(frame: event) == true &&
                 self.frameFilter == FRAME_FILTER.MODULE_STATE_UPDATE {
                 
                 let frame = self.mRecieveQueue.last
@@ -494,9 +616,10 @@ open class ModiCodeUpdater : ModiFrameObserver{
                 bytes = ModiProtocol().setModuleState(moduleKey: targetModuleKey, state: ModiProtocol.MODULE_STATE.UPDATE_READY)
                 self.sendData(bytes: bytes)
                 
+                checkTime = Date().timeIntervalSince1970 * 1000
             }
             
-            else if self.getChageUpdateFilter(moduleKey: targetModuleKey).filter(frame: event.element!) == true &&
+            else if self.getChageUpdateFilter(moduleKey: targetModuleKey).filter(frame: event) == true &&
                         self.frameFilter == FRAME_FILTER.MODULE_STATE_UPDATE_READY {
                         
                         let frame = self.mRecieveQueue.last
@@ -515,10 +638,20 @@ open class ModiCodeUpdater : ModiFrameObserver{
                         self.setPlugAndPlayModule(module: module, pnpEnable: self.mPnpEnable, userEnable: self.mUserEnable)
                     }
             
+            },
+            onError: { _ in
+                    
+                    print("steave requestChangeUpdateMode onError \(self.frameFilter.rawValue)")
+                    
+                self.updateFail(error: CodeUpdateError.CODE_NOT_UPDATE_READY)
+                    
+                    
             
-            
-            
-        }.disposed(by: self.disposeBag!)
+        }).disposed(by: self.disposeBag!)
+        
+        
+       
+       
         
     }
     
@@ -531,37 +664,62 @@ open class ModiCodeUpdater : ModiFrameObserver{
         resetStream.streamBody = Array<UInt8>()
     
         mRecieveQueue.removeAll()
-        
-        self.frameFilter = FRAME_FILTER.RESET_STREAM
-        
         let bytes = ModiProtocol().streamCommand(stream: resetStream)
         sendData(bytes: bytes)
-//        usleep(200000)
         
-        mRecieveQueueSubject.subscribe { event in
+        let checkTime = Date().timeIntervalSince1970 * 1000
+    
         
-            if self.getStreamFilter(moduleKey : resetStream.moduleId, streamId : Int(resetStream.streamId)).filter(frame: event.element!) == true && self.frameFilter == FRAME_FILTER.RESET_STREAM {
+        mRecieveQueueSubject
+//            .subscribeOn(background)
+        
+            .subscribeOn(MainScheduler.instance)
+            .subscribe(
+                onNext:{
+                    event in
+                    
+                    if(self.frameFilter.rawValue > FRAME_FILTER.RESET_STREAM.rawValue) {
+                        return
+                    }
+                    
+                    print("steave requestResetStream subscribe \(event.cmd())")
+                    
+                    self.timerCheck(checkTime: checkTime, timeout: 1000 * 5)
                 
-                let frame = self.mRecieveQueue.last
-                self.mRecieveQueue.removeLast()
-                
-                let responseCode = Int(frame!.data()[1])
-                
-                print("steave requestResetStream RESET_STREAM \(responseCode)")
-                
-                if responseCode != ModiStream.STREAM_RESPONSE.SUCCESS.rawValue {
-               
-                    self.updateFail(error: CodeUpdateError.MODULE_TIMEOUT)
-                }
+                    if self.getStreamFilter(moduleKey : resetStream.moduleId, streamId : Int(resetStream.streamId)).filter(frame: event) == true {
+                        
+                        let frame = self.mRecieveQueue.last
+                        self.mRecieveQueue.removeLast()
+                        
+                        let responseCode = Int(frame!.data()[1])
+                        
+                        print("steave requestResetStream RESET_STREAM \(responseCode)")
+                        
+                        if responseCode != ModiStream.STREAM_RESPONSE.SUCCESS.rawValue {
+                       
+                            self.updateFail(error: CodeUpdateError.MODULE_TIMEOUT)
+                        }
 
-                else {
+                        else {
+                            self.modiManager.getModuleManager().enableUpdateMode()
+                            self.updateModule()
+                            
+                        }
+                    }
+            },
+                onError: {_ in
                     
-                    self.updateModule()
+                    print("steave requestResetStream onError \(self.frameFilter.rawValue)")
                     
+                    if(self.frameFilter.rawValue > FRAME_FILTER.RESET_STREAM.rawValue) {
+                        return
+                    }
+                    
+                    self.updateFail(error: CodeUpdateError.STREAM_COMMAND_RESPONSE_FAILED)
                 }
-            }
         
-        }.disposed(by: disposeBag!)
+        ).disposed(by: disposeBag!)
+       
        
         
     }
@@ -586,16 +744,19 @@ open class ModiCodeUpdater : ModiFrameObserver{
     func onModiFrame(frame: ModiFrame) {
         
         ModiLog.d("onModiFrame", messages: "frame : \(frame.cmd())")
+    
+        
         if frame.cmd() != 0x00 {
             
             mRecieveQueue.append(frame)
             mRecieveQueueSubject.onNext(frame)
-            
         }
         
         while mRecieveQueue.count > 64 {
             mRecieveQueue.removeLast()
         }
+        
+       
     }
     
     private func progressNotifierStart() {
@@ -629,6 +790,13 @@ open class ModiCodeUpdater : ModiFrameObserver{
         mRunningFlag = false
         mModuleUpdateCount = 0
         disposeBag = nil
+        self.frameFilter = FRAME_FILTER.RESET_STREAM
+        
+        self.mToTal = 0
+        self.mCount = 0
+        self.modiManager.getModuleManager().disableUpdateMode()
+        self.modiManager.getModuleManager().discoverModules()
+        
 //        disposeBag = DisposeBag()
         
     }
@@ -650,7 +818,7 @@ open class ModiCodeUpdater : ModiFrameObserver{
         sleep(1)
     }
     
-    func notifyUpdateFail(reson : String) {
+    func notifyUpdateFail(error: CodeUpdateError, reson : String) {
         
         progressNotifierComplete()
         let bytes = ModiProtocol().setModuleState(moduleKey : 0xFFF, state : ModiProtocol.MODULE_STATE.RESET)
@@ -664,6 +832,22 @@ open class ModiCodeUpdater : ModiFrameObserver{
         
         modiCodeUpdaterCallback?.onUpdateFailed(error: CodeUpdateError.MODULE_TIMEOUT, reason: reson)
         
+    }
+    
+    
+    func timerCheck(checkTime : TimeInterval ,timeout : Int) {
+        
+        let currentTime = Date().timeIntervalSince1970 * 1000
+        
+      
+        let duration = Int(currentTime - checkTime)
+        
+        if (duration > timeout) {
+            
+            print("timerCheck MODULE_TIMEOUT duration \(duration)")
+            updateFail(error: CodeUpdateError.MODULE_TIMEOUT)
+            
+        }
     }
 
     

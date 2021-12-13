@@ -34,7 +34,7 @@ open class ModiManager  {
    
 
     
-    private var MODI_ID:[UInt8] = [0x00,0x00]
+    private var MODI_ID:[UInt8] = [0x00,0x00, 0x00, 0x00]
     private var macString : String
     
 //    private let discoveredServicesSubject = PublishSubject<Result<Service, Error>>()
@@ -268,14 +268,18 @@ open class ModiManager  {
                      let macString1 = ModiString.subString(self.macString, start : lenth - 4, length: 2)
 
 
-//                     ModiLog.d("setModi_ID1", messages: "\(String(describing: ModiString.convertHexString(data.value)))")
+                     ModiLog.d("setModi_ID1", messages: "\(String(describing: ModiString.convertHexString(data.value)))")
+                    
+
 //                     ModiLog.d("setModi_ID1-1", messages: "\(String(describing: macString0))")
 //                     ModiLog.d("setModi_ID1-2", messages: "\(String(describing: macString1))")
 //                     ModiLog.d("setModi_ID1-3", messages: "\(String(describing: self.stringToBytes(macString0)![0]))")
 //                     ModiLog.d("setModi_ID1-4", messages: "\(String(describing: self.stringToBytes(macString1)![0]&0x0f))")
                 
-                     self.MODI_ID[0] = self.stringToBytes(macString0)![0]
-                     self.MODI_ID[1] = self.stringToBytes(macString1)![0]&0x0f
+                     self.MODI_ID[0] = data.value![0]
+                     self.MODI_ID[1] = data.value![1]
+                     self.MODI_ID[2] = data.value![2]
+                     self.MODI_ID[3] = data.value![3]
                 
                      self.modiConnected = true
                      self.managerDelegate?.onConnected()
@@ -332,18 +336,19 @@ open class ModiManager  {
 
                             if (characteristic.value![0] != 0) {
                                 ModiLog.d("setupNotification DEVICE_CHAR_TX_RX", messages: "\(ModiString.convertHexString(characteristics.value)))")
-                                
-                                self.managerDelegate?.onReceived(str, bytes: characteristics.value!)
-                                let modiFrame = ModiFrame()
-                                modiFrame.setFrame(data: characteristics.value!)
-                                ModiSingleton.shared.notifyModiFrame(frame: modiFrame.getFrame())
-                                
-                                if(characteristics.value![0] == 0x28) {
-                                    
-                                    self.setModi_ID(value: characteristics.value!)
-                                  
-                                }
                             }
+                            
+                            self.managerDelegate?.onReceived(str, bytes: characteristics.value!)
+                            let modiFrame = ModiFrame()
+                            modiFrame.setFrame(data: characteristics.value!)
+                            ModiSingleton.shared.notifyModiFrame(frame: modiFrame.getFrame())
+                            
+                            if(characteristics.value![0] == 0x28) {
+                                
+                                self.setModi_ID(value: characteristics.value!)
+                              
+                            }
+                            
                       }
 
                        case ModiGattArributes.DEVICE_TX_DESC:
@@ -367,7 +372,7 @@ open class ModiManager  {
 
     private func scanFail(error : Error) {
         stopScan()
-        4
+        
         managerDelegate?.onScanFail(error: error)
     }
     
@@ -466,8 +471,10 @@ open class ModiManager  {
         
        //모디 ID를 입력받음
         
-        self.MODI_ID[0]=stringToBytes(value.hexEncodedString())![0]
-        self.MODI_ID[1]=stringToBytes(value.hexEncodedString())![1]&0x0f
+        self.MODI_ID[0] = value[0]
+        self.MODI_ID[1] = value[1]
+        self.MODI_ID[2] = value[2]
+        self.MODI_ID[3] = value[3]
   
         self.modiConnected = true
         self.managerDelegate?.onConnected()
@@ -554,17 +561,17 @@ open class ModiManager  {
         self.sendData(MODI)
     }
     
-    func getConnectedModiUuid() -> Int {
+    open func getConnectedModiUuid() -> Int {
         
         let littleEndianValue = getMODI_ID().withUnsafeBufferPointer {
-                 ($0.baseAddress!.withMemoryRebound(to: UInt32.self, capacity: 2) { $0 })
-        }.pointee
+                 ($0.baseAddress!.withMemoryRebound(to: UInt32.self, capacity: 1) { $0 })
+        }.pointee.littleEndian
         let value = UInt32(littleEndianValue)
         
         return Int(value)
     }
     
-    func getModuleManager() -> ModiModuleManager {
+    open func getModuleManager() -> ModiModuleManager {
         
         return self.modiModuleManager!
     }

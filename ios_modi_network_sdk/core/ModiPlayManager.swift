@@ -30,7 +30,7 @@ open class ModiPlayManager {
     
     
     public func fireEvent(command : PlayCommand, commandData : PlayCommandData, option : Int) {
-        let target = modiManager.getConnectedModiUuid() & 0xFFF
+        let target = modiManager.getConnectedModiUuid() & 0xFF
 
         var data = [UInt8](repeating: 0, count: 8)
         data[0] = commandData.rawValue
@@ -40,7 +40,7 @@ open class ModiPlayManager {
     }
     
     public func sendValue(value : Int,did:Int) {
-        let target = modiManager.getConnectedModiUuid() & 0xFFF
+        let target = modiManager.getConnectedModiUuid() & 0xFF
         var data = [UInt8](repeating: 0, count: 8)
         data[0] = UInt8(value & 0xFF)
         data[7] = 0
@@ -57,7 +57,7 @@ open class ModiPlayManager {
     private func onModiFrame(frame : ModiFrame) {
         if frame.cmd() == 0x04 {
             
-            let moduleKey = modiManager.getConnectedModiUuid() & 0xFFF
+            let moduleKey = modiManager.getConnectedModiUuid() & 0xFF
             
             if frame.did() == moduleKey {
                 

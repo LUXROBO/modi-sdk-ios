@@ -118,4 +118,19 @@ class CrcCalculator {
         return (hash ^ params.xorOut) & Int(mask)
         
     }
+    
+    func calc(data : [UInt8], offset : Int, length : Int, crc : Int) -> Int {
+        
+        var initial : UInt64 = UInt64(crc)
+        
+        if crc == 0 {
+            initial = params.refOut ? reverseBits(index: params.initial, valueLength: hashSize) : params.initial
+        }
+        
+        let hash = computeCalc(initial: initial, data: data, offset: offset, length: length)
+        
+
+        return (hash ^ params.xorOut) & Int(mask)
+        
+    }
 }

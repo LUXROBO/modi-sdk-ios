@@ -25,7 +25,7 @@ public enum PlayCommandData  {
         case .PRESSED: return 100 & 0xFF
         case .UNPRESSED: return 0 & 0xFF
         case .JOYSTICK_UNPRESSED: return 0 & 0xFF
-        case .JOYSTICK_UP: return 20& 0xFF
+        case .JOYSTICK_UP: return 20 & 0xFF
         case .JOYSTICK_DOWN: return 30 & 0xFF
         case .JOYSTICK_LEFT: return 40 & 0xFF
         case .JOYSTICK_RIGHT: return 50 & 0xFF
