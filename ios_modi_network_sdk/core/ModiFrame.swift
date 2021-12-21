@@ -65,7 +65,7 @@ open class ModiFrame  {
         return self
     }
     
-    func makeFrame(cmd : Int, sid : Int, did : Int, binary : [UInt8]) -> [UInt8] {
+    open func makeFrame(cmd : Int, sid : Int, did : Int, binary : [UInt8]) -> [UInt8] {
         
     
         stuffFrameHeader(cmd:cmd, sid : sid, did : did)
@@ -100,13 +100,12 @@ open class ModiFrame  {
     }
     
     open func getInt(data : Array<UInt8>) -> Int {
-        
+                
         let littleEndianValue = data.withUnsafeBufferPointer {
-                 ($0.baseAddress!.withMemoryRebound(to: UInt32.self, capacity: 2) { $0 })
-        }.pointee
-        let value = UInt32(littleEndianValue)
-        
-        return Int(value)
+                 ($0.baseAddress!.withMemoryRebound(to: Int.self, capacity: 8) { $0 })
+        }.pointee.littleEndian
+    
+        return littleEndianValue
         
     }
     

@@ -16,10 +16,13 @@ open class ModiPlayManager {
         
         self.modiManager = modiManager
         self.delegate = delegate
-        
+
         ModiSingleton.shared.getModiFrameObserver().subscribe { frame in
-                
-            self.onModiFrame(frame: frame)
+            if let frame = frame.element {
+                self.onModiFrame(frame: frame)
+
+            }
+
             
         }.dispose()
         
@@ -27,14 +30,22 @@ open class ModiPlayManager {
     
     
     public func fireEvent(command : PlayCommand, commandData : PlayCommandData, option : Int) {
-        
-        let target = modiManager.getConnectedModiUuid() & 0xFFF
-        
+        let target = modiManager.getConnectedModiUuid() & 0xFF
+
         var data = [UInt8](repeating: 0, count: 8)
         data[0] = commandData.rawValue
         data[7] = UInt8(option)
         
         sendData(bytes: ModiFrame().makeFrame(cmd:0x1F, sid: target, did: command.rawValue, binary : data))
+    }
+    
+    public func sendValue(value : Int,did:Int) {
+        let target = modiManager.getConnectedModiUuid() & 0xFF
+        var data = [UInt8](repeating: 0, count: 8)
+        data[0] = UInt8(value & 0xFF)
+        data[7] = 0
+        
+        sendData(bytes: ModiFrame().makeFrame(cmd:0x1F, sid: target, did: did, binary : data))
     }
     
     private func sendData(bytes : [UInt8]) {
@@ -44,10 +55,9 @@ open class ModiPlayManager {
     }
     
     private func onModiFrame(frame : ModiFrame) {
-        
         if frame.cmd() == 0x04 {
             
-            let moduleKey = modiManager.getConnectedModiUuid() & 0xFFF
+            let moduleKey = modiManager.getConnectedModiUuid() & 0xFF
             
             if frame.did() == moduleKey {
                 

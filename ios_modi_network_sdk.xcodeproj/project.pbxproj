@@ -12,7 +12,6 @@
 		DE3027C52682DD2D00C82583 /* PlayCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3027C42682DD2D00C82583 /* PlayCommand.swift */; };
 		DE3027C72682E1DC00C82583 /* PlayCommandData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3027C62682E1DC00C82583 /* PlayCommandData.swift */; };
 		DE3027C926830D3D00C82583 /* PlayEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3027C826830D3D00C82583 /* PlayEvent.swift */; };
-		DE342E272637C04E00BABE0B /* ios_modi_network_sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE342E1D2637C04E00BABE0B /* ios_modi_network_sdk.framework */; };
 		DE342E2C2637C04E00BABE0B /* ios_modi_network_sdkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E2B2637C04E00BABE0B /* ios_modi_network_sdkTests.swift */; };
 		DE342E2E2637C04E00BABE0B /* ios_modi_network_sdk.h in Headers */ = {isa = PBXBuildFile; fileRef = DE342E202637C04E00BABE0B /* ios_modi_network_sdk.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DE342E652637C0C300BABE0B /* ModiCodeUpdaterCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE342E3A2637C0C300BABE0B /* ModiCodeUpdaterCallback.swift */; };
@@ -59,6 +58,7 @@
 		DE545B902660B381003EB0D6 /* Crc32.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE545B8F2660B381003EB0D6 /* Crc32.swift */; };
 		DE545B942660B4F6003EB0D6 /* CrcCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE545B932660B4F6003EB0D6 /* CrcCalculator.swift */; };
 		DE65398E26451CFA00662728 /* ModiProtocol_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE65398D26451CFA00662728 /* ModiProtocol_Test.swift */; };
+		DE69A13D26EB5C3000062D04 /* ModiKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE69A13C26EB5C3000062D04 /* ModiKind.swift */; };
 		DEBCC881264B852400D5036C /* ModiCodeUpdate_Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBCC880264B852400D5036C /* ModiCodeUpdate_Test.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,19 +73,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		67B546600723AF13485C8612 /* Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.debug.xcconfig"; path = "Target Support Files/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.debug.xcconfig"; sourceTree = "<group>"; };
-		7386B6D367E7440A2DF8840C /* Pods-ios_modi_network_sdk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios_modi_network_sdk.release.xcconfig"; path = "Target Support Files/Pods-ios_modi_network_sdk/Pods-ios_modi_network_sdk.release.xcconfig"; sourceTree = "<group>"; };
-		BA99EC06EBEDF37462706905 /* Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.release.xcconfig"; path = "Target Support Files/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.release.xcconfig"; sourceTree = "<group>"; };
-		DDB2116D363C7F25DF252D3F /* Pods-ios_modi_network_sdk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios_modi_network_sdk.debug.xcconfig"; path = "Target Support Files/Pods-ios_modi_network_sdk/Pods-ios_modi_network_sdk.debug.xcconfig"; sourceTree = "<group>"; };
+		094B420A5AEC896F8842863A /* Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.release.xcconfig"; path = "Target Support Files/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.release.xcconfig"; sourceTree = "<group>"; };
+		4532AFC87B18B348B87A72F4 /* Pods-ios_modi_network_sdk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios_modi_network_sdk.debug.xcconfig"; path = "Target Support Files/Pods-ios_modi_network_sdk/Pods-ios_modi_network_sdk.debug.xcconfig"; sourceTree = "<group>"; };
 		DE3027C02681E02E00C82583 /* ModiPlayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModiPlayManager.swift; sourceTree = "<group>"; };
 		DE3027C22681F08200C82583 /* ModiPlayManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModiPlayManagerProtocol.swift; sourceTree = "<group>"; };
 		DE3027C42682DD2D00C82583 /* PlayCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayCommand.swift; sourceTree = "<group>"; };
 		DE3027C62682E1DC00C82583 /* PlayCommandData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayCommandData.swift; sourceTree = "<group>"; };
 		DE3027C826830D3D00C82583 /* PlayEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayEvent.swift; sourceTree = "<group>"; };
-		DE342E1D2637C04E00BABE0B /* ios_modi_network_sdk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ios_modi_network_sdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE342E202637C04E00BABE0B /* ios_modi_network_sdk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ios_modi_network_sdk.h; sourceTree = "<group>"; };
 		DE342E212637C04E00BABE0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DE342E262637C04E00BABE0B /* ios_modi_network_sdkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ios_modi_network_sdkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE342E2B2637C04E00BABE0B /* ios_modi_network_sdkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_modi_network_sdkTests.swift; sourceTree = "<group>"; };
 		DE342E2D2637C04E00BABE0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE342E3A2637C0C300BABE0B /* ModiCodeUpdaterCallback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModiCodeUpdaterCallback.swift; sourceTree = "<group>"; };
@@ -132,7 +128,12 @@
 		DE545B8F2660B381003EB0D6 /* Crc32.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crc32.swift; sourceTree = "<group>"; };
 		DE545B932660B4F6003EB0D6 /* CrcCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrcCalculator.swift; sourceTree = "<group>"; };
 		DE65398D26451CFA00662728 /* ModiProtocol_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModiProtocol_Test.swift; sourceTree = "<group>"; };
+		DE69A13B26EB381400062D04 /* ios_modi_network_sdkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ios_modi_network_sdkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DE69A13C26EB5C3000062D04 /* ModiKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModiKind.swift; sourceTree = "<group>"; };
+		DEA17FED26AFF25B00D474C8 /* ios_modi_network_sdk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ios_modi_network_sdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEBCC880264B852400D5036C /* ModiCodeUpdate_Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModiCodeUpdate_Test.swift; sourceTree = "<group>"; };
+		E4D0629853C26A262DD4D9C5 /* Pods-ios_modi_network_sdk.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios_modi_network_sdk.release.xcconfig"; path = "Target Support Files/Pods-ios_modi_network_sdk/Pods-ios_modi_network_sdk.release.xcconfig"; sourceTree = "<group>"; };
+		F70CE734635378A8CB60FBEE /* Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.debug.xcconfig"; path = "Target Support Files/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,7 +148,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DE342E272637C04E00BABE0B /* ios_modi_network_sdk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,19 +157,12 @@
 		08FA18470EB4D9805091BDA9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				DDB2116D363C7F25DF252D3F /* Pods-ios_modi_network_sdk.debug.xcconfig */,
-				7386B6D367E7440A2DF8840C /* Pods-ios_modi_network_sdk.release.xcconfig */,
-				67B546600723AF13485C8612 /* Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.debug.xcconfig */,
-				BA99EC06EBEDF37462706905 /* Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.release.xcconfig */,
+				4532AFC87B18B348B87A72F4 /* Pods-ios_modi_network_sdk.debug.xcconfig */,
+				E4D0629853C26A262DD4D9C5 /* Pods-ios_modi_network_sdk.release.xcconfig */,
+				F70CE734635378A8CB60FBEE /* Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.debug.xcconfig */,
+				094B420A5AEC896F8842863A /* Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		5237E7CE778189CC00B2680D /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		DE342E132637C04E00BABE0B = {
@@ -177,19 +170,11 @@
 			children = (
 				DE342E1F2637C04E00BABE0B /* ios_modi_network_sdk */,
 				DE342E2A2637C04E00BABE0B /* ios_modi_network_sdkTests */,
-				DE342E1E2637C04E00BABE0B /* Products */,
 				08FA18470EB4D9805091BDA9 /* Pods */,
-				5237E7CE778189CC00B2680D /* Frameworks */,
+				DEA17FED26AFF25B00D474C8 /* ios_modi_network_sdk.framework */,
+				E516E3B1B49A04EBA9F24C42 /* Frameworks */,
+				DE69A13B26EB381400062D04 /* ios_modi_network_sdkTests.xctest */,
 			);
-			sourceTree = "<group>";
-		};
-		DE342E1E2637C04E00BABE0B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				DE342E1D2637C04E00BABE0B /* ios_modi_network_sdk.framework */,
-				DE342E262637C04E00BABE0B /* ios_modi_network_sdkTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		DE342E1F2637C04E00BABE0B /* ios_modi_network_sdk */ = {
@@ -336,6 +321,7 @@
 				DE3027C42682DD2D00C82583 /* PlayCommand.swift */,
 				DE3027C62682E1DC00C82583 /* PlayCommandData.swift */,
 				DE3027C826830D3D00C82583 /* PlayEvent.swift */,
+				DE69A13C26EB5C3000062D04 /* ModiKind.swift */,
 			);
 			path = enums;
 			sourceTree = "<group>";
@@ -372,6 +358,13 @@
 			path = crcCalc;
 			sourceTree = "<group>";
 		};
+		E516E3B1B49A04EBA9F24C42 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -390,7 +383,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DE342E312637C04E00BABE0B /* Build configuration list for PBXNativeTarget "ios_modi_network_sdk" */;
 			buildPhases = (
-				8D364A22344E95C28B0DDB0C /* [CP] Check Pods Manifest.lock */,
+				A89F4E2A1F8F7A99B982B9BE /* [CP] Check Pods Manifest.lock */,
 				DE342E182637C04E00BABE0B /* Headers */,
 				DE342E192637C04E00BABE0B /* Sources */,
 				DE342E1A2637C04E00BABE0B /* Frameworks */,
@@ -402,18 +395,18 @@
 			);
 			name = ios_modi_network_sdk;
 			productName = ios_modi_network_sdk;
-			productReference = DE342E1D2637C04E00BABE0B /* ios_modi_network_sdk.framework */;
+			productReference = DEA17FED26AFF25B00D474C8 /* ios_modi_network_sdk.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		DE342E252637C04E00BABE0B /* ios_modi_network_sdkTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DE342E342637C04E00BABE0B /* Build configuration list for PBXNativeTarget "ios_modi_network_sdkTests" */;
 			buildPhases = (
-				8A4D3E657FB368F6D0C42CAE /* [CP] Check Pods Manifest.lock */,
+				40BCA503351FE0D260153293 /* [CP] Check Pods Manifest.lock */,
 				DE342E222637C04E00BABE0B /* Sources */,
 				DE342E232637C04E00BABE0B /* Frameworks */,
 				DE342E242637C04E00BABE0B /* Resources */,
-				EF71D216E5EFABB18D77633B /* [CP] Embed Pods Frameworks */,
+				92DFA4DB9A8B71910B96BDAE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -422,7 +415,7 @@
 			);
 			name = ios_modi_network_sdkTests;
 			productName = ios_modi_network_sdkTests;
-			productReference = DE342E262637C04E00BABE0B /* ios_modi_network_sdkTests.xctest */;
+			productReference = DE69A13B26EB381400062D04 /* ios_modi_network_sdkTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -452,7 +445,7 @@
 				Base,
 			);
 			mainGroup = DE342E132637C04E00BABE0B;
-			productRefGroup = DE342E1E2637C04E00BABE0B /* Products */;
+			productRefGroup = DE342E132637C04E00BABE0B;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -480,7 +473,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		8A4D3E657FB368F6D0C42CAE /* [CP] Check Pods Manifest.lock */ = {
+		40BCA503351FE0D260153293 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -502,7 +495,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8D364A22344E95C28B0DDB0C /* [CP] Check Pods Manifest.lock */ = {
+		92DFA4DB9A8B71910B96BDAE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A89F4E2A1F8F7A99B982B9BE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -522,23 +532,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EF71D216E5EFABB18D77633B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -569,6 +562,7 @@
 				DE342E692637C0C300BABE0B /* FirmwareUpdater.swift in Sources */,
 				DE545B87265DF48C003EB0D6 /* ChangeUpdateFilter.swift in Sources */,
 				DE545B7F265DEE33003EB0D6 /* FirmwareFilter.swift in Sources */,
+				DE69A13D26EB5C3000062D04 /* ModiKind.swift in Sources */,
 				DE3027C72682E1DC00C82583 /* PlayCommandData.swift in Sources */,
 				DE342E822637C0C300BABE0B /* ModiData.swift in Sources */,
 				DE342E852637C0C300BABE0B /* CodeUpdateError.swift in Sources */,
@@ -744,7 +738,7 @@
 		};
 		DE342E322637C04E00BABE0B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DDB2116D363C7F25DF252D3F /* Pods-ios_modi_network_sdk.debug.xcconfig */;
+			baseConfigurationReference = 4532AFC87B18B348B87A72F4 /* Pods-ios_modi_network_sdk.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -755,7 +749,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = ios_modi_network_sdk/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -772,7 +766,7 @@
 		};
 		DE342E332637C04E00BABE0B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7386B6D367E7440A2DF8840C /* Pods-ios_modi_network_sdk.release.xcconfig */;
+			baseConfigurationReference = E4D0629853C26A262DD4D9C5 /* Pods-ios_modi_network_sdk.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -783,7 +777,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = ios_modi_network_sdk/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -799,7 +793,7 @@
 		};
 		DE342E352637C04E00BABE0B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 67B546600723AF13485C8612 /* Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.debug.xcconfig */;
+			baseConfigurationReference = F70CE734635378A8CB60FBEE /* Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -819,7 +813,7 @@
 		};
 		DE342E362637C04E00BABE0B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA99EC06EBEDF37462706905 /* Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.release.xcconfig */;
+			baseConfigurationReference = 094B420A5AEC896F8842863A /* Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
