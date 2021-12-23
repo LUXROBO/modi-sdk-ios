@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7BAE9FA22774104100646DC8 /* ModiSdk.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 7BAE9FA12774104100646DC8 /* ModiSdk.podspec */; };
+		7BAE9FA6277423A000646DC8 /* Pods_ios_modi_network_sdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BAE9FA5277423A000646DC8 /* Pods_ios_modi_network_sdk.framework */; };
+		7BAE9FA7277423A000646DC8 /* Pods_ios_modi_network_sdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7BAE9FA5277423A000646DC8 /* Pods_ios_modi_network_sdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DE3027C12681E02E00C82583 /* ModiPlayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3027C02681E02E00C82583 /* ModiPlayManager.swift */; };
 		DE3027C32681F08200C82583 /* ModiPlayManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3027C22681F08200C82583 /* ModiPlayManagerProtocol.swift */; };
 		DE3027C52682DD2D00C82583 /* PlayCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3027C42682DD2D00C82583 /* PlayCommand.swift */; };
@@ -73,10 +75,25 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		7BAE9FA8277423A100646DC8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7BAE9FA7277423A000646DC8 /* Pods_ios_modi_network_sdk.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		094B420A5AEC896F8842863A /* Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.release.xcconfig"; path = "Target Support Files/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests/Pods-ios_modi_network_sdk-ios_modi_network_sdkTests.release.xcconfig"; sourceTree = "<group>"; };
 		4532AFC87B18B348B87A72F4 /* Pods-ios_modi_network_sdk.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios_modi_network_sdk.debug.xcconfig"; path = "Target Support Files/Pods-ios_modi_network_sdk/Pods-ios_modi_network_sdk.debug.xcconfig"; sourceTree = "<group>"; };
 		7BAE9FA12774104100646DC8 /* ModiSdk.podspec */ = {isa = PBXFileReference; lastKnownFileType = file; path = ModiSdk.podspec; sourceTree = SOURCE_ROOT; };
+		7BAE9FA5277423A000646DC8 /* Pods_ios_modi_network_sdk.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_ios_modi_network_sdk.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE3027C02681E02E00C82583 /* ModiPlayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModiPlayManager.swift; sourceTree = "<group>"; };
 		DE3027C22681F08200C82583 /* ModiPlayManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModiPlayManagerProtocol.swift; sourceTree = "<group>"; };
 		DE3027C42682DD2D00C82583 /* PlayCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayCommand.swift; sourceTree = "<group>"; };
@@ -143,6 +160,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BAE9FA6277423A000646DC8 /* Pods_ios_modi_network_sdk.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,6 +188,7 @@
 		DE342E132637C04E00BABE0B = {
 			isa = PBXGroup;
 			children = (
+				7BAE9FA12774104100646DC8 /* ModiSdk.podspec */,
 				DE342E1F2637C04E00BABE0B /* ios_modi_network_sdk */,
 				DE342E2A2637C04E00BABE0B /* ios_modi_network_sdkTests */,
 				08FA18470EB4D9805091BDA9 /* Pods */,
@@ -182,7 +201,6 @@
 		DE342E1F2637C04E00BABE0B /* ios_modi_network_sdk */ = {
 			isa = PBXGroup;
 			children = (
-				7BAE9FA12774104100646DC8 /* ModiSdk.podspec */,
 				DE545B8A2660910F003EB0D6 /* crcCalc */,
 				DE342EFB2637FAE800BABE0B /* extention */,
 				DE342E3F2637C0C300BABE0B /* core */,
@@ -364,6 +382,7 @@
 		E516E3B1B49A04EBA9F24C42 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7BAE9FA5277423A000646DC8 /* Pods_ios_modi_network_sdk.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -391,6 +410,7 @@
 				DE342E192637C04E00BABE0B /* Sources */,
 				DE342E1A2637C04E00BABE0B /* Frameworks */,
 				DE342E1B2637C04E00BABE0B /* Resources */,
+				7BAE9FA8277423A100646DC8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "ModiSdk"
-  spec.version      = "0.2.1"
+  spec.version      = "0.2.0"
   spec.summary      = "A short description of ModiSdk."
 
   # This description is used to generate tags and improve search results.
@@ -39,7 +39,7 @@ Pod::Spec.new do |spec|
   #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
   #
 
-  spec.license      = "MIT"
+  spec.license      = "Apache License, Version 2.0"
   # spec.license      = { :type => "MIT", :file => "FILE_LICENSE" }
 
 
@@ -123,7 +123,8 @@ Pod::Spec.new do |spec|
   # spec.library   = "iconv"
   # spec.libraries = "iconv", "xml2"
 
-
+    spec.vendored_frameworks = "ios_modi_network_sdk/ios_modi_network.sdk.framework"
+    
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
   #  If your library depends on compiler flags you can set them in the xcconfig hash
