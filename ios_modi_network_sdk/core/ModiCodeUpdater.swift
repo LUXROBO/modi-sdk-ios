@@ -818,7 +818,7 @@ open class ModiCodeUpdater : ModiFrameObserver{
         sleep(1)
     }
     
-    func notifyUpdateFail(error: CodeUpdateError, reson : String) {
+    open func notifyUpdateFail(error: CodeUpdateError, reson : String) {
         
         progressNotifierComplete()
         let bytes = ModiProtocol().setModuleState(moduleKey : 0xFFF, state : ModiProtocol.MODULE_STATE.RESET)

@@ -386,7 +386,9 @@ open class ModiManager  {
     open func disconnect() {
         
         self.modiConnected = false
-        self.bluetoothService.disconnect(self.periperal!)
+        if let periperal = self.periperal {
+            self.bluetoothService.disconnect(periperal)
+        }
         self.periperal = nil
         self.stopNotification()
         self.managerDelegate?.onDisconnected()
