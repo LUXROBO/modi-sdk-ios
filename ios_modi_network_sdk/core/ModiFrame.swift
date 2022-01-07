@@ -14,7 +14,7 @@ open class ModiFrame  {
 
     public init() {}
     
-    func cmd() -> Int {
+    open func cmd() -> Int {
 
         return Int(mFrame[0])
     
@@ -49,7 +49,7 @@ open class ModiFrame  {
         return data
     }
     
-    func setFrame(data : Data) {
+    open func setFrame(data : Data) {
         
         for i in 0...data.count - 1 {
             
