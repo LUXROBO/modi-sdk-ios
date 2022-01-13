@@ -77,7 +77,7 @@ open class ModiModule {
 //        return String(format: "%s %s(0x%04X%08X);\n", type,name,typeCode, uuid)
         var modiString = String(format: "(0x%04X%07X);", typeCode, uuid)
         
-        modiString = "\(type) \(name) \(modiString)"
+        modiString = "this.\(name) = \(type)(\(modiString))"
         return modiString
         
     }
