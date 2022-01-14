@@ -583,6 +583,10 @@ open class ModiManager  {
         return self.modiCodeUpdater!
     }
     
+    open func getVersion(){
+        let data = ModiProtocol().getVersion(moduleKey: 0)
+        sendData(Data(data))
+    }
    
 }
 

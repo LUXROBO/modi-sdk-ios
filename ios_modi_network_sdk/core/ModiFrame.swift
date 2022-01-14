@@ -37,7 +37,7 @@ open class ModiFrame  {
         
     }
     
-    func data() -> [UInt8] {
+    open func data() -> [UInt8] {
         
         var data = [UInt8](repeating: 0, count: 8)
         
