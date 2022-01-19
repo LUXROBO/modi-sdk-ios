@@ -566,11 +566,10 @@ open class ModiManager  {
     open func getConnectedModiUuid() -> Int {
         
         let littleEndianValue = getMODI_ID().withUnsafeBufferPointer {
-                 ($0.baseAddress!.withMemoryRebound(to: UInt32.self, capacity: 1) { $0 })
+            ($0.baseAddress!.withMemoryRebound(to: Int.self, capacity: 2) { $0 })
         }.pointee.littleEndian
-        let value = UInt32(littleEndianValue)
         
-        return Int(value)
+        return littleEndianValue.littleEndian
     }
     
     open func getModuleManager() -> ModiModuleManager {
