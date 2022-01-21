@@ -19,7 +19,7 @@ open class ModiModule {
     private let TYPE_IR = "Ir"
     private let TYPE_DISPLAY = "Display"
     private let TYPE_MOTOR = "Motor"
-    private let TYPE_MOTOR_B = "MotorB"
+    private let TYPE_MOTOR_B = "Motor"
     private let TYPE_LED = "Led"
     private let TYPE_SPEAKER = "Speaker"
     private let TYPE_BATTERY = "Battery"
