@@ -73,7 +73,11 @@ open class ModiModule {
     
     open func getString() -> String {
         
-        let name = self.type.lowercased()+"0"
+        var name = self.type.lowercased()+"0"
+        
+        if(typeCode == 0x4011) {
+            name = self.type.lowercased()+"1"
+        }
 //        return String(format: "%s %s(0x%04X%08X);\n", type,name,typeCode, uuid)
         var modiString = String(format: "(0x%04X%07X);", typeCode, uuid)
         
