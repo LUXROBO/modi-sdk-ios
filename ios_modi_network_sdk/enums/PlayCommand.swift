@@ -29,12 +29,12 @@ public enum PlayCommand  {
         case .BUTTON_PRESS_STATUS: return 0x0003
         case .BUTTON_CLICK: return 0x0102
         case .BUTTON_DOUBLE_CLICK: return 0x0103
-        case .TOGGLE: return 0x0104
-        case .JOYSTICK: return 0x0003
-        case .DIAL: return 0x0004
-        case .LEFT_SLIDER: return 0x0005
+        case .TOGGLE: return 0x0004
+        case .JOYSTICK: return 0x0006
+        case .DIAL: return 0x0005
+        case .LEFT_SLIDER: return 0x0007
         case .RIGHT_SLIDER: return 0x0006
-        case .TIMER: return 0x0007
+        case .TIMER: return 0x0008
        
       }
     }
