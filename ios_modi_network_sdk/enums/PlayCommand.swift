@@ -27,8 +27,8 @@ public enum PlayCommand  {
       switch self {
         case .RECEIVE_DATA: return 0x0002
         case .BUTTON_PRESS_STATUS: return 0x0003
-        case .BUTTON_CLICK: return 0x0102
-        case .BUTTON_DOUBLE_CLICK: return 0x0103
+        case .BUTTON_CLICK: return 0x0003
+        case .BUTTON_DOUBLE_CLICK: return 0x0003
         case .TOGGLE: return 0x0004
         case .JOYSTICK: return 0x0006
         case .DIAL: return 0x0005

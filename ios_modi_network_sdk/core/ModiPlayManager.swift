@@ -32,15 +32,30 @@ open class ModiPlayManager {
     public func fireEvent(command : PlayCommand, commandData : PlayCommandData, option : Int) {
         let target = modiManager.getConnectedModiUuid() & 0xFFF
 
-        var data = [UInt8](repeating: 0, count: 8)
-        data[0] = commandData.rawValue
+        var data = getEventData(command: command, commandData: commandData)
         data[7] = UInt8(option)
         
         sendData(bytes: ModiFrame().makeFrame(cmd:0x1F, sid: target, did: command.rawValue, binary : data))
     }
     
+    private func getEventData(command : PlayCommand,commandData : PlayCommandData) -> [UInt8]{
+        var data = [UInt8](repeating: 0, count: 8)
+        switch command {
+        case .BUTTON_CLICK:
+            data[2] = commandData.rawValue
+        case .BUTTON_PRESS_STATUS:
+            data[0] = commandData.rawValue
+        case .BUTTON_DOUBLE_CLICK:
+            data[4] = commandData.rawValue
+        default:
+            data[0] = commandData.rawValue
+        }
+        return data
+    }
+    
     public func sendValue(value : Int,did:Int) {
         let target = modiManager.getConnectedModiUuid() & 0xFFF
+    
         var data = [UInt8](repeating: 0, count: 8)
         data[0] = UInt8(value & 0xFF)
         data[7] = 0
