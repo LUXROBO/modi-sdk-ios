@@ -35,6 +35,7 @@ open class ModiManager  {
 
     
     private var MODI_ID:[UInt8] = [0x00,0x00, 0x00, 0x00]
+    private var modiuuid = 0
     private var macString : String
     
 //    private let discoveredServicesSubject = PublishSubject<Result<Service, Error>>()
@@ -143,7 +144,7 @@ open class ModiManager  {
        bluetoothService.discoverServices(for: periperal)
        bluetoothService.discoveredServicesOutput
         .observeOn(MainScheduler.instance)
-        .subscribe(onNext: { result in
+        .subscribe(onNext: { [self] result in
             switch result {
             case .success(let services):
                 
@@ -152,15 +153,20 @@ open class ModiManager  {
                     return
                 }
                 
-                self.macString = ModiString.subString(periperal.peripheral.name, start: 5, length: periperal.peripheral.name!.count - 5)
+                self.macString = ModiString.subString(periperal.peripheral.name, start: 6, length: periperal.peripheral.name!.count - 6)
+                    
+                self.modiuuid = Int(UInt32(self.macString, radix: 16) ?? 0)
+                self.modiModuleManager?.setRootModule(uuid: self.modiuuid)
+                self.stopScan()
+                    
                 ModiLog.i("connect", messages: "============================================")
                 ModiLog.i("connect", messages: "peripheral.name : \(String(describing:periperal.peripheral.name))")
-                ModiLog.i("connect", messages: "uuid value : \(self.macString)")
+                ModiLog.i("connect", messages: "uuid value1 : \(self.macString)")
+                ModiLog.i("connect", messages: "uuid value2 : \(String(describing: self.modiuuid))")
                 ModiLog.i("connect", messages: "uuidString value : \(String(describing: periperal.peripheral.identifier.uuidString))")
                 ModiLog.i("connect", messages: "============================================")
                 
                
-                self.stopScan()
                 
                 
                 services.forEach { service in
@@ -199,7 +205,7 @@ open class ModiManager  {
                     let item = characteristics[0]
                     
                     if(self.characteristic == item) {
-                        ModiLog.i("discoveredServices", messages: "characteristic == item")
+//                        ModiLog.i("discoveredServices", messages: "characteristic == item")
                         return
                     }
                     
@@ -262,19 +268,9 @@ open class ModiManager  {
             switch result {
                 case .success(let data) :
                     
-                    
-                     let lenth = self.macString.count
-                     let macString0 = ModiString.subString(self.macString, start : lenth - 2, length: 2)
-                     let macString1 = ModiString.subString(self.macString, start : lenth - 4, length: 2)
-
-
+                
                      ModiLog.d("setModi_ID1", messages: "\(String(describing: ModiString.convertHexString(data.value)))")
                     
-
-//                     ModiLog.d("setModi_ID1-1", messages: "\(String(describing: macString0))")
-//                     ModiLog.d("setModi_ID1-2", messages: "\(String(describing: macString1))")
-//                     ModiLog.d("setModi_ID1-3", messages: "\(String(describing: self.stringToBytes(macString0)![0]))")
-//                     ModiLog.d("setModi_ID1-4", messages: "\(String(describing: self.stringToBytes(macString1)![0]&0x0f))")
                 
                      self.MODI_ID[0] = data.value![0]
                      self.MODI_ID[1] = data.value![1]
@@ -290,7 +286,7 @@ open class ModiManager  {
                     ModiLog.d("setupRead", messages: "\(getConnectedModiUuid())")
                     
                     
-                    modiModuleManager!.setRootModule(uuid: self.getConnectedModiUuid())
+//                    modiModuleManager!.setRootModule(uuid: self.getConnectedModiUuid())
                     modiModuleManager!.discoverModules()
                     self.managerDelegate?.onDiscoveredAllCharacteristics()
                 
@@ -464,9 +460,11 @@ open class ModiManager  {
        
 //       let characteristic = self.characteristicsList[ModiGattArributes.DEVICE_CHAR_TX_RX]
         ModiLog.d("sendData", messages: "\(String(describing: ModiString.convertHexString(bytes)))")
+       
+       if(self.characteristic != nil) {
+           self.bluetoothService.writeValueTo(characteristic: self.characteristic!, data: bytes)
+       }
     
-        self.bluetoothService.writeValueTo(characteristic: self.characteristic!, data: bytes)
-
    }
     
     func setModi_ID(value : Data) {
@@ -564,12 +562,8 @@ open class ModiManager  {
     }
     
     open func getConnectedModiUuid() -> Int {
-        
-        let littleEndianValue = getMODI_ID().withUnsafeBufferPointer {
-            ($0.baseAddress!.withMemoryRebound(to: Int.self, capacity: 2) { $0 })
-        }.pointee.littleEndian
-        
-        return littleEndianValue.littleEndian
+
+        return modiuuid
     }
     
     open func getModuleManager() -> ModiModuleManager {
