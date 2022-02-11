@@ -43,13 +43,31 @@ open class ModiProtocol  {
         streamCommandData[0] = stream.streamId
         streamCommandData[1] = 3
 
-        let dataArray = withUnsafeBytes(of: streamBodySize, Array.init)
+        
+        let value = UInt16(streamBodySize)
+        let littleStr = String(format:"%06X", value.littleEndian)
+        var dataArray = [UInt8](repeating: 0, count: 6)
+        
+
+        print("steave streamCommand littleStr \(littleStr)")
+        print("steave streamCommand value \(value)")
+        
+        let idx1: String.Index = littleStr.index(littleStr.startIndex, offsetBy: 1)
+        let idx2: String.Index = littleStr.index(idx1, offsetBy: 2)
+        let idx3: String.Index = littleStr.index(idx2, offsetBy: 1)
+    
+        dataArray[2] = UInt8(String(littleStr[...idx1]), radix: 16) ?? 0
+        dataArray[1] = UInt8(String(littleStr[idx1..<idx2]), radix: 16) ?? 0
+        dataArray[0] = UInt8(String(littleStr[idx3...]), radix: 16) ?? 0
+    
         
         for i in 0...3 {
-
+          
             streamCommandData[i + 2] = dataArray[i]
 
         }
+        
+        print("steave streamCommand streamCommandData \(streamCommandData)")
         
         return ModiFrame().makeFrame(cmd: 0x12, sid: 0, did : stream.moduleId, binary : streamCommandData)
     }
