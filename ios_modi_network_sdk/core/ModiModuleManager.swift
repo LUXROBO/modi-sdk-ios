@@ -11,7 +11,7 @@ import RxSwift
 open class ModiModuleManager: ModiFrameObserver {
     
     private let MODULE_STATE_UNKNOWN = 0xFF
-    private let MODULE_TIMEOUT_PERIOD = 2000
+    private let MODULE_TIMEOUT_PERIOD = 4000
     private let MODULE_UPDATE_TIMEOUT_PERIOD = 10000 * 11
     private let MODULE_CHECK_PERIOD = 500
 
@@ -76,7 +76,7 @@ open class ModiModuleManager: ModiFrameObserver {
     
         self.mRootmodule = ModiModule().makeModule(type: 0x0000, uuid: uuid, version: 0, state: 0, time: Date())
         
-        updateRootModule(uuid : uuid & 0xFF)
+        updateRootModule(uuid : uuid)
         
         observeFrame()
         
@@ -99,17 +99,18 @@ open class ModiModuleManager: ModiFrameObserver {
     
     func updateRootModule(uuid : Int) {
         
-        print("updateRootModule1 uuid \(uuid)")
+        print("updateRootModule1 uuid \(uuid & 0xFF)")
         
-        if self.mModuleMap.keys.contains(uuid) != true {
-            self.mModuleMap[uuid] = self.mRootmodule
+        if self.mModuleMap.keys.contains(uuid & 0xFF) != true {
+            self.mModuleMap[uuid & 0xFF] = self.mRootmodule
             
             print("updateRootModule2 uuid \(uuid) mModuleMap : \(mModuleMap.count)")
             
-        }
-        
-        if self.mListener != nil {
-            self.mListener?.onConnectModule(manager: self, module: self.mRootmodule!)
+            if self.mListener != nil {
+                print("updateRootModule onConnectModule uuid \(uuid) mModuleMap : \(mModuleMap.count)")
+                self.mListener?.onConnectModule(manager: self, module: self.mRootmodule!)
+            }
+            
         }
     }
     
@@ -134,12 +135,14 @@ open class ModiModuleManager: ModiFrameObserver {
     
     func updateModuleState(id : Int, moduleData : Array<UInt8>) {
         
+        print("updateModuleState id \(id) mModuleMap : \(mModuleMap.count)")
+        
         if(self.mModuleMap.keys.contains(id) != true) {
             
-            let uuid = ModiFrame().getInt(data : Array(moduleData[0...1])) & 0xFFFF
+            let uuid = ModiFrame().getInt(data : Array(moduleData[0...3])) & 0xFFFFFFF
             let typeCode = ModiFrame().getInt(data : Array(moduleData[4...5])) & 0xFFFF
             var version = ModiFrame().getInt(data : Array(moduleData[6...7])) & 0xFFFF
-            let state = Int(moduleData[6]) & 0xFFFF
+            let state = mModuleMap[uuid & 0xFFF]?.state ?? 0
             let time = Date()
             
             if version == 10 || version == 0 {
@@ -161,7 +164,7 @@ open class ModiModuleManager: ModiFrameObserver {
         else {
             
             let module = self.mModuleMap[id]
-            module!.state = Int(moduleData[6]) & 0xFFFF 
+            module!.state = mModuleMap[id]?.state ?? 0
             module?.lastUpdate = Date().timeIntervalSince1970 * 1000
             
             if(mListener != nil) {
@@ -282,14 +285,15 @@ open class ModiModuleManager: ModiFrameObserver {
     
     func updateModuleData(moduleKey : Int , moduleData : Array<UInt8>) {
         
-        let data = Data(bytes : moduleData, count: moduleData.count)
-    
+//        let data = Data(bytes : moduleData, count: moduleData.count)
+        print("updateModuleData onConnectModule moduleKey \(moduleKey) mModuleMap : \(mModuleMap.count)")
+        
         if mModuleMap.keys.contains(moduleKey) != true {
             
-            let uuid = ModiFrame().getInt(data : Array(moduleData[0...1])) & 0xFFFF
+            let uuid = ModiFrame().getInt(data : Array(moduleData[0...3])) & 0xFFFFFFF
             let typeCode = ModiFrame().getInt(data : Array(moduleData[4...5])) & 0xFFFF
             var version = ModiFrame().getInt(data : Array(moduleData[6...7])) & 0xFFFF
-            let state = Int(moduleData[6]) & 0xFFFF
+            let state = mModuleMap[uuid & 0xFFF]?.state ?? 0
             let time = Date()
             
             if version == 10 || version == 0 {
@@ -300,12 +304,11 @@ open class ModiModuleManager: ModiFrameObserver {
             let module = ModiModule().makeModule(type : typeCode, uuid : uuid, version : version, state : state, time : time)
             
             self.mModuleMap[moduleKey] = module
-            
-          
-            
+    
             self.removeDisableMapModule(id : moduleKey)
             
             if(mListener != nil) {
+                print("updateModuleData onConnectModule : \(module.uuid)")
                 mListener?.onConnectModule(manager: self, module: module)
             }
             
