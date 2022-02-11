@@ -33,6 +33,7 @@ open class ModiManager  {
     private var varcharacteristicUuidStreamUpload : CBUUID?
    
 
+    private var updatedValueAndNotificationOutputDisposable : Disposable?
     
     private var MODI_ID:[UInt8] = [0x00,0x00, 0x00, 0x00]
     private var modiuuid = 0
@@ -307,7 +308,7 @@ open class ModiManager  {
         print("setupNotification start \(characteristic)");
         
         self.bluetoothService.observeValueUpdateAndSetNotification(for: characteristic)
-        self.bluetoothService.updatedValueAndNotificationOutput
+        updatedValueAndNotificationOutputDisposable = self.bluetoothService.updatedValueAndNotificationOutput
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: {[unowned self] (result) in
 
@@ -361,7 +362,7 @@ open class ModiManager  {
                    self.disconnect()
             }
 
-        }).disposed(by: disposeBag)
+        })
         
     }
 
@@ -390,6 +391,8 @@ open class ModiManager  {
         self.managerDelegate?.onDisconnected()
         
         self.reConnectCount = 0
+        
+        self.updatedValueAndNotificationOutputDisposable?.dispose()
        
     }
     
