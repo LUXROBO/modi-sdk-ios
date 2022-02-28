@@ -389,7 +389,7 @@ open class ModiManager  {
         self.periperal = nil
         self.stopNotification()
         self.managerDelegate?.onDisconnected()
-        
+        self.modiModuleManager?.expireAllModules()
         self.reConnectCount = 0
         
         self.updatedValueAndNotificationOutputDisposable?.dispose()
