@@ -10,7 +10,8 @@ import Foundation
 open class ModiFrame  {
     
     private var mFrame = [UInt8](repeating: 0, count: 16)
-    private var frame = [UInt8](repeating: 0, count: 16)
+    private var frame  = [UInt8](repeating: 0, count: 16)
+    private var lenth = 0
 
     public init() {}
     
@@ -39,7 +40,7 @@ open class ModiFrame  {
     
     open func data() -> [UInt8] {
         
-        var data = [UInt8](repeating: 0, count: 8)
+        var data = [UInt8](repeating: 0, count: lenth)
         
         for i in 8 ... mFrame.count - 1 {
             
@@ -50,6 +51,10 @@ open class ModiFrame  {
     }
     
     open func setFrame(data : Data) {
+        
+        lenth = Int(data[6])
+        mFrame = [UInt8](repeating: 0, count: data.count)
+        frame = [UInt8](repeating: 0, count: data.count)
         
         for i in 0...data.count - 1 {
             

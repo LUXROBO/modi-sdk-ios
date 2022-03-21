@@ -246,9 +246,9 @@ open class ModiManager  {
                     }
                     
                 
-                var buff: [UInt8]=[0x00,0x00,0x00,0x00,0x00,0x00,0x08,0x00,0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x00]
-                let MODI:Data = Data(bytes: &buff, count: buff.count)
-                self.sendData(MODI)
+//                var buff: [UInt8]=[0x00,0x00,0x00,0x00,0x00,0x00,0x08,0x00,0x02,0x00,0x00,0x00,0x00,0x00,0x00,0x00]
+//                let MODI:Data = Data(bytes: &buff, count: buff.count)
+//                self.sendData(MODI)
                     
                 case .error(let error):
                     ModiLog.i("discoveredServices", messages: "error : \(error)")
@@ -270,6 +270,10 @@ open class ModiManager  {
                 case .success(let data) :
                     
                 
+                    if self.modiConnected == true {
+                        return
+                    }
+                    
                      ModiLog.d("setModi_ID1", messages: "\(String(describing: ModiString.convertHexString(data.value)))")
                     
                 
@@ -280,6 +284,10 @@ open class ModiManager  {
                 
                      self.modiConnected = true
                      self.managerDelegate?.onConnected()
+                    
+                    self.modiuuid = Int(UInt32(self.macString, radix: 16) ?? 0)
+                    self.modiModuleManager?.setRootModule(uuid: self.modiuuid)
+                    
                      self.reConnectCount = 0
                     
                     
@@ -329,7 +337,7 @@ open class ModiManager  {
 
                    switch UUID16bit {
                         case ModiGattArributes.DEVICE_CHAR_TX_RX:
-                          if(characteristics.value?.count == 10 || characteristics.value?.count == 16) {
+                          if(characteristics.value!.count >= 16) {
 
                             if (characteristic.value![0] != 0) {
                                 ModiLog.d("setupNotification DEVICE_CHAR_TX_RX", messages: "\(ModiString.convertHexString(characteristics.value)))")
@@ -340,11 +348,11 @@ open class ModiManager  {
                             modiFrame.setFrame(data: characteristics.value!)
                             ModiSingleton.shared.notifyModiFrame(frame: modiFrame.getFrame())
                             
-                            if(characteristics.value![0] == 0x28) {
-                                
-                                self.setModi_ID(value: characteristics.value!)
-                              
-                            }
+//                            if(characteristics.value![0] == 0x28) {
+//
+//                                self.setModi_ID(value: characteristics.value!)
+//
+//                            }
                             
                       }
 
