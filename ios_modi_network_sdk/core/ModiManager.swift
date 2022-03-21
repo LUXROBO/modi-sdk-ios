@@ -337,7 +337,7 @@ open class ModiManager  {
 
                    switch UUID16bit {
                         case ModiGattArributes.DEVICE_CHAR_TX_RX:
-                          if(characteristics.value!.count >= 16) {
+                          if(characteristics.value!.count >= 10) {
 
                             if (characteristic.value![0] != 0) {
                                 ModiLog.d("setupNotification DEVICE_CHAR_TX_RX", messages: "\(ModiString.convertHexString(characteristics.value)))")
