@@ -50,6 +50,7 @@ open class ModiModule {
         
         switch typeCode {
             case 0x0000: return TYPE_NETWORK
+            case 0x0010: return TYPE_BATTERY
             case 0x2000: return TYPE_ENVIRONMENT
             case 0x2010: return TYPE_IMU
             case 0x2020: return TYPE_MIC
