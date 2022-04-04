@@ -48,18 +48,23 @@ open class ModiProtocol  {
         let littleStr = String(format:"%06X", value.littleEndian)
         var dataArray = [UInt8](repeating: 0, count: 6)
         
-
-        print("steave streamCommand littleStr \(littleStr)")
-        print("steave streamCommand value \(value)")
+//        print("steave streamCommand littleStr \(littleStr)")
+//        print("steave streamCommand value \(value)")
         
-        let idx1: String.Index = littleStr.index(littleStr.startIndex, offsetBy: 1)
+        let idx0: String.Index = littleStr.index(littleStr.startIndex, offsetBy: 1)
+        let idx1: String.Index = littleStr.index(idx0, offsetBy: 1)
         let idx2: String.Index = littleStr.index(idx1, offsetBy: 2)
         let idx3: String.Index = littleStr.index(idx2, offsetBy: 1)
     
-        dataArray[2] = UInt8(String(littleStr[...idx1]), radix: 16) ?? 0
+//        print("steave streamCommand String(littleStr[...2])\(String(littleStr[idx1..<idx2]))")
+//        print("steave streamCommand String(littleStr[...3])\(String(littleStr[idx2...idx3]))")
+        
+        dataArray[2] = UInt8(String(littleStr[...idx0]), radix: 16) ?? 0
         dataArray[1] = UInt8(String(littleStr[idx1..<idx2]), radix: 16) ?? 0
-        dataArray[0] = UInt8(String(littleStr[idx3...]), radix: 16) ?? 0
+        dataArray[0] = UInt8(String(littleStr[idx2...idx3]), radix: 16) ?? 0
     
+        
+        
         
         for i in 0...3 {
           
