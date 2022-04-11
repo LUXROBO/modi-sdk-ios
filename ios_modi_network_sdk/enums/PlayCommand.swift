@@ -15,7 +15,7 @@ public enum PlayCommand  {
     case BUTTON_PRESS_STATUS
     case BUTTON_CLICK
     case BUTTON_DOUBLE_CLICK
-    case TOGGLE
+    case SWITCH
     case JOYSTICK_DIRECTION
     case DIAL_POSITION
     case SLIDER_POSITION
@@ -32,7 +32,7 @@ public enum PlayCommand  {
         case .BUTTON_PRESS_STATUS: return 0x00
         case .BUTTON_CLICK: return 0x02
         case .BUTTON_DOUBLE_CLICK: return 0x04
-        case .TOGGLE: return 0x00
+        case .SWITCH: return 0x00
         case .JOYSTICK_DIRECTION: return 0x00
         case .DIAL_POSITION: return 0x00
         case .SLIDER_POSITION: return 0x00
