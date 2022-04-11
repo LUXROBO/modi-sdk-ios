@@ -29,14 +29,17 @@ open class ModiPlayManager {
     }
     
     
-    public func fireEvent(command : PlayCommand, commandData : PlayCommandData, option : Int) {
+    public func fireEvent(index : Int, property : Int, command : PlayCommand, commandData : PlayCommandData, option : Int) {
         let target = modiManager.getConnectedModiUuid() & 0xFFF
 
         var data = getEventData(command: command, commandData: commandData)
         data[7] = UInt8(option)
         
-        sendData(bytes: ModiFrame().makeFrame(cmd:0x1F, sid: target, did: command.rawValue, binary : data))
+        let did = property + (index * 100);
+        
+        sendData(bytes: ModiFrame().makeFrame(cmd:0x1F, sid: target, did: did, binary : data))
     }
+    
     
     private func getEventData(command : PlayCommand,commandData : PlayCommandData) -> [UInt8]{
         var data = [UInt8](repeating: 0, count: 8)
