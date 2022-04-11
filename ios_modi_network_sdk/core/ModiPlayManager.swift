@@ -29,10 +29,10 @@ open class ModiPlayManager {
     }
     
     
-    public func fireEvent(index : Int, property : Int, command : PlayCommand, commandData : PlayCommandData, option : Int) {
+    public func fireEvent(index : Int, property : Int, command : PlayCommand, commandDataValue : Int, option : Int) {
         let target = modiManager.getConnectedModiUuid() & 0xFFF
 
-        var data = getEventData(command: command, commandData: commandData)
+        var data = getEventData(command: command, commandData: commandDataValue)
         data[7] = UInt8(option)
         
         let did = property + (index * 100);
@@ -41,17 +41,27 @@ open class ModiPlayManager {
     }
     
     
-    private func getEventData(command : PlayCommand,commandData : PlayCommandData) -> [UInt8]{
+    private func getEventData(command : PlayCommand,commandData : Int) -> [UInt8]{
         var data = [UInt8](repeating: 0, count: 8)
         switch command {
-        case .BUTTON_CLICK:
-            data[2] = commandData.rawValue
-        case .BUTTON_PRESS_STATUS:
-            data[0] = commandData.rawValue
-        case .BUTTON_DOUBLE_CLICK:
-            data[4] = commandData.rawValue
+                
+        case .RECEIVE_DATA:
+            data[2] = UInt8(commandData) & 0xFF
+                
+        case . BUTTON_CLICK:
+            data[2] = UInt8(commandData) & 0xFF
+                
+        case . IMU_ANGLE_PITCH:
+            data[2] = UInt8(commandData) & 0xFF
+                
+        case . BUTTON_DOUBLE_CLICK :
+            data[4] = UInt8(commandData) & 0xFF
+        case . IMU_ANGLE_YAW :
+                
+            data[4] = UInt8(commandData) & 0xFF
+                
         default:
-            data[0] = commandData.rawValue
+            data[0] = UInt8(commandData) & 0xFF
         }
         return data
     }
