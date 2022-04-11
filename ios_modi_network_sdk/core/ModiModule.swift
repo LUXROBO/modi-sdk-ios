@@ -80,7 +80,7 @@ open class ModiModule {
             name = self.type.lowercased()+"1"
         }
 //        return String(format: "%s %s(0x%04X%08X);\n", type,name,typeCode, uuid)
-        var modiString = String(format: "(0x%04X%07X);", typeCode, uuid)
+        var modiString = String(format: "(0x%04X%08X);", typeCode, uuid)
         
         modiString = "this.\(name) = \(type)\(modiString)"
         return modiString

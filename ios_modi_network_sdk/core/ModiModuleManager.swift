@@ -139,7 +139,7 @@ open class ModiModuleManager: ModiFrameObserver {
         
         if(self.mModuleMap.keys.contains(id) != true) {
             
-            let uuid = ModiFrame().getInt(data : Array(moduleData[0...3])) & 0xFFFFFFF
+            let uuid = ModiFrame().getInt(data : Array(moduleData[0...3])) & 0xFFFFFFFF
             let typeCode = ModiFrame().getInt(data : Array(moduleData[4...5])) & 0xFFFF
             var version = ModiFrame().getInt(data : Array(moduleData[6...7])) & 0xFFFF
             let state = mModuleMap[uuid & 0xFFF]?.state ?? 0
@@ -290,7 +290,7 @@ open class ModiModuleManager: ModiFrameObserver {
         
         if mModuleMap.keys.contains(moduleKey) != true {
             
-            let uuid = ModiFrame().getInt(data : Array(moduleData[0...3])) & 0xFFFFFFF
+            let uuid = ModiFrame().getInt(data : Array(moduleData[0...3])) & 0xFFFFFFFF
             let typeCode = ModiFrame().getInt(data : Array(moduleData[4...5])) & 0xFFFF
             var version = ModiFrame().getInt(data : Array(moduleData[6...7])) & 0xFFFF
             let state = mModuleMap[uuid & 0xFFF]?.state ?? 0

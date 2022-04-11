@@ -79,6 +79,16 @@ open class ModiFrame  {
         return mFrame
     }
     
+    open func makeFrame(cmd : Int, sid : Int, did : Int, binary : [UInt8], lenth : Int) -> [UInt8] {
+        
+    
+        stuffFrameHeader(cmd:cmd, sid : sid, did : did)
+        stuffFrameData(data : binary, lenth : lenth)
+        
+        return mFrame
+    }
+    
+    
     
     private func stuffFrameHeader(cmd : Int, sid : Int, did : Int) {
         
@@ -103,6 +113,20 @@ open class ModiFrame  {
         }
         
     }
+    
+    private func stuffFrameData(data : [UInt8], lenth : Int ) {
+    
+        mFrame[6] = UInt8( lenth & 0xFF)
+        mFrame[7] = UInt8( lenth >> 8 & 0xFF)
+        
+        for i in 0 ..< data.count {
+            
+            mFrame[i+8] = data[i]
+        
+        }
+        
+    }
+    
     
     open func getInt(data : Array<UInt8>) -> Int {
                 

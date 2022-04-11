@@ -85,21 +85,44 @@ open class ModiProtocol  {
 
            let begin = i
            var end = i + 7
-           
+           var isEnd = false
+            
             if (end > stream.streamBody.count) {
                 end = stream.streamBody.count
+                isEnd = true
+            }
+            
+            if isEnd {
+                
+                let slice : [UInt8] =  Array(stream.streamBody[begin...end - 1])
+                
+                var streamSlice = [UInt8](repeating: 0, count: 8)
+                streamSlice[0] = stream.streamId
+                
+                for j in 0 ..< slice.count {
+                    
+                    streamSlice[j+1] = slice[j]
+                    
+                }
+                
+                dataList.append(ModiFrame().makeFrame(cmd: 0x10, sid: 0, did : stream.moduleId, binary : streamSlice, lenth : slice.count + 1))
+//                dataList.append(ModiFrame().makeFrame(cmd: 0x10, sid: 0, did : stream.moduleId, binary : streamSlice, lenth : slice.count + 1))
+            }
+            
+            else {
+                let slice : [UInt8] =  Array(stream.streamBody[begin...end - 1])
+                
+                var streamSlice = [UInt8](repeating: 0, count: slice.count + 1)
+                streamSlice[0] = stream.streamId
+                
+                for j in 0 ..< slice.count {
+                    streamSlice[j+1] = slice[j]
+                }
+                
+                dataList.append(ModiFrame().makeFrame(cmd: 0x10, sid: 0, did : stream.moduleId, binary : streamSlice))
             }
            
-            let slice : [UInt8] =  Array(stream.streamBody[begin...end - 1])
-            
-            var streamSlice = [UInt8](repeating: 0, count: slice.count + 1)
-            streamSlice[0] = stream.streamId
-            
-            for j in 0 ..< slice.count {
-                streamSlice[j+1] = slice[j]
-            }
-            
-            dataList.append(ModiFrame().makeFrame(cmd: 0x10, sid: 0, did : stream.moduleId, binary : streamSlice))
+           
         }
         
         return dataList

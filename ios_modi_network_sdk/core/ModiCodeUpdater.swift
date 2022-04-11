@@ -270,18 +270,11 @@ open class ModiCodeUpdater : ModiFrameObserver{
             mRecieveQueue.removeAll()
             self.frameFilter = FRAME_FILTER.UPLOAD_STREAM
            
-            var checkTime = Date().timeIntervalSince1970 * 1000
             do {
                 
                 let bytes = ModiProtocol().streamCommand(stream: self.modiStream!)
                 self.sendData(bytes: bytes)
         
-            }
-        
-            
-            catch CodeUpdateError.STREAM_COMMAND_RESPONSE_FAILED {
-                print("\(CodeUpdateError.STREAM_COMMAND_RESPONSE_FAILED.rawValue)")
-                notifyUpdateFail(error: CodeUpdateError.STREAM_COMMAND_RESPONSE_FAILED, reson: CodeUpdateError.STREAM_COMMAND_RESPONSE_FAILED.rawValue)
             }
            
             
@@ -717,6 +710,7 @@ open class ModiCodeUpdater : ModiFrameObserver{
 
                             let bytes = ModiProtocol().setModuleState(moduleKey : 0xFFF, state : ModiProtocol.MODULE_STATE.RESET)
                             self.sendData(bytes: bytes)
+                            usleep(1000 * 200)
                             self.sendData(bytes: ModiProtocol().setStartInterpreter())
 
 
@@ -839,7 +833,7 @@ open class ModiCodeUpdater : ModiFrameObserver{
     func sendData(bytes : Array<UInt8>) {
         let data = Data(bytes : bytes, count: bytes.count)
         modiManager.sendData(data)
-        sleep(1)
+        usleep(1000 * 100)
        
     }
     
