@@ -29,40 +29,46 @@ open class ModiPlayManager {
     }
     
     
-    public func fireEvent(index : Int, property : Int, command : PlayCommand, commandDataValue : Int, option : Int) {
+    public func fireEvent(index : Int, property : Int, command : PlayCommand, commandDataValue : Int) {
         let target = modiManager.getConnectedModiUuid() & 0xFFF
 
-        var data = getEventData(command: command, commandData: commandDataValue)
-        data[7] = UInt8(option)
-        
+        let data = getEventData(command: command, commandDataValue: commandDataValue)
+       
         let did = property + (index * 100);
         
         sendData(bytes: ModiFrame().makeFrame(cmd:0x1F, sid: target, did: did, binary : data))
     }
     
     
-    private func getEventData(command : PlayCommand,commandData : Int) -> [UInt8]{
+    private func getEventData(command : PlayCommand, commandDataValue : Int) -> [UInt8]{
+        
         var data = [UInt8](repeating: 0, count: 8)
+        
         switch command {
                 
-        case .RECEIVE_DATA:
-            data[2] = UInt8(commandData) & 0xFF
+            case . BUTTON_CLICK:
+                data[2] = UInt8(commandDataValue) & 0xFF
+                    
+            case . IMU_ANGLE_PITCH:
+                data[2] = UInt8(commandDataValue) & 0xFF
+                    
+            case . BUTTON_DOUBLE_CLICK :
+                data[4] = UInt8(commandDataValue) & 0xFF
                 
-        case . BUTTON_CLICK:
-            data[2] = UInt8(commandData) & 0xFF
+            case . IMU_ANGLE_YAW :
+                data[4] = UInt8(commandDataValue) & 0xFF
                 
-        case . IMU_ANGLE_PITCH:
-            data[2] = UInt8(commandData) & 0xFF
+            case .RECEIVE_DATA :
                 
-        case . BUTTON_DOUBLE_CLICK :
-            data[4] = UInt8(commandData) & 0xFF
-        case . IMU_ANGLE_YAW :
+                data[3] = UInt8(commandDataValue >> 24 & 0xFF)
+                data[2] = UInt8(commandDataValue >> 16 & 0xFF)
+                data[1] = UInt8(commandDataValue >> 8 & 0xFF)
+                data[0] = UInt8(commandDataValue & 0xFF)
+      
+            default:
                 
-            data[4] = UInt8(commandData) & 0xFF
-                
-        default:
-            data[0] = UInt8(commandData) & 0xFF
-        }
+                data[0] = UInt8(commandDataValue) & 0xFF
+            }
         return data
     }
     
