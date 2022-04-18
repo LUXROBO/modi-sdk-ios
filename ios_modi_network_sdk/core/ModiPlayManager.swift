@@ -50,13 +50,13 @@ open class ModiPlayManager {
                 data[2] = UInt8(commandDataValue) & 0xFF
                     
             case . IMU_ANGLE_PITCH:
-                data[2] = UInt8(commandDataValue) & 0xFF
+                data[2] = UInt8(Int16(commandDataValue) & 0xFF)
                     
             case . BUTTON_DOUBLE_CLICK :
                 data[4] = UInt8(commandDataValue) & 0xFF
                 
             case . IMU_ANGLE_YAW :
-                data[4] = UInt8(commandDataValue) & 0xFF
+                data[4] = UInt8(Int16(commandDataValue) & 0xFF)
                 
             case .RECEIVE_DATA :
                 
@@ -67,8 +67,9 @@ open class ModiPlayManager {
       
             default:
                 
-                data[0] = UInt8(commandDataValue) & 0xFF
+                data[0] = UInt8(Int16(commandDataValue) & 0xFF)
             }
+        
         return data
     }
     
