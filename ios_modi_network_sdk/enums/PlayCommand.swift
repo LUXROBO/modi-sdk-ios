@@ -28,7 +28,7 @@ public enum PlayCommand  {
     
     public var rawValue: RawValue {
       switch self {
-        case .RECEIVE_DATA: return 0x02
+        case .RECEIVE_DATA: return 0x00
         case .BUTTON_PRESS_STATUS: return 0x00
         case .BUTTON_CLICK: return 0x02
         case .BUTTON_DOUBLE_CLICK: return 0x04
