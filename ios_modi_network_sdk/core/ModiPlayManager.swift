@@ -32,15 +32,23 @@ open class ModiPlayManager {
     public func fireEvent(index : Int, property : Int, command : PlayCommand, commandDataValue : Int) {
         let target = modiManager.getConnectedModiUuid() & 0xFFF
 
-        let data = getEventData(command: command, commandDataValue: commandDataValue)
-       
-        let did = property + (index * 100);
+        if commandDataValue > 0 {
+            
+            let data = unSignedGetEventData(command: command, commandDataValue: commandDataValue)
+            let did = property + (index * 100);
+            sendData(bytes: ModiFrame().makeFrame(cmd:0x1F, sid: target, did: did, binary : data))
+        }
         
-        sendData(bytes: ModiFrame().makeFrame(cmd:0x1F, sid: target, did: did, binary : data))
+        else {
+            let data = getEventData(command: command, commandDataValue: commandDataValue)
+            let did = property + (index * 100);
+            sendData(bytes: ModiFrame().makeFrame(cmd:0x1F, sid: target, did: did, binary : data))
+            
+        }
     }
     
     
-    private func getEventData(command : PlayCommand, commandDataValue : Int) -> [UInt8]{
+    private func unSignedGetEventData(command : PlayCommand, commandDataValue : Int) -> [UInt8]{
         
         var data = [UInt8](repeating: 0, count: 8)
         
@@ -50,13 +58,13 @@ open class ModiPlayManager {
                 data[2] = UInt8(commandDataValue) & 0xFF
                     
             case . IMU_ANGLE_PITCH:
-                data[2] = UInt8(Int16(commandDataValue) & 0xFF)
+                data[2] = UInt8(commandDataValue & 0xFF)
                     
             case . BUTTON_DOUBLE_CLICK :
                 data[4] = UInt8(commandDataValue) & 0xFF
                 
             case . IMU_ANGLE_YAW :
-                data[4] = UInt8(Int16(commandDataValue) & 0xFF)
+                data[4] = UInt8(commandDataValue & 0xFF)
                 
             case .RECEIVE_DATA :
                 
@@ -67,9 +75,47 @@ open class ModiPlayManager {
       
             default:
                 
-                data[0] = UInt8(Int16(commandDataValue) & 0xFF)
+                data[0] = UInt8(commandDataValue & 0xFF)
             }
         
+       
+        return data
+    }
+    
+    private func getEventData(command : PlayCommand, commandDataValue : Int) -> [UInt8]{
+        
+        var data = [UInt8](repeating: 0, count: 8)
+        
+        switch command {
+                
+            case . BUTTON_CLICK:
+                data[2] = UInt8(Int16(commandDataValue) & 0xFF)
+                    
+            case . IMU_ANGLE_PITCH:
+                data[2] = UInt8(Int16(commandDataValue) & 0xFF)
+                data[3] = UInt8(Int16(commandDataValue >> 8 & 0xFF))
+                    
+            case . BUTTON_DOUBLE_CLICK :
+                data[4] = UInt8(Int16(commandDataValue) & 0xFF)
+                
+            case . IMU_ANGLE_YAW :
+                data[4] = UInt8(Int16(commandDataValue) & 0xFF)
+                data[5] = UInt8(Int16(commandDataValue >> 8 & 0xFF))
+                
+            case .RECEIVE_DATA :
+                
+                data[3] = UInt8(Int16(commandDataValue >> 24 & 0xFF))
+                data[2] = UInt8(Int16(commandDataValue >> 16 & 0xFF))
+                data[1] = UInt8(Int16(commandDataValue >> 8 & 0xFF))
+                data[0] = UInt8(Int16(commandDataValue) & 0xFF)
+      
+            default:
+                
+                data[0] = UInt8(Int16(commandDataValue) & 0xFF)
+                data[1] = UInt8(Int16(commandDataValue >> 8 & 0xFF))
+            }
+        
+       
         return data
     }
     
