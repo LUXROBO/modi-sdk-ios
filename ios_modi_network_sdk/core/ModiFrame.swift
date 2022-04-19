@@ -128,10 +128,10 @@ open class ModiFrame  {
     }
     
     
-    open func getInt(data : Array<UInt8>) -> Int {
+    open func getInt(data : Array<UInt8>) -> Int64 {
                 
         let littleEndianValue = data.withUnsafeBufferPointer {
-                 ($0.baseAddress!.withMemoryRebound(to: Int.self, capacity: 8) { $0 })
+                 ($0.baseAddress!.withMemoryRebound(to: Int64.self, capacity: 8) { $0 })
         }.pointee.littleEndian
     
         return littleEndianValue
