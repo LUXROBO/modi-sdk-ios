@@ -107,7 +107,7 @@ open class ModiPlayManager {
                 data[3] = UInt8(Int16(commandDataValue >> 24 & 0xFF))
                 data[2] = UInt8(Int16(commandDataValue >> 16 & 0xFF))
                 data[1] = UInt8(Int16(commandDataValue >> 8 & 0xFF))
-                data[0] = UInt8(Int16(commandDataValue) & 0xFF)
+                data[0] = UInt8(Int16(commandDataValue & 0xFF))
       
             default:
                 
